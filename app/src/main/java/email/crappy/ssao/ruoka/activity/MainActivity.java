@@ -8,16 +8,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.event.LoadFailEvent;
+import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
+import email.crappy.ssao.ruoka.network.DataLoader;
+import email.crappy.ssao.ruoka.pojo.PojoUtil;
+import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 import icepick.Icepick;
 
 /**
  * @author Santeri 'iffa'
  */
 public class MainActivity extends ActionBarActivity {
+    private static final String FILE_NAME = "Data.json";
+    RuokaJsonObject data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +37,17 @@ public class MainActivity extends ActionBarActivity {
 
         setSupportActionBar((Toolbar)ButterKnife.findById(this, R.id.toolbar));
 
+        // If data should be downloaded -> load it
+        // If data is already loaded -> generate POJO -> validate -> etc.
         if (shouldDownloadData()) {
-            // TODO: Download data here
+            new DataLoader().loadData(new File(getApplicationContext().getFilesDir(), FILE_NAME).getPath());
+        } else {
+            try {
+                data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
+            } catch (FileNotFoundException e) {
+                // TODO: Show error dialog/exit
+                e.printStackTrace();
+            }
         }
     }
 
@@ -87,8 +104,16 @@ public class MainActivity extends ActionBarActivity {
      */
     private boolean shouldDownloadData() {
         // Checking if data needs to be downloaded (if no local file exists)
-        String fileName = "Data.json";
-        File data = new File(getApplicationContext().getFilesDir(), fileName);
+        File data = new File(getApplicationContext().getFilesDir(), FILE_NAME);
         return !data.exists();
+    }
+
+    public void onEvent(LoadSuccessEvent event) {
+
+    }
+
+    public void onEvent(LoadFailEvent event) {
+        // TODO: Show dialog with fail-message
+
     }
 }

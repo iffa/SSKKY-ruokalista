@@ -2,6 +2,9 @@ package email.crappy.ssao.ruoka.pojo;
 
 import com.google.gson.annotations.Expose;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Item {
 
     @Expose
