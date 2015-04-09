@@ -6,5 +6,8 @@ import android.app.Application;
  * @author Santeri 'iffa'
  */
 public class RuokaApplication extends Application {
-    // TODO: Something should probably happen here
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 }

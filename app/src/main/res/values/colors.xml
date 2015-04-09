@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_window">#FFE5E5E5</color>
+    <color name="blue">#006BB6</color>
+    <color name="blueDark">#004480</color>
+    <color name="gold">#FAA21B</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black_20">#33000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- TODO: Do something fun with these :P -->
+    <color name="manly">#D416FA</color>
+    <color name="lessManly">#D377E6</color>
+</resources>
