@@ -6,6 +6,7 @@ import com.google.gson.annotations.Expose;
 
 import org.parceler.Parcel;
 
+// TODO: Make this Parcelable so that Icepick can understand it (Parceler does not work ATM)
 @Parcel
 public class RuokaJsonObject {
     @Expose
