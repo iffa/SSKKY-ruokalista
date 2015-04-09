@@ -1,0 +1,190 @@
+﻿{
+    "Ruoka": [
+        {
+            "UniqueId": "Group-1",
+            "Title": "viikko 15 (6.4-10.4)",
+            "Items": [
+                {
+                    "Pvm": "6.4",
+                    "Paiva": "ma",
+                    "Kama": "PÄÄSIÄINEN"
+                },
+                {
+                    "Pvm": "7.4",
+                    "Paiva": "ti",
+                    "Kama": "Jokapojan kalapala, yrttikastike, perunat, salaatti\nporkkanapihvi"
+                },
+                {
+                    "Pvm": "8.4",
+                    "Paiva": "ke",
+                    "Kama": "Lihakeitto, salaatti, omenakaurapaistos, vaniljakastike\nkahden kaalin keitto"
+                },
+                {
+                    "Pvm": "9.4",
+                    "Paiva": "to",
+                    "Kama": "Välimeren broilerikiusaus, salaatti\nvälimerenkiusaus"
+                },
+                {
+                    "Pvm": "10.4",
+                    "Paiva": "pe",
+                    "Kama": "Uunimakkara, perunasose, sinappi, salaatti\nsoijamakkara"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-2",
+            "Title": "viikko 16 (13.4-17.4)",
+            "Items": [
+                {
+                    "Pvm": "13.4",
+                    "Paiva": "ma",
+                    "Kama": "Broilerijuustopuikula, riisi, curry-päärynäkastike, salaatti\ncouscouspihvi"
+                },
+                {
+                    "Pvm": "14.4",
+                    "Paiva": "ti",
+                    "Kama": "Jauhelihakiusaus, salaatti\nkreikkalainen kiusaus"
+                },
+                {
+                    "Pvm": "15.4",
+                    "Paiva": "ke",
+                    "Kama": "Metsästäjänpata, perunat, salaatti\nkermainen sienipata"
+                },
+                {
+                    "Pvm": "16.4",
+                    "Paiva": "to",
+                    "Kama": "Kalakeitto, karjalanpiirakka ja munavoi, päärynä\nkesäkeitto"
+                },
+                {
+                    "Pvm": "17.4",
+                    "Paiva": "pe",
+                    "Kama": "Jauhelihapihvi, perunat, sipulikastike, salaatti\nparsakaalipinaattipihvi"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-3",
+            "Title": "viikko 17 (20.4-24.4)",
+            "Items": [
+                {
+                    "Pvm": "20.4",
+                    "Paiva": "ma",
+                    "Kama": "Birgitan kasviskastike, pasta, juustosalaatti"
+                },
+                {
+                    "Pvm": "21.4",
+                    "Paiva": "ti",
+                    "Kama": "Lihapyörykät, perunat, yrttipippurikastike, salaatti\nkasvispyörykät"
+                },
+                {
+                    "Pvm": "22.4",
+                    "Paiva": "ke",
+                    "Kama": "Janssoninkiusaus, keit.kasvis, salaatti\nkaalilaatikko"
+                },
+                {
+                    "Pvm": "23.4",
+                    "Paiva": "to",
+                    "Kama": "Hernekeitto, juustoviipale, kurkkuviipale, pannari ja hillo\nhernekeitto"
+                },
+                {
+                    "Pvm": "24.4",
+                    "Paiva": "pe",
+                    "Kama": "Broilerkastike, perunat, salaatti\nratatouille"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-4",
+            "Title": "viikko 18 (27.4-1.5)",
+            "Items": [
+                {
+                    "Pvm": "27.4",
+                    "Paiva": "ma",
+                    "Kama": "Chili con carne, perunat, salaatti\nchili con kasvis"
+                },
+                {
+                    "Pvm": "28.4",
+                    "Paiva": "ti",
+                    "Kama": "Mantelikala, perunat, salaatti\nkasvispihvi"
+                },
+                {
+                    "Pvm": "29.4",
+                    "Paiva": "ke",
+                    "Kama": "Jauhelihakeitto, salaatti, mangorahka\nhyvänmielen sosekeitto"
+                },
+                {
+                    "Pvm": "30.4",
+                    "Paiva": "to",
+                    "Kama": "Pyttipannu, ketsuppi, munkki ja sima, salaatti"
+                },
+                {
+                    "Pvm": "1.5",
+                    "Paiva": "pe",
+                    "Kama": "VAPPU"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-5",
+            "Title": "viikko 19 (4.5-8.5)",
+            "Items": [
+                {
+                    "Pvm": "4.5",
+                    "Paiva": "ma",
+                    "Kama": "Nakkikastike, perunat, salaatti\nkikhernecurry"
+                },
+                {
+                    "Pvm": "5.5",
+                    "Paiva": "ti",
+                    "Kama": "Pinaattiletut, perunat, kananmunakastike, salaatti"
+                },
+                {
+                    "Pvm": "6.5",
+                    "Paiva": "ke",
+                    "Kama": "Broilerikeitto, salaatti, raparperikiisseli\nkasviskeitto"
+                },
+                {
+                    "Pvm": "7.5",
+                    "Paiva": "to",
+                    "Kama": "Uunilohi, kermaviilikastike, perunat, salaatti\nkasvisgratiini"
+                },
+                {
+                    "Pvm": "8.5",
+                    "Paiva": "pe",
+                    "Kama": "Jauhelihaspagettivuoka, salaatti\ncannelonivuoka"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-6",
+            "Title": "viikko 20 (11.5-15.5)",
+            "Items": [
+                {
+                    "Pvm": "11.5",
+                    "Paiva": "ma",
+                    "Kama": "Savulohikastike, pasta, salaatti\nkasviskastike"
+                },
+                {
+                    "Pvm": "12.5",
+                    "Paiva": "ti",
+                    "Kama": "Broileripihvi, yrttijuustokastike, perunat, salaatti\nkasvismureke"
+                },
+                {
+                    "Pvm": "13.5",
+                    "Paiva": "ke",
+                    "Kama": "Siskonmakkarakeitto, paprikaviipale, jäätelö\nlinssikeitto"
+                },
+                {
+                    "Pvm": "14.5",
+                    "Paiva": "to",
+                    "Kama": "HELATORSTAI"
+                },
+                {
+                    "Pvm": "15.5",
+                    "Paiva": "pe",
+                    "Kama": "Talon tapaan"
+                }
+            ]
+        }
+    ]
+}
