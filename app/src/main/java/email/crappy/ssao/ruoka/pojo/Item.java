@@ -1,11 +1,11 @@
 package email.crappy.ssao.ruoka.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 
-import org.parceler.Parcel;
-
-@Parcel
-public class Item {
+public class Item implements Parcelable {
 
     @Expose
     private String pvm;
@@ -38,4 +38,35 @@ public class Item {
         this.kama = kama;
     }
 
+
+    protected Item(Parcel in) {
+        pvm = in.readString();
+        paiva = in.readString();
+        kama = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(pvm);
+        dest.writeString(paiva);
+        dest.writeString(kama);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() {
+        @Override
+        public Item createFromParcel(Parcel in) {
+            return new Item(in);
+        }
+
+        @Override
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
 }

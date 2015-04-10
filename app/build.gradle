@@ -28,8 +28,6 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-core:4.47'
     compile 'com.j256.ormlite:ormlite-android:4.47'
     compile 'com.google.code.gson:gson:2.3'
-    compile "org.parceler:parceler-api:0.2.16"
-    provided "org.parceler:parceler:0.2.16"
     compile "frankiesardo:icepick:3.0.2"
     provided 'frankiesardo:icepick-processor:3.0.2'
     compile 'de.greenrobot:eventbus:2.4.0'

@@ -19,12 +19,14 @@ import email.crappy.ssao.ruoka.network.DataLoader;
 import email.crappy.ssao.ruoka.pojo.PojoUtil;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 import icepick.Icepick;
+import icepick.Icicle;
 
 /**
  * @author Santeri 'iffa'
  */
 public class MainActivity extends ActionBarActivity {
     private static final String FILE_NAME = "Data.json";
+    @Icicle
     RuokaJsonObject data;
 
     @Override
