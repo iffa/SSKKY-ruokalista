@@ -38,18 +38,20 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        setSupportActionBar((Toolbar)ButterKnife.findById(this, R.id.toolbar));
+        setSupportActionBar((Toolbar) ButterKnife.findById(this, R.id.toolbar));
 
         // If data should be downloaded -> load it
         // If data is already loaded -> generate POJO -> validate -> etc.
-        if (shouldDownloadData()) {
-            new DataLoader().loadData(new File(getApplicationContext().getFilesDir(), FILE_NAME).getPath());
-        } else {
-            try {
-                data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
-            } catch (FileNotFoundException e) {
-                // TODO: Show error dialog/exit
-                e.printStackTrace();
+        if (data == null) {
+            if (shouldDownloadData()) {
+                new DataLoader().loadData(new File(getApplicationContext().getFilesDir(), FILE_NAME).getPath());
+            } else {
+                try {
+                    data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
+                } catch (FileNotFoundException e) {
+                    // TODO: Show error dialog/exit
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -103,6 +105,7 @@ public class MainActivity extends ActionBarActivity {
 
     /**
      * Checks if local data exists and wether or not it needs to be downloaded
+     *
      * @return True if data should be downloaded
      */
     private boolean shouldDownloadData() {
