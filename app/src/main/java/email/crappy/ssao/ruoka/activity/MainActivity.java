@@ -15,6 +15,7 @@ import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.event.LoadFailEvent;
 import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
+import email.crappy.ssao.ruoka.fragment.InfoDialogFragment;
 import email.crappy.ssao.ruoka.network.DataLoader;
 import email.crappy.ssao.ruoka.pojo.PojoUtil;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
@@ -120,7 +121,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onEvent(LoadFailEvent event) {
-        // TODO: Show dialog with fail-message
-
+        InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.load_failed) + event.reason, true);
+        dialog.show(getSupportFragmentManager(), "errorDialog");
     }
 }
