@@ -111,7 +111,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onEvent(LoadSuccessEvent event) {
-
+        try {
+            data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
+        } catch (FileNotFoundException e) {
+            // TODO: Show error dialog/exit
+            e.printStackTrace();
+        }
     }
 
     public void onEvent(LoadFailEvent event) {
