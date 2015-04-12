@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.orhanobut.logger.Logger;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -16,6 +18,8 @@ import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.event.LoadFailEvent;
 import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
 import email.crappy.ssao.ruoka.fragment.InfoDialogFragment;
+import email.crappy.ssao.ruoka.fragment.LoadingDialogFragment;
+import email.crappy.ssao.ruoka.fragment.ViewPagerFragment;
 import email.crappy.ssao.ruoka.network.DataLoader;
 import email.crappy.ssao.ruoka.pojo.PojoUtil;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
@@ -28,7 +32,7 @@ import icepick.Icicle;
 public class MainActivity extends ActionBarActivity {
     private static final String FILE_NAME = "Data.json";
     @Icicle
-    RuokaJsonObject data;
+    public RuokaJsonObject data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +47,27 @@ public class MainActivity extends ActionBarActivity {
         // If data should be downloaded -> load it
         // If data is already loaded -> generate POJO -> validate -> etc.
         if (data == null) {
+            Logger.d("data == null, doing what is necessary");
             if (shouldDownloadData()) {
+                // TODO: Loading dialog
+                LoadingDialogFragment dialog = new LoadingDialogFragment();
+                dialog.show(getSupportFragmentManager(), "loadingDialog");
                 new DataLoader().loadData(new File(getApplicationContext().getFilesDir(), FILE_NAME).getPath());
             } else {
                 try {
                     data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
+                    showData();
                 } catch (FileNotFoundException e) {
                     // TODO: Show error dialog/exit
-                    e.printStackTrace();
+                    Logger.d("Tried to generate data from JSON but it failed", e);
                 }
             }
         }
+    }
+
+    private void showData() {
+        ViewPagerFragment fragment = new ViewPagerFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmentFrameLayout, fragment).commit();
     }
 
     @Override
@@ -91,8 +105,12 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_about) {
+            // TODO: Content to dialog
+            InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_about_title),getResources().getString(R.string.dialog_about_message), false);
+            dialog.show(getSupportFragmentManager(), "aboutDialog");
             return true;
         }
+        // TODO: "Go to today"-button in menu?
 
         return super.onOptionsItemSelected(item);
     }
@@ -117,13 +135,17 @@ public class MainActivity extends ActionBarActivity {
     public void onEvent(LoadSuccessEvent event) {
         try {
             data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
+            ((LoadingDialogFragment)getSupportFragmentManager().findFragmentByTag("loadingDialog")).dismiss();
+            showData();
         } catch (FileNotFoundException e) {
             // TODO: Show error dialog/exit
-            e.printStackTrace();
+            Logger.d("Tried to generate data from JSON but it failed", e);
         }
     }
 
     public void onEvent(LoadFailEvent event) {
+        // TODO: Alternatively a new fragment with a retry-button (or a dialog)
+        ((LoadingDialogFragment)getSupportFragmentManager().findFragmentByTag("loadingDialog")).dismiss();
         InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.load_failed) + event.reason, true);
         dialog.show(getSupportFragmentManager(), "errorDialog");
     }

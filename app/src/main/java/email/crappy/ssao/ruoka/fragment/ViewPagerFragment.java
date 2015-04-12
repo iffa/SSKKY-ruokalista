@@ -15,6 +15,9 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import butterknife.ButterKnife;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.activity.MainActivity;
+import email.crappy.ssao.ruoka.pojo.Ruoka;
+import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 
 /**
  * @author Santeri 'iffa'
@@ -34,7 +37,9 @@ public class ViewPagerFragment extends Fragment {
         FragmentPagerItems items = FragmentPagerItems.with(getActivity().getApplicationContext()).create();
 
         // TODO: Dynamically add items from the data
-        items.add(FragmentPagerItem.of("Title", PageFragment.class));
+        for (Ruoka item : ((MainActivity)getActivity()).data.getRuoka()) {
+            items.add(FragmentPagerItem.of(item.getTitle(), PageFragment.class));
+        }
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), items);
         viewPager.setAdapter(adapter);

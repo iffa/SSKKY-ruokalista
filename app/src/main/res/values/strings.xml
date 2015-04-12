@@ -10,4 +10,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="error">Error</string>
     <string name="load_failed">Failed to download the data file. Please try again later.\\n\\n</string>
+    <string name="dialog_about_title">About</string>
+    <string name="dialog_about_message">TODO: About dialog content</string>
+    <string name="dialog_progress_title">Downloading data</string>
+    <string name="dialog_progress_content">Please wait...</string>
 </resources>
