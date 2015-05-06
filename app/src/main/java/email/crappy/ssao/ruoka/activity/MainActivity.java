@@ -1,6 +1,9 @@
 package email.crappy.ssao.ruoka.activity;
 
 import android.os.PersistableBundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +23,7 @@ import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
 import email.crappy.ssao.ruoka.fragment.InfoDialogFragment;
 import email.crappy.ssao.ruoka.fragment.LoadingDialogFragment;
 import email.crappy.ssao.ruoka.fragment.ViewPagerFragment;
+import email.crappy.ssao.ruoka.fragment.WelcomeFragment;
 import email.crappy.ssao.ruoka.network.DataLoader;
 import email.crappy.ssao.ruoka.pojo.PojoUtil;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
@@ -44,12 +48,12 @@ public class MainActivity extends ActionBarActivity {
 
         setSupportActionBar((Toolbar) ButterKnife.findById(this, R.id.toolbar));
 
+        /*
         // If data should be downloaded -> load it
         // If data is already loaded -> generate POJO -> validate -> etc.
         if (data == null) {
             Logger.d("data == null, doing what is necessary");
             if (shouldDownloadData()) {
-                // TODO: Loading dialog
                 LoadingDialogFragment dialog = new LoadingDialogFragment();
                 dialog.show(getSupportFragmentManager(), "loadingDialog");
                 new DataLoader().loadData(new File(getApplicationContext().getFilesDir(), FILE_NAME).getPath());
@@ -62,6 +66,13 @@ public class MainActivity extends ActionBarActivity {
                     Logger.d("Tried to generate data from JSON but it failed", e);
                 }
             }
+        }
+        */
+
+        // Show welcome screen if data is non-existent
+        if (shouldDownloadData()) {
+            WelcomeFragment fragment = new WelcomeFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragmentFrameLayout, fragment).commit();
         }
     }
 
@@ -107,7 +118,7 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_about) {
             // TODO: Content to dialog
             InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_about_title),getResources().getString(R.string.dialog_about_message), false);
-            dialog.show(getSupportFragmentManager(), "aboutDialog");
+            showDialog(dialog, "aboutDialog");
             return true;
         }
         // TODO: "Go to today"-button in menu?
@@ -147,6 +158,11 @@ public class MainActivity extends ActionBarActivity {
         // TODO: Alternatively a new fragment with a retry-button (or a dialog)
         ((LoadingDialogFragment)getSupportFragmentManager().findFragmentByTag("loadingDialog")).dismiss();
         InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.load_failed) + event.reason, true);
-        dialog.show(getSupportFragmentManager(), "errorDialog");
+        showDialog(dialog, "errorDialog");
     }
+
+    void showDialog(DialogFragment fragment, String tag) {
+        fragment.show(getSupportFragmentManager(), tag);
+    }
+
 }

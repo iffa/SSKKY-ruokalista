@@ -17,7 +17,7 @@ public class LoadingDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        return new MaterialDialog.Builder(getActivity().getApplicationContext())
+        return new MaterialDialog.Builder(getActivity())
                 .title(R.string.dialog_progress_title)
                 .content(R.string.dialog_progress_content)
                 .progress(true, 0)

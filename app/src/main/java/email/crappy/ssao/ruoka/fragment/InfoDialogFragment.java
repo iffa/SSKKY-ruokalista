@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.orhanobut.logger.Logger;
 
 /**
  * TODO (testing phase): Is this retained on configuration change?
@@ -35,11 +36,15 @@ public class InfoDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        String title = savedInstanceState.getString("title");
-        String message = savedInstanceState.getString("message");
-        final boolean terminate = savedInstanceState.getBoolean("terminate");
+        if (getArguments() == null) {
+            Logger.d("getArguments() == null... why");
+        }
 
-        return new MaterialDialog.Builder(getActivity().getApplicationContext())
+        String title = getArguments().getString("title");
+        String message = getArguments().getString("message");
+        final boolean terminate = getArguments().getBoolean("terminate");
+
+        return new MaterialDialog.Builder(getActivity())
                 .title(title)
                 .content(message)
                 .neutralText(android.R.string.ok)
