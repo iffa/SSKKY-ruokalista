@@ -9,14 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dexafree.materialList.cards.SmallImageCard;
+import com.dexafree.materialList.controller.RecyclerItemClickListener;
+import com.dexafree.materialList.model.CardItemView;
+import com.dexafree.materialList.view.MaterialListView;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.activity.MainActivity;
+import email.crappy.ssao.ruoka.pojo.Item;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
 import icepick.Icepick;
-import icepick.Icicle;
+import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 /**
  * TODO: Implement this class completely
@@ -24,6 +30,9 @@ import icepick.Icicle;
  * @author Santeri 'iffa'
  */
 public class PageFragment extends Fragment {
+    @InjectView(R.id.ruokaListView)
+    MaterialListView ruokaListView;
+
     public PageFragment() {
     }
 
@@ -46,15 +55,32 @@ public class PageFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // TODO: Use position to get data from Mainactivity.data
         int position = FragmentPagerItem.getPosition(getArguments());
-
-        TextView debug = (TextView) view.findViewById(R.id.text_debug);
-        TextView debug2 = (TextView) view.findViewById(R.id.text_debug2);
-        debug.setText(String.valueOf(position));
-
         Ruoka ruoka = ((MainActivity)getActivity()).data.getRuoka().get(position);
-        debug2.setText(ruoka.getTitle() + "\n" + ruoka.getUniqueId() + "\n");
+
+        ruokaListView.setItemAnimator(new LandingAnimator());
+
+        for (Item item : ruoka.getItems()) {
+            SmallImageCard card = new SmallImageCard(getActivity());
+            card.setDescription(item.getKama());
+            card.setTitle(item.getPaiva() + " - " + item.getPvm());
+            card.setDrawable(R.drawable.ic_launcher);
+            card.setDismissible(false);
+
+            ruokaListView.add(card);
+        }
+
+        ruokaListView.addOnItemTouchListener(new RecyclerItemClickListener.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(CardItemView view, int position) {
+            }
+
+            @Override
+            public void onItemLongClick(CardItemView view, int position) {
+            }
+        });
+
     }
 
     @Override

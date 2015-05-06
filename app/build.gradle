@@ -37,4 +37,6 @@ dependencies {
     compile 'com.afollestad:material-dialogs:0.7.1.2'
     compile 'com.eftimoff:androidplayer:1.0.0@aar'
     compile 'com.github.rahatarmanahmed:circularprogressview:2.2.1'
+    compile 'com.github.dexafree:materiallist:2.4.3'
+    compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
 }

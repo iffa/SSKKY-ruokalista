@@ -2,10 +2,12 @@ package email.crappy.ssao.ruoka.fragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import com.orhanobut.logger.Logger;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.activity.MainActivity;
 
 /**
  * @author Santeri 'iffa'
@@ -52,20 +55,35 @@ public class WelcomeFragment extends Fragment {
         // TODO: Animate welcome-screen
         final PropertyAction titleAction = PropertyAction.newPropertyAction(view.findViewById(R.id.welcomeLayout)).
                 interpolator(new DecelerateInterpolator()).
-                translationY(-200).
+                translationY(-100).
                 duration(550).
-                alpha(0.4f).
+                alpha(0.0f).
                 build();
 
         final PropertyAction spinnerAction = PropertyAction.newPropertyAction(view.findViewById(R.id.loadingSpinner)).
-                interpolator(new DecelerateInterpolator()).
-                translationY(400).
+                interpolator(new AnticipateOvershootInterpolator()).
+                translationY(300).
                 duration(700).
-                alpha(0.2f).
+                alpha(0.0f).
                 build();
 
         Player.init().animate(titleAction).then().animate(spinnerAction).play();
+    }
 
-        // TODO: Start data loading
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Loading data
+        // TODO: Make sure this isn't called again
+        final MainActivity activity = (MainActivity) getActivity();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                activity.downloadData(false);
+            }
+        }, 4000);
+
     }
 }
