@@ -70,6 +70,7 @@ public class PageFragment extends Fragment {
             ruokaListView.add(card);
         }
 
+        /*
         ruokaListView.addOnItemTouchListener(new RecyclerItemClickListener.OnItemClickListener() {
 
             @Override
@@ -80,6 +81,7 @@ public class PageFragment extends Fragment {
             public void onItemLongClick(CardItemView view, int position) {
             }
         });
+        */
 
     }
 
