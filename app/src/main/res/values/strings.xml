@@ -7,11 +7,11 @@
     <string name="action_about">About</string>
     <string name="hello_blank_fragment">I am a TODO! :D</string>
     <string name="error">Error</string>
-    <string name="load_failed">Failed to download the data file. Please try again later.\\n\\n</string>
+    <string name="load_failed">Failed to download the data file. If this issue persists, please contact me and include the error below:</string>
     <string name="dialog_about_title">About</string>
     <string name="dialog_about_message">Developed by Santeri \'iffa\' Elo (iffa@crappy.email)</string>
     <string name="dialog_progress_title">Downloading data</string>
     <string name="dialog_progress_content">Please wait...</string>
-    <string name="welcome_title_text">Welcome, doing some baby steps</string>
+    <string name="welcome_title_text">Welcome</string>
     <string name="welcome_message_text">Downloading the menu... please hold tight</string>
 </resources>

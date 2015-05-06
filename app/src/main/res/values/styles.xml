@@ -2,10 +2,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- TODO: Colors -->
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/blueDark</item>
         <item name="colorAccent">@color/gold</item>
-    </style>
 
+        <!-- TODO: Color toolbar menu to light? -->
+    </style>
 </resources>

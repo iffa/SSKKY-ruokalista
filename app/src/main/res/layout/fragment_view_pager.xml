@@ -15,6 +15,7 @@
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:clipToPadding="false"
+        android:background="?attr/colorPrimary"
         app:stl_indicatorInterpolation="smart"
         app:stl_indicatorColor="@color/black_20"
         app:stl_indicatorThickness="40dp"

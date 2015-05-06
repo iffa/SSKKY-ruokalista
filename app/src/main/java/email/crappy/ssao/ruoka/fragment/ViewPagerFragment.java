@@ -14,15 +14,24 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.activity.MainActivity;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
+import icepick.Icepick;
+import icepick.Icicle;
 
 /**
  * @author Santeri 'iffa'
  */
 public class ViewPagerFragment extends Fragment {
+    @InjectView(R.id.viewPager)
+    ViewPager viewPager;
+
+    @InjectView(R.id.viewPagerTab)
+    SmartTabLayout viewPagerTab;
+
     public ViewPagerFragment() {
     }
 
@@ -32,21 +41,34 @@ public class ViewPagerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_view_pager, container, false);
         ButterKnife.inject(this, view);
 
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-
         FragmentPagerItems items = FragmentPagerItems.with(getActivity().getApplicationContext()).create();
 
-        // TODO: Dynamically add items from the data
+        // TODO: Fix orientation change bugs (emulator issue?)
         for (Ruoka item : ((MainActivity)getActivity()).data.getRuoka()) {
             items.add(FragmentPagerItem.of(item.getTitle(), PageFragment.class));
         }
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), items);
         viewPager.setAdapter(adapter);
-
-        SmartTabLayout viewPagerTab = (SmartTabLayout) view.findViewById(R.id.viewPagerTab);
         viewPagerTab.setViewPager(viewPager);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Icepick.restoreInstanceState(this, savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
 }
