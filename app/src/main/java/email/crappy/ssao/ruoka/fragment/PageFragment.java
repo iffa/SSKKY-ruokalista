@@ -7,12 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.dexafree.materialList.cards.SmallImageCard;
-import com.dexafree.materialList.controller.RecyclerItemClickListener;
-import com.dexafree.materialList.model.CardItemView;
-import com.dexafree.materialList.view.MaterialListView;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
 import butterknife.ButterKnife;
@@ -30,8 +25,6 @@ import jp.wasabeef.recyclerview.animators.LandingAnimator;
  * @author Santeri 'iffa'
  */
 public class PageFragment extends Fragment {
-    @InjectView(R.id.ruokaListView)
-    MaterialListView ruokaListView;
 
     public PageFragment() {
     }
@@ -61,13 +54,6 @@ public class PageFragment extends Fragment {
         //ruokaListView.setItemAnimator(new LandingAnimator());
 
         for (Item item : ruoka.getItems()) {
-            SmallImageCard card = new SmallImageCard(getActivity());
-            card.setDescription(item.getKama());
-            card.setTitle(item.getPaiva() + " - " + item.getPvm());
-            card.setDrawable(R.drawable.ic_launcher);
-            card.setDismissible(false);
-
-            ruokaListView.add(card);
         }
 
         /*
