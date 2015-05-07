@@ -24,11 +24,6 @@ import email.crappy.ssao.ruoka.activity.MainActivity;
  * @author Santeri 'iffa'
  */
 public class WelcomeFragment extends Fragment {
-    @InjectView(R.id.welcomeTitle)
-    TextView welcomeTitle;
-    @InjectView(R.id.welcomeMessage)
-    TextView welcomeMessage;
-
 
     public WelcomeFragment() {
     }
@@ -52,6 +47,8 @@ public class WelcomeFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
+
+
         // TODO: Animate welcome-screen
         final PropertyAction titleAction = PropertyAction.newPropertyAction(view.findViewById(R.id.welcomeLayout)).
                 interpolator(new DecelerateInterpolator()).
@@ -68,6 +65,13 @@ public class WelcomeFragment extends Fragment {
                 build();
 
         Player.init().animate(titleAction).then().animate(spinnerAction).play();
+
+        if (getArguments().getBoolean("update", false)) {
+            TextView title = (TextView) view.findViewById(R.id.welcomeTitle);
+            TextView message = (TextView) view.findViewById(R.id.welcomeMessage);
+            title.setText(R.string.welcome_update_title);
+            message.setText(R.string.welcome_update_message);
+        }
     }
 
     @Override

@@ -82,6 +82,8 @@ public class RuokaListCard extends CardWithList {
             // Setting today bold
             dayText.setTypeface(null, Typeface.BOLD);
             dateText.setTypeface(null, Typeface.BOLD);
+            dayText.setTextColor(getContext().getResources().getColor(android.R.color.secondary_text_light));
+            dateText.setTextColor(getContext().getResources().getColor(android.R.color.secondary_text_light));
         }
 
         return view;

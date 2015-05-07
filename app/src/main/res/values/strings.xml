@@ -16,6 +16,10 @@
     <string name="welcome_message_text">Ruokalistaa ladataan, tässä voi mennä hetki...</string>
     <string name="dialog_easter_title">Onko nyt jo pääsiäinen?</string>
     <string name="dialog_easter_choose">easter egg get!</string>
+    <string name="dialog_expired_title">Vanhentunut lista</string>
+    <string name="dialog_expired_message">Palvelimelta saatu ruokalista on vanhentunut. Yritä myöhemmin uudelleen.</string>
+    <string name="welcome_update_title">Päivitetään ruokalistaa</string>
+    <string name="welcome_update_message">Tässä kestää vain pieni tovi...</string>
     <string-array name="dialog_easter_items">
         <item>Yllätysmuna</item>
         <item>Pinikki</item>
