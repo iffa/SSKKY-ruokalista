@@ -44,5 +44,4 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.0.1'
     compile 'com.github.gabrielemariotti.cards:cardslib-extra-staggeredgrid:2.0.1'
     compile 'net.grandcentrix.tray:tray:0.9'
-
 }
