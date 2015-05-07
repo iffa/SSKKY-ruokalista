@@ -16,6 +16,10 @@ import net.grandcentrix.tray.TrayAppPreferences;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
@@ -46,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-         appPreferences = new TrayAppPreferences(this);
+        appPreferences = new TrayAppPreferences(this);
 
         // Easter egg get!
         if (appPreferences.getBoolean("easterFun", false)) {
@@ -64,6 +68,9 @@ public class MainActivity extends ActionBarActivity {
         // Show welcome screen if data is non-existent (possible first time user)
         if (shouldDownloadData()) {
             WelcomeFragment fragment = new WelcomeFragment();
+            Bundle args = new Bundle();
+            args.putBoolean("update", false);
+            fragment.setArguments(args);
             getSupportFragmentManager().beginTransaction().add(R.id.fragmentFrameLayout, fragment, "welcomeFragment").commit();
         }
 
@@ -72,17 +79,19 @@ public class MainActivity extends ActionBarActivity {
             try {
                 data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
 
-                // TODO: Is it up to date?
-
-
-                showData();
+                if (dataExpired()) {
+                    // TODO: Get new data -> welcome screen?
+                    WelcomeFragment fragment = new WelcomeFragment();
+                    Bundle args = new Bundle();
+                    args.putBoolean("update", true);
+                    fragment.setArguments(args);
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragmentFrameLayout, fragment, "welcomeFragment").commit();
+                } else {
+                    showData();
+                }
             } catch (FileNotFoundException e) {
-                // TODO: Show error dialog/exit
                 Logger.d("Tried to generate data from JSON but it failed", e);
             }
-        } else {
-            Logger.d("data is not null, config change?");
-            // TODO: nothing i guess, no clue yet
         }
     }
 
@@ -173,6 +182,25 @@ public class MainActivity extends ActionBarActivity {
         return !data.exists();
     }
 
+    public boolean dataExpired() {
+        Logger.d("Data expiration date: " + data.getExpiration());
+        GregorianCalendar current = new GregorianCalendar();
+        GregorianCalendar expire = new GregorianCalendar();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        try {
+            expire.setTime(sdf.parse(data.getExpiration()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Logger.d("expire: " + expire.get(GregorianCalendar.DAY_OF_MONTH) + " " + expire.get(GregorianCalendar.MONTH) + " " + expire.get(GregorianCalendar.YEAR));
+        Logger.d("current: " + current.get(GregorianCalendar.DAY_OF_MONTH) + " " + current.get(GregorianCalendar.MONTH) + " " + current.get(GregorianCalendar.YEAR));
+
+
+        return current.after(expire);
+
+    }
+
     public void onEvent(LoadSuccessEvent event) {
         try {
             data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
@@ -181,7 +209,12 @@ public class MainActivity extends ActionBarActivity {
                 ((LoadingDialogFragment) getSupportFragmentManager().findFragmentByTag("loadingDialog")).dismiss();
             }
 
-            showData();
+            if (dataExpired()) {
+                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_expired_title), getResources().getString(R.string.dialog_expired_message), true);
+                showDialog(dialog, "expiredDialog");
+            } else {
+                showData();
+            }
         } catch (FileNotFoundException e) {
             // TODO: Show error dialog/exit
             Logger.d("Tried to generate data from JSON but it failed", e);
