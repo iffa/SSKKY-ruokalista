@@ -40,6 +40,8 @@ import icepick.Icepick;
 import icepick.Icicle;
 
 /**
+ * TODO: Notification every day at 10am
+ *
  * @author Santeri 'iffa'
  */
 public class MainActivity extends ActionBarActivity {
@@ -160,6 +162,8 @@ public class MainActivity extends ActionBarActivity {
             InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_about_title), getResources().getString(R.string.dialog_about_message), false);
             showDialog(dialog, "aboutDialog");
             return true;
+        } else if (id == R.id.action_today) {
+            // TODO: Show what today's menu is
         }
 
         return super.onOptionsItemSelected(item);

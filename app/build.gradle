@@ -10,7 +10,7 @@ android {
         targetSdkVersion 21
         // Continuing from where we left off (SSKKY-ruokalista V1)
         versionCode 10
-        versionName "2.0"
+        versionName "2.0-beta"
 
         // Tray stuff
         applicationId "sskky.ruokalista" // this is your unique applicationId

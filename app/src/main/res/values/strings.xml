@@ -20,6 +20,7 @@
     <string name="dialog_expired_message">Palvelimelta saatu ruokalista on vanhentunut. Yritä myöhemmin uudelleen.</string>
     <string name="welcome_update_title">Päivitetään ruokalistaa</string>
     <string name="welcome_update_message">Tässä kestää vain pieni tovi...</string>
+    <string name="action_today">Tänään ruokana</string>
     <string-array name="dialog_easter_items">
         <item>Yllätysmuna</item>
         <item>Pinikki</item>
