@@ -58,7 +58,7 @@ public class PageFragment extends Fragment {
         int position = FragmentPagerItem.getPosition(getArguments());
         Ruoka ruoka = ((MainActivity)getActivity()).data.getRuoka().get(position);
 
-        ruokaListView.setItemAnimator(new LandingAnimator());
+        //ruokaListView.setItemAnimator(new LandingAnimator());
 
         for (Item item : ruoka.getItems()) {
             SmallImageCard card = new SmallImageCard(getActivity());

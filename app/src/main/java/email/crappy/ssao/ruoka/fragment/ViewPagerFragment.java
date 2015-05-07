@@ -18,9 +18,6 @@ import butterknife.InjectView;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.activity.MainActivity;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
-import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
-import icepick.Icepick;
-import icepick.Icicle;
 
 /**
  * @author Santeri 'iffa'
@@ -41,9 +38,16 @@ public class ViewPagerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_view_pager, container, false);
         ButterKnife.inject(this, view);
 
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         FragmentPagerItems items = FragmentPagerItems.with(getActivity().getApplicationContext()).create();
 
-        // TODO: Fix orientation change bugs (emulator issue?)
+        // TODO: Fix orientation change bugs (emulator issue? confirmed not)
         for (Ruoka item : ((MainActivity)getActivity()).data.getRuoka()) {
             items.add(FragmentPagerItem.of(item.getTitle(), PageFragment.class));
         }
@@ -51,24 +55,15 @@ public class ViewPagerFragment extends Fragment {
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), items);
         viewPager.setAdapter(adapter);
         viewPagerTab.setViewPager(viewPager);
-
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Icepick.restoreInstanceState(this, savedInstanceState);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Icepick.saveInstanceState(this, outState);
     }
 }
