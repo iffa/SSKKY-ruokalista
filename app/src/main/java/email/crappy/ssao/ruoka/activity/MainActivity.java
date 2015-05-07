@@ -12,21 +12,25 @@ import android.view.MenuItem;
 
 import com.orhanobut.logger.Logger;
 
+import net.grandcentrix.tray.TrayAppPreferences;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.event.EasterEggEvent;
 import email.crappy.ssao.ruoka.event.LoadFailEvent;
 import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
+import email.crappy.ssao.ruoka.event.PinikkiEvent;
+import email.crappy.ssao.ruoka.fragment.CardGridFragment;
+import email.crappy.ssao.ruoka.fragment.EasterDialogFragment;
 import email.crappy.ssao.ruoka.fragment.InfoDialogFragment;
 import email.crappy.ssao.ruoka.fragment.LoadingDialogFragment;
-import email.crappy.ssao.ruoka.fragment.ViewPagerFragment;
 import email.crappy.ssao.ruoka.fragment.WelcomeFragment;
 import email.crappy.ssao.ruoka.network.DataLoader;
 import email.crappy.ssao.ruoka.pojo.PojoUtil;
-import email.crappy.ssao.ruoka.pojo.Ruoka;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 import icepick.Icepick;
 import icepick.Icicle;
@@ -36,11 +40,19 @@ import icepick.Icicle;
  */
 public class MainActivity extends ActionBarActivity {
     private static final String FILE_NAME = "Data.json";
+    public TrayAppPreferences appPreferences;
     @Icicle
     public RuokaJsonObject data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+         appPreferences = new TrayAppPreferences(this);
+
+        // Easter egg get!
+        if (appPreferences.getBoolean("easterFun", false)) {
+            setTheme(R.style.AppThemeManly);
+        }
+
         super.onCreate(savedInstanceState);
         Icepick.restoreInstanceState(this, savedInstanceState);
 
@@ -95,8 +107,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void showData() {
-        ViewPagerFragment fragment = new ViewPagerFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrameLayout, fragment, "dataFragment").commit();
+        CardGridFragment fragment = new CardGridFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.enter, R.anim.exit);
+        transaction.replace(R.id.fragmentFrameLayout, fragment, "dataFragment").commit();
     }
 
     @Override
@@ -134,12 +148,10 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_about) {
-            // TODO: Content to dialog
             InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_about_title), getResources().getString(R.string.dialog_about_message), false);
             showDialog(dialog, "aboutDialog");
             return true;
         }
-        // TODO: "Go to today"-button in menu?
 
         return super.onOptionsItemSelected(item);
     }
@@ -185,8 +197,18 @@ public class MainActivity extends ActionBarActivity {
         showDialog(dialog, "errorDialog");
     }
 
+    // Very manly easter egg get!
+    public void onEvent(EasterEggEvent event) {
+        EasterDialogFragment dialog = new EasterDialogFragment();
+        showDialog(dialog, "easterDialog");
+    }
+
+    public void onEvent(PinikkiEvent event) {
+        appPreferences.put("easterFun", !appPreferences.getBoolean("easterFun", false));
+        System.exit(0);
+    }
+
     void showDialog(DialogFragment fragment, String tag) {
         fragment.show(getSupportFragmentManager(), tag);
     }
-
 }

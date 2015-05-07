@@ -9,7 +9,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.orhanobut.logger.Logger;
 
 /**
- * TODO (testing phase): Is this retained on configuration change?
  * Generic DialogFragment for showing a title and a message with an OK-button.
  * Additional boolean if app needs to be terminated right after the dialog (for errors)
  *
@@ -47,12 +46,12 @@ public class InfoDialogFragment extends DialogFragment {
         return new MaterialDialog.Builder(getActivity())
                 .title(title)
                 .content(message)
-                .neutralText(android.R.string.ok)
+                .positiveText(android.R.string.ok)
                 .cancelable(false)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
-                    public void onNeutral(MaterialDialog dialog) {
-                        super.onNeutral(dialog);
+                    public void onPositive(MaterialDialog dialog) {
+                        super.onPositive(dialog);
 
                         if (terminate) {
                             // TODO: Perhaps handle this better?

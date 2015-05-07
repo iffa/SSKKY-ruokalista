@@ -5,10 +5,12 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 
+import butterknife.OnItemClick;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.prototypes.CardWithList;
 
 public class Item implements Parcelable, CardWithList.ListObject {
+    CardWithList.OnItemClickListener mClickListener;
 
     @Expose
     private String pvm;
@@ -85,12 +87,12 @@ public class Item implements Parcelable, CardWithList.ListObject {
 
     @Override
     public void setOnItemClickListener(CardWithList.OnItemClickListener onItemClickListener) {
-
+        mClickListener = onItemClickListener;
     }
 
     @Override
     public CardWithList.OnItemClickListener getOnItemClickListener() {
-        return null;
+        return mClickListener;
     }
 
     @Override

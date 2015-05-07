@@ -11,6 +11,11 @@ android {
         // Continuing from where we left off (SSKKY-ruokalista V1)
         versionCode 10
         versionName "2.0"
+
+        // Tray stuff
+        applicationId "sskky.ruokalista" // this is your unique applicationId
+        resValue "string", "tray__authority", "${applicationId}.tray" // add this to set a unique tray authority based on your applicationId
+
     }
     buildTypes {
         release {
@@ -31,15 +36,13 @@ dependencies {
     compile "frankiesardo:icepick:3.0.2"
     provided 'frankiesardo:icepick-processor:3.0.2'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.ogaclejapan.smarttablayout:library:1.1.0@aar'
-    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.1.0@aar'
     compile 'com.mani:thindownloadmanager:1.0.0'
     compile 'com.afollestad:material-dialogs:0.7.1.2'
     compile 'com.eftimoff:androidplayer:1.0.0@aar'
     compile 'com.github.rahatarmanahmed:circularprogressview:2.2.1'
-    compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1'
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.0.1'
-    compile 'com.github.gabrielemariotti.cards:cardslib-recyclerview:2.0.1'
     compile 'com.github.gabrielemariotti.cards:cardslib-extra-staggeredgrid:2.0.1'
+    compile 'net.grandcentrix.tray:tray:0.9'
+
 }

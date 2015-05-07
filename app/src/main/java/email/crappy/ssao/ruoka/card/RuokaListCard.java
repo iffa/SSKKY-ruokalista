@@ -1,17 +1,24 @@
 package email.crappy.ssao.ruoka.card;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.event.EasterEggEvent;
 import email.crappy.ssao.ruoka.pojo.Item;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.prototypes.CardWithList;
+import it.gmariotti.cardslib.library.prototypes.LinearListView;
 
 /**
  * TODO: Complete background code work on this class (so this can be used to display the menu items)
@@ -29,7 +36,7 @@ public class RuokaListCard extends CardWithList {
     @Override
     protected CardHeader initCardHeader() {
         CardHeader header = new CardHeader(getContext());
-        header.setTitle(getContext().getResources().getString(R.string.hello_world));
+        header.setTitle(ruoka.getTitle());
         return header;
     }
 
@@ -43,19 +50,57 @@ public class RuokaListCard extends CardWithList {
         List<ListObject> mObjects = new ArrayList<ListObject>();
 
         for(Item item : ruoka.getItems()) {
+            if (item.getKama().toLowerCase().contains("talon tapaan")) {
+                item.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(LinearListView linearListView, View view, int i, ListObject listObject) {
+                        EventBus.getDefault().post(new EasterEggEvent());
+                    }
+                });
+            }
             mObjects.add(item);
+
         }
-        
+
         return mObjects;
     }
 
     @Override
-    public View setupChildView(int i, ListObject listObject, View view, ViewGroup viewGroup) {
-        return null;
+    public View setupChildView(int childPosition, ListObject object, View view, ViewGroup parent) {
+        // TODO: The awesome dynamic food icons?
+        TextView dayText = (TextView) view.findViewById(R.id.item_day);
+        TextView dateText = (TextView) view.findViewById(R.id.item_date);
+        TextView foodText = (TextView) view.findViewById(R.id.item_food);
+
+        // Setting the text for all TextViews from the item
+        Item item = (Item) object;
+        dayText.setText(item.getPaiva());
+        dateText.setText(item.getPvm());
+        foodText.setText(item.getKama());
+
+        if (isToday(item.getPvm())) {
+            // Setting today bold
+            dayText.setTypeface(null, Typeface.BOLD);
+            dateText.setTypeface(null, Typeface.BOLD);
+        }
+
+        return view;
+    }
+
+    private boolean isToday(String date) {
+        int day = Integer.parseInt(date.split("\\.")[0]);
+        int month = Integer.parseInt(date.split("\\.")[1]);
+
+        GregorianCalendar calendar = new GregorianCalendar();
+        if (calendar.get(Calendar.DAY_OF_MONTH) == day && calendar.get(Calendar.MONTH) == (month - 1)) {
+            return true;
+        }
+        return false;
+
     }
 
     @Override
     public int getChildLayoutId() {
-        return 0;
+        return R.layout.card_list_item;
     }
 }
