@@ -2,8 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="email.crappy.ssao.ruoka.activity.MainActivity">
-    <item android:id="@+id/action_about" android:icon="@drawable/ic_action_action_info_outline" android:title="@string/action_about"
-        android:orderInCategory="200" app:showAsAction="ifRoom" />
     <item android:id="@+id/action_today" android:icon="@drawable/ic_action_action_query_builder" android:title="@string/action_today"
         android:orderInCategory="100" app:showAsAction="always" />
+    <item android:id="@+id/action_about" android:icon="@drawable/ic_action_action_info_outline" android:title="@string/action_about"
+        android:orderInCategory="200" app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_donate" android:title="@string/action_donate"
+        android:orderInCategory="300" app:showAsAction="never" />
+    <item android:id="@+id/action_licenses" android:title="@string/action_licenses"
+        android:orderInCategory="400" app:showAsAction="never" />
 </menu>

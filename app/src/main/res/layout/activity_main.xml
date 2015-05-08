@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     tools:context="email.crappy.ssao.ruoka.activity.MainActivity">
 
-    <!-- TODO: Fragment with content -->
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_height="wrap_content"

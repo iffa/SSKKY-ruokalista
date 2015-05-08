@@ -21,12 +21,33 @@
     <string name="welcome_update_title">Päivitetään ruokalistaa</string>
     <string name="welcome_update_message">Tässä kestää vain pieni tovi...</string>
     <string name="action_today">Tänään ruokana</string>
+    <string name="dialog_today_title">Tänään ruokana</string>
+    <string name="welcome_tooltip">Tänään ruokana</string>
+    <string name="action_donate">Tue kehittäjää</string>
+    <string name="action_licenses">Kirjastojen lisenssit</string>
+    <string name="dialog_licenses_title">Kirjastojen lisenssit</string>
+    <string name="dialog_licenses_message">Sovelluksen kehityksen mahdollistivat nämä mahtavat avoimen lähdekoodin kirjastot:</string>
     <string-array name="dialog_easter_items">
         <item>Yllätysmuna</item>
         <item>Pinikki</item>
         <item>ALT + F4</item>
         <item>Jonnet ei muista</item>
         <item>Älä valitse tätä</item>
+    </string-array>
+    <string-array name="dialog_licenses_items">
+        <item>ButterKnife</item>
+        <item>Logger</item>
+        <item>ORMLite</item>
+        <item>GSON</item>
+        <item>Icepick</item>
+        <item>EventBus</item>
+        <item>ThinDownloadManager</item>
+        <item>Material Dialogs</item>
+        <item>android-player</item>
+        <item>CircularProgressView</item>
+        <item>Cardslib</item>
+        <item>Tray</item>
+        <item>android-inapp-billing-v3</item>
     </string-array>
 
 </resources>

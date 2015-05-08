@@ -1,5 +1,6 @@
 package email.crappy.ssao.ruoka.activity;
 
+import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.orhanobut.logger.Logger;
 
 import net.grandcentrix.tray.TrayAppPreferences;
@@ -18,10 +22,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.event.EasterEggEvent;
@@ -31,10 +37,13 @@ import email.crappy.ssao.ruoka.event.PinikkiEvent;
 import email.crappy.ssao.ruoka.fragment.CardGridFragment;
 import email.crappy.ssao.ruoka.fragment.EasterDialogFragment;
 import email.crappy.ssao.ruoka.fragment.InfoDialogFragment;
+import email.crappy.ssao.ruoka.fragment.LicenseDialogFragment;
 import email.crappy.ssao.ruoka.fragment.LoadingDialogFragment;
 import email.crappy.ssao.ruoka.fragment.WelcomeFragment;
 import email.crappy.ssao.ruoka.network.DataLoader;
+import email.crappy.ssao.ruoka.pojo.Item;
 import email.crappy.ssao.ruoka.pojo.PojoUtil;
+import email.crappy.ssao.ruoka.pojo.Ruoka;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 import icepick.Icepick;
 import icepick.Icicle;
@@ -44,15 +53,17 @@ import icepick.Icicle;
  *
  * @author Santeri 'iffa'
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements BillingProcessor.IBillingHandler {
     private static final String FILE_NAME = "Data.json";
     public TrayAppPreferences appPreferences;
+    BillingProcessor bp;
     @Icicle
     public RuokaJsonObject data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         appPreferences = new TrayAppPreferences(this);
+        bp = new BillingProcessor(this, null, this);
 
         // Easter egg get!
         if (appPreferences.getBoolean("easterFun", false)) {
@@ -104,17 +115,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
         new DataLoader().loadData(new File(getApplicationContext().getFilesDir(), FILE_NAME).getPath());
-        /*
-        else {
-            try {
-                data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
-                showData();
-            } catch (FileNotFoundException e) {
-                // TODO: Show error dialog/exit
-                Logger.d("Tried to generate data from JSON but it failed", e);
-            }
-        }
-        */
     }
 
     private void showData() {
@@ -143,14 +143,17 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onDestroy() {
+        if (bp != null) {
+            bp.release();
+        }
         super.onDestroy();
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -167,7 +170,25 @@ public class MainActivity extends ActionBarActivity {
             showDialog(dialog, "aboutDialog");
             return true;
         } else if (id == R.id.action_today) {
-            // TODO: Show what today's menu is
+            Item todayItem = null;
+            for (Ruoka ruoka : data.getRuoka()) {
+                for (Item ruokaItem  : ruoka.getItems()) {
+                    if(isToday(ruokaItem.getPvm())) {
+                        todayItem = ruokaItem;
+                        break;
+                    }
+                }
+            }
+
+            if (todayItem != null) {
+                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_today_title), todayItem.getKama(), false);
+                showDialog(dialog, "todayDialog");
+            }
+            return true;
+        } else if (id == R.id.action_licenses) {
+            LicenseDialogFragment dialog = new LicenseDialogFragment();
+            showDialog(dialog, "licenseDialog");
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -178,6 +199,13 @@ public class MainActivity extends ActionBarActivity {
         super.onSaveInstanceState(outState, outPersistentState);
         Icepick.saveInstanceState(this, outState);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!bp.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     /**
      * Checks if local data exists and wether or not it needs to be downloaded
@@ -230,6 +258,18 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public static boolean isToday(String date) {
+        int day = Integer.parseInt(date.split("\\.")[0]);
+        int month = Integer.parseInt(date.split("\\.")[1]);
+
+        GregorianCalendar calendar = new GregorianCalendar();
+        if (calendar.get(Calendar.DAY_OF_MONTH) == day && calendar.get(Calendar.MONTH) == (month - 1)) {
+            return true;
+        }
+        return false;
+
+    }
+
     public void onEvent(LoadFailEvent event) {
         if (getSupportFragmentManager().findFragmentByTag("loadingDialog") != null) {
             ((LoadingDialogFragment) getSupportFragmentManager().findFragmentByTag("loadingDialog")).dismiss();
@@ -251,5 +291,25 @@ public class MainActivity extends ActionBarActivity {
 
     void showDialog(DialogFragment fragment, String tag) {
         fragment.show(getSupportFragmentManager(), tag);
+    }
+
+    @Override
+    public void onProductPurchased(String s, TransactionDetails transactionDetails) {
+
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {
+
+    }
+
+    @Override
+    public void onBillingError(int i, Throwable throwable) {
+
+    }
+
+    @Override
+    public void onBillingInitialized() {
+
     }
 }
