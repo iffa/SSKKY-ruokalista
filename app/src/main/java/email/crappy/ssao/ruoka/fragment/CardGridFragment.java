@@ -55,6 +55,5 @@ public class CardGridFragment extends Fragment {
         if (mGridView != null) {
             mGridView.setAdapter(mCardArrayAdapter);
         }
-
     }
 }

@@ -82,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
                 data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
 
                 if (dataExpired()) {
-                    // TODO: Get new data -> welcome screen?
+                    data = null;
                     WelcomeFragment fragment = new WelcomeFragment();
                     Bundle args = new Bundle();
                     args.putBoolean("update", true);
@@ -158,6 +158,10 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        if (data == null) {
+            return super.onOptionsItemSelected(item);
+        }
+
         if (id == R.id.action_about) {
             InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_about_title), getResources().getString(R.string.dialog_about_message), false);
             showDialog(dialog, "aboutDialog");
@@ -214,19 +218,19 @@ public class MainActivity extends ActionBarActivity {
             }
 
             if (dataExpired()) {
+                data = null;
                 InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_expired_title), getResources().getString(R.string.dialog_expired_message), true);
                 showDialog(dialog, "expiredDialog");
             } else {
                 showData();
             }
         } catch (FileNotFoundException e) {
-            // TODO: Show error dialog/exit
+            // Very unlikely to happen
             Logger.d("Tried to generate data from JSON but it failed", e);
         }
     }
 
     public void onEvent(LoadFailEvent event) {
-        // TODO: Alternatively a new fragment with a retry-button (or a dialog)
         if (getSupportFragmentManager().findFragmentByTag("loadingDialog") != null) {
             ((LoadingDialogFragment) getSupportFragmentManager().findFragmentByTag("loadingDialog")).dismiss();
         }
