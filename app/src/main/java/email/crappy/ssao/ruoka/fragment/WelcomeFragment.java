@@ -16,7 +16,6 @@ import com.eftimoff.androidplayer.actions.property.PropertyAction;
 import com.orhanobut.logger.Logger;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.activity.MainActivity;
 

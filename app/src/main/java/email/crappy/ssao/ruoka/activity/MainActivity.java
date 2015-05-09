@@ -189,6 +189,10 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
             LicenseDialogFragment dialog = new LicenseDialogFragment();
             showDialog(dialog, "licenseDialog");
             return true;
+        } else if (id == R.id.action_donate) {
+            bp.loadOwnedPurchasesFromGoogle();
+            bp.purchase(this, "donate");
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
