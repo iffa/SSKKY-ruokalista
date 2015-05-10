@@ -1,5 +1,6 @@
 package email.crappy.ssao.ruoka.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.v4.app.DialogFragment;
@@ -32,6 +33,7 @@ import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.event.EasterEggEvent;
 import email.crappy.ssao.ruoka.event.LoadFailEvent;
+import email.crappy.ssao.ruoka.event.LoadStartEvent;
 import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
 import email.crappy.ssao.ruoka.event.PinikkiEvent;
 import email.crappy.ssao.ruoka.fragment.CardGridFragment;
@@ -54,7 +56,7 @@ import icepick.Icicle;
  * @author Santeri 'iffa'
  */
 public class MainActivity extends ActionBarActivity implements BillingProcessor.IBillingHandler {
-    private static final String FILE_NAME = "Data.json";
+    public static final String FILE_NAME = "Data.json";
     public TrayAppPreferences appPreferences;
     BillingProcessor bp;
     @Icicle
@@ -62,6 +64,10 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Icepick.restoreInstanceState(this, savedInstanceState);
+
+        // Initializing billing & preferences
         appPreferences = new TrayAppPreferences(this);
         bp = new BillingProcessor(this, null, this);
 
@@ -70,16 +76,13 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
             setTheme(R.style.AppThemeManly);
         }
 
-        super.onCreate(savedInstanceState);
-        Icepick.restoreInstanceState(this, savedInstanceState);
-
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
         setSupportActionBar((Toolbar) ButterKnife.findById(this, R.id.toolbar));
 
         // Show welcome screen if data is non-existent (possible first time user)
-        if (shouldDownloadData()) {
+        if (shouldDownloadData(getApplicationContext())) {
             WelcomeFragment fragment = new WelcomeFragment();
             Bundle args = new Bundle();
             args.putBoolean("update", false);
@@ -90,7 +93,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
         // If data is already loaded -> generate POJO -> validate -> etc.
         if (data == null) {
             try {
-                data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
+                data = PojoUtil.generatePojoFromJson(getApplicationContext());
 
                 if (dataExpired()) {
                     data = null;
@@ -216,9 +219,9 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
      *
      * @return True if data should be downloaded
      */
-    private boolean shouldDownloadData() {
+    public static boolean shouldDownloadData(Context context) {
         // Checking if data needs to be downloaded (if no local file exists)
-        File data = new File(getApplicationContext().getFilesDir(), FILE_NAME);
+        File data = new File(context.getFilesDir(), FILE_NAME);
         return !data.exists();
     }
 
@@ -243,7 +246,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
 
     public void onEvent(LoadSuccessEvent event) {
         try {
-            data = PojoUtil.generatePojoFromJson(new File(getApplicationContext().getFilesDir(), FILE_NAME));
+            data = PojoUtil.generatePojoFromJson(getApplicationContext());
 
             if (getSupportFragmentManager().findFragmentByTag("loadingDialog") != null) {
                 ((LoadingDialogFragment) getSupportFragmentManager().findFragmentByTag("loadingDialog")).dismiss();
@@ -291,6 +294,10 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
     public void onEvent(PinikkiEvent event) {
         appPreferences.put("easterFun", !appPreferences.getBoolean("easterFun", false));
         System.exit(0);
+    }
+
+    public void onEvent(LoadStartEvent event) {
+        downloadData(event.getShowDialog());
     }
 
     void showDialog(DialogFragment fragment, String tag) {

@@ -27,6 +27,7 @@
     <string name="action_licenses">Kirjastojen lisenssit</string>
     <string name="dialog_licenses_title">Kirjastojen lisenssit</string>
     <string name="dialog_licenses_message">Sovelluksen kehityksen mahdollistivat nämä mahtavat avoimen lähdekoodin kirjastot:</string>
+    <string name="notification_title">Tänään ruokana</string>
     <string-array name="dialog_easter_items">
         <item>Yllätysmuna</item>
         <item>Pinikki</item>

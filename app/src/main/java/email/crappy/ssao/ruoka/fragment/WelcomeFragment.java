@@ -16,17 +16,21 @@ import com.eftimoff.androidplayer.actions.property.PropertyAction;
 import com.orhanobut.logger.Logger;
 
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
-import email.crappy.ssao.ruoka.activity.MainActivity;
+import email.crappy.ssao.ruoka.event.LoadStartEvent;
 
 /**
  * @author Santeri 'iffa'
  */
 public class WelcomeFragment extends Fragment {
-
     public WelcomeFragment() {
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +38,7 @@ public class WelcomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_welcome, container, false);
 
+        setRetainInstance(true);
         ButterKnife.inject(view);
 
         return view;
@@ -45,7 +50,6 @@ public class WelcomeFragment extends Fragment {
         Logger.d("onViewCreated has been called :D");
 
         super.onViewCreated(view, savedInstanceState);
-
 
 
         // TODO: Animate welcome-screen
@@ -78,15 +82,17 @@ public class WelcomeFragment extends Fragment {
         super.onStart();
 
         // Loading data
-        // TODO: Make sure this isn't called again
-        final MainActivity activity = (MainActivity) getActivity();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                activity.downloadData(false);
+                EventBus.getDefault().post(new LoadStartEvent(false));
             }
         }, 4000);
+    }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }
