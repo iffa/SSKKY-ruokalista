@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.parse.Parse;
+import com.parse.ParseUser;
 
 /**
  * @author Santeri 'iffa'
@@ -26,5 +27,11 @@ public class RuokaApplication extends Application {
         // Initialize Parse
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, PARSE_APP_ID, PARSE_MASTER);
+
+        // Anonymous users ftw
+        // TODO: Add rating the day's food (anonymously, with yes/no/50-50 and a short description)
+        ParseUser.enableAutomaticUser();
+        ParseUser.getCurrentUser().increment("RunCount");
+        ParseUser.getCurrentUser().saveInBackground();
     }
 }
