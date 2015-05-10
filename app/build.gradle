@@ -25,6 +25,8 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.android.support:cardview-v7:22.0.0'
+    compile 'com.parse.bolts:bolts-android:1.2.0'
+    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile 'com.jakewharton:butterknife:6.0.0'
     compile 'com.orhanobut:logger:1.5'
     compile 'com.j256.ormlite:ormlite-core:4.47'

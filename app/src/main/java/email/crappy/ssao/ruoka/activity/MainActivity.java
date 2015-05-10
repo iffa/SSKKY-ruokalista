@@ -31,6 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.RuokaApplication;
 import email.crappy.ssao.ruoka.event.EasterEggEvent;
 import email.crappy.ssao.ruoka.event.LoadFailEvent;
 import email.crappy.ssao.ruoka.event.LoadStartEvent;
@@ -69,7 +70,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
 
         // Initializing billing & preferences
         appPreferences = new TrayAppPreferences(this);
-        bp = new BillingProcessor(this, null, this);
+        bp = new BillingProcessor(this, RuokaApplication.BILLING_KEY, this);
 
         // Easter egg get!
         if (appPreferences.getBoolean("easterFun", false)) {
