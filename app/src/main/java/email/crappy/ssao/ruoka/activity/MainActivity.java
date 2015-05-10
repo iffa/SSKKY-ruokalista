@@ -16,6 +16,7 @@ import android.view.View;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.orhanobut.logger.Logger;
+import com.parse.ParseAnalytics;
 
 import net.grandcentrix.tray.TrayAppPreferences;
 
@@ -71,6 +72,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
         // Initializing billing & preferences
         appPreferences = new TrayAppPreferences(this);
         bp = new BillingProcessor(this, RuokaApplication.BILLING_KEY, this);
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
         // Easter egg get!
         if (appPreferences.getBoolean("easterFun", false)) {

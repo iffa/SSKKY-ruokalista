@@ -11,8 +11,8 @@ import com.parse.Parse;
 public class RuokaApplication extends Application {
     public static final String ACTION_SET_ALARM = "email.crappy.ssao.ruoka.SET_ALARM";
     public static final String BILLING_KEY = null;
-    public static final String PARSE_KEY = null; // TODO: WTF are these for real
-    public static final String PARSE_KEY_2 = null;
+    public static final String PARSE_APP_ID = null;
+    public static final String PARSE_MASTER = null;
 
     @Override
     public void onCreate() {
@@ -25,6 +25,6 @@ public class RuokaApplication extends Application {
 
         // Initialize Parse
         Parse.enableLocalDatastore(this);
-        Parse.initialize(this, PARSE_KEY, PARSE_KEY_2);
+        Parse.initialize(this, PARSE_APP_ID, PARSE_MASTER);
     }
 }
