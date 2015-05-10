@@ -9,8 +9,8 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         // Continuing from where we left off (SSKKY-ruokalista V1)
-        versionCode 12
-        versionName "2.0"
+        versionCode 13
+        versionName "2.0.1"
         resValue "string", "tray__authority", "${applicationId}.tray" // add this to set a unique tray authority based on your applicationId
 
     }
