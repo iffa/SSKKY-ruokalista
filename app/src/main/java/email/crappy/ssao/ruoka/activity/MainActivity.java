@@ -43,6 +43,7 @@ import email.crappy.ssao.ruoka.fragment.EasterDialogFragment;
 import email.crappy.ssao.ruoka.fragment.InfoDialogFragment;
 import email.crappy.ssao.ruoka.fragment.LicenseDialogFragment;
 import email.crappy.ssao.ruoka.fragment.LoadingDialogFragment;
+import email.crappy.ssao.ruoka.fragment.RatingDialogFragment;
 import email.crappy.ssao.ruoka.fragment.WelcomeFragment;
 import email.crappy.ssao.ruoka.network.DataLoader;
 import email.crappy.ssao.ruoka.pojo.Item;
@@ -198,6 +199,11 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
         } else if (id == R.id.action_donate) {
             bp.loadOwnedPurchasesFromGoogle();
             bp.purchase(this, "donation");
+            return true;
+        } else if (id == R.id.action_rate) {
+            // TODO: Don't show this if there's no food for today or if the user already rated
+            RatingDialogFragment dialog = new RatingDialogFragment();
+            showDialog(dialog, "ratingDialog");
             return true;
         }
 
