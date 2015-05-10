@@ -191,7 +191,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
             return true;
         } else if (id == R.id.action_donate) {
             bp.loadOwnedPurchasesFromGoogle();
-            bp.purchase(this, "donate");
+            bp.purchase(this, "donation");
             return true;
         }
 
