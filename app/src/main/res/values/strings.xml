@@ -37,9 +37,11 @@
     <string name="dialog_rating_positive">Lähetä</string>
     <string name="toast_rating">Kiitos palautteestasi!</string>
     <string name="dialog_rating_negative">Peruuta</string>
-    <string name="dialog_nofood_title">Ei ruokaa tänään</string>
-    <string name="dialog_nofood_message">Tänään ei ole ruokaa.</string>
-    <string name="toast_fill_radio">Arvostellaksesi sinun täytyy valita jokin vaihtoehto</string>
+    <string name="dialog_nofood_title">Ei ruokaa</string>
+    <string name="dialog_nofood_message">Tänään ei ole ruokaa (onko nälkä?).</string>
+    <string name="toast_fill_radio">Palautetta ei voi antaa tyhjänä</string>
+    <string name="dialog_rated_already_message">Olet jo antanut palautteesi tämän päivän ruoasta.</string>
+    <string name="dialog_parse_error_message">Palvelimeen ei saatu yhteyttä, yritä myöhemmin uudelleen.\n\nHuom: palautteen antaminen vaatii aktiivisen internet-yhteyden.</string>
     <string-array name="dialog_easter_items">
         <item>Yllätysmuna</item>
         <item>Pinikki</item>

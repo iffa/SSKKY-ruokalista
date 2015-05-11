@@ -18,7 +18,9 @@ import android.widget.Toast;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.orhanobut.logger.Logger;
+import com.parse.GetCallback;
 import com.parse.ParseAnalytics;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import net.grandcentrix.tray.TrayAppPreferences;
@@ -200,14 +202,37 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
             bp.purchase(this, "donation");
             return true;
         } else if (id == R.id.action_rate) {
-            // TODO: Don't show this if the user already rated
             Item todayItem = getTodayItem();
             if (todayItem == null) {
                 InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_nofood_title), getResources().getString(R.string.dialog_nofood_message), false);
                 showDialog(dialog, "noFoodDialog");
             } else {
-                RatingDialogFragment dialog = new RatingDialogFragment();
-                showDialog(dialog, "ratingDialog");
+                ParseQuery<Rating> query = Rating.getQuery();
+                query.whereEqualTo("date", todayItem.getPvm());
+                query.whereEqualTo("user", ParseUser.getCurrentUser());
+                query.getFirstInBackground(new GetCallback<Rating>() {
+                    @Override
+                    public void done(Rating rating, com.parse.ParseException e) {
+                        Logger.d("Got first in background");
+                        if (e != null && e.getCode() != com.parse.ParseException.OBJECT_NOT_FOUND) {
+                            Logger.d("ParseException: " + e.toString());
+                            // ERROR IS BIG!! fukc
+                            InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.dialog_parse_error_message), false);
+                            showDialog(dialog, "parseErrorDialog");
+                            return;
+                        }
+
+                        if (rating == null) {
+                            Logger.d("Rating is null in getFirstInBackground");
+                            RatingDialogFragment dialog = new RatingDialogFragment();
+                            showDialog(dialog, "ratingDialog");
+                        } else {
+                            Logger.d("Rating is not null = already exists?");
+                            InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.dialog_rated_already_message), false);
+                            showDialog(dialog, "alreadyRatedDialog");
+                        }
+                    }
+                });
                 return true;
             }
         }
@@ -218,8 +243,8 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     public Item getTodayItem() {
         Item todayItem = null;
         for (Ruoka ruoka : data.getRuoka()) {
-            for (Item ruokaItem  : ruoka.getItems()) {
-                if(isToday(ruokaItem.getPvm())) {
+            for (Item ruokaItem : ruoka.getItems()) {
+                if (isToday(ruokaItem.getPvm())) {
                     todayItem = ruokaItem;
                     break;
                 }
@@ -312,6 +337,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         showDialog(dialog, "errorDialog");
     }
 
+    // TODO: Add some protection so nobody unwanted gets in
     // Very manly easter egg get!
     public void onEvent(EasterEggEvent event) {
         EasterDialogFragment dialog = new EasterDialogFragment();
@@ -336,6 +362,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         rating.setOpinion(event.getOpinion());
         rating.setDate(todayItem.getPvm());
         rating.setFood(todayItem.getKama());
+        rating.setUser(ParseUser.getCurrentUser());
 
         ParseUser.getCurrentUser().put("rating", rating);
         ParseUser.getCurrentUser().saveInBackground();

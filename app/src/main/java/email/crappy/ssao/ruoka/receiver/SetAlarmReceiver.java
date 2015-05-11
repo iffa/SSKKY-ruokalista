@@ -39,6 +39,7 @@ public class SetAlarmReceiver extends BroadcastReceiver {
 
             // Avoid triggering alarm unintentionally
             if (intent.getAction().equals(RuokaApplication.ACTION_SET_ALARM) || (calendar.get(Calendar.HOUR_OF_DAY) > 10 && calendar.get(Calendar.MINUTE) > 30)) {
+                Logger.d("Added a day to the alarm time to avoid weird stuff");
                 calendar.add(Calendar.DATE, 1);
             }
 
