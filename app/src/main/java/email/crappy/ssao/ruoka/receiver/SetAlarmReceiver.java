@@ -36,7 +36,15 @@ public class SetAlarmReceiver extends BroadcastReceiver {
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());
+
+            // Avoid triggering alarm unintentionally
+            if (intent.getAction().equals(RuokaApplication.ACTION_SET_ALARM) || (calendar.get(Calendar.HOUR_OF_DAY) > 10 && calendar.get(Calendar.MINUTE) > 30)) {
+                calendar.add(Calendar.DATE, 1);
+            }
+
             calendar.set(Calendar.HOUR_OF_DAY, 10);
+            calendar.set(Calendar.MINUTE, 0);
+
             alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                     AlarmManager.INTERVAL_DAY, alarmIntent);
 
