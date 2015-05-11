@@ -8,15 +8,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.orhanobut.logger.Logger;
 import com.parse.ParseAnalytics;
+import com.parse.ParseUser;
 
 import net.grandcentrix.tray.TrayAppPreferences;
 
@@ -38,6 +41,7 @@ import email.crappy.ssao.ruoka.event.LoadFailEvent;
 import email.crappy.ssao.ruoka.event.LoadStartEvent;
 import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
 import email.crappy.ssao.ruoka.event.PinikkiEvent;
+import email.crappy.ssao.ruoka.event.RatingSaveEvent;
 import email.crappy.ssao.ruoka.fragment.CardGridFragment;
 import email.crappy.ssao.ruoka.fragment.EasterDialogFragment;
 import email.crappy.ssao.ruoka.fragment.InfoDialogFragment;
@@ -48,6 +52,7 @@ import email.crappy.ssao.ruoka.fragment.WelcomeFragment;
 import email.crappy.ssao.ruoka.network.DataLoader;
 import email.crappy.ssao.ruoka.pojo.Item;
 import email.crappy.ssao.ruoka.pojo.PojoUtil;
+import email.crappy.ssao.ruoka.pojo.Rating;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 import icepick.Icepick;
@@ -58,7 +63,7 @@ import icepick.Icicle;
  *
  * @author Santeri 'iffa'
  */
-public class MainActivity extends ActionBarActivity implements BillingProcessor.IBillingHandler {
+public class MainActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
     public static final String FILE_NAME = "Data.json";
     public TrayAppPreferences appPreferences;
     BillingProcessor bp;
@@ -177,19 +182,13 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
             showDialog(dialog, "aboutDialog");
             return true;
         } else if (id == R.id.action_today) {
-            Item todayItem = null;
-            for (Ruoka ruoka : data.getRuoka()) {
-                for (Item ruokaItem  : ruoka.getItems()) {
-                    if(isToday(ruokaItem.getPvm())) {
-                        todayItem = ruokaItem;
-                        break;
-                    }
-                }
-            }
-
+            Item todayItem = getTodayItem();
             if (todayItem != null) {
                 InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_today_title), todayItem.getKama(), false);
                 showDialog(dialog, "todayDialog");
+            } else {
+                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_nofood_title), getResources().getString(R.string.dialog_nofood_message), false);
+                showDialog(dialog, "noFoodDialog");
             }
             return true;
         } else if (id == R.id.action_licenses) {
@@ -201,13 +200,32 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
             bp.purchase(this, "donation");
             return true;
         } else if (id == R.id.action_rate) {
-            // TODO: Don't show this if there's no food for today or if the user already rated
-            RatingDialogFragment dialog = new RatingDialogFragment();
-            showDialog(dialog, "ratingDialog");
-            return true;
+            // TODO: Don't show this if the user already rated
+            Item todayItem = getTodayItem();
+            if (todayItem == null) {
+                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_nofood_title), getResources().getString(R.string.dialog_nofood_message), false);
+                showDialog(dialog, "noFoodDialog");
+            } else {
+                RatingDialogFragment dialog = new RatingDialogFragment();
+                showDialog(dialog, "ratingDialog");
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Item getTodayItem() {
+        Item todayItem = null;
+        for (Ruoka ruoka : data.getRuoka()) {
+            for (Item ruokaItem  : ruoka.getItems()) {
+                if(isToday(ruokaItem.getPvm())) {
+                    todayItem = ruokaItem;
+                    break;
+                }
+            }
+        }
+        return todayItem;
     }
 
     @Override
@@ -307,6 +325,23 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
 
     public void onEvent(LoadStartEvent event) {
         downloadData(event.getShowDialog());
+    }
+
+    public void onEvent(RatingSaveEvent event) {
+        Rating rating = new Rating();
+        rating.setUuidString();
+
+        Item todayItem = getTodayItem();
+        rating.setDescription(event.getDescription());
+        rating.setOpinion(event.getOpinion());
+        rating.setDate(todayItem.getPvm());
+        rating.setFood(todayItem.getKama());
+
+        ParseUser.getCurrentUser().put("rating", rating);
+        ParseUser.getCurrentUser().saveInBackground();
+
+        Toast successToast = Toast.makeText(this, R.string.toast_rating, Toast.LENGTH_SHORT);
+        successToast.show();
     }
 
     void showDialog(DialogFragment fragment, String tag) {

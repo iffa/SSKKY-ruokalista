@@ -4,7 +4,10 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
+
+import email.crappy.ssao.ruoka.pojo.Rating;
 
 /**
  * @author Santeri 'iffa'
@@ -26,6 +29,7 @@ public class RuokaApplication extends Application {
 
         // Initialize Parse
         Parse.enableLocalDatastore(this);
+        ParseObject.registerSubclass(Rating.class);
         Parse.initialize(this, PARSE_APP_ID, PARSE_MASTER);
 
         // Anonymous users ftw

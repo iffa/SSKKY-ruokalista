@@ -28,15 +28,18 @@
     <string name="dialog_licenses_title">Kirjastojen lisenssit</string>
     <string name="dialog_licenses_message">Sovelluksen kehityksen mahdollistivat nämä mahtavat avoimen lähdekoodin kirjastot:</string>
     <string name="notification_title">Tänään ruokana</string>
-    <string name="rating_positive">Tykkäsin</string>
-    <string name="rating_negative">En tykännyt</string>
-    <string name="rating_neutral">50/50</string>
-    <string name="rating_title">Mitä pidit ruuasta?</string>
+    <string name="rating_positive">Kyllä</string>
+    <string name="rating_negative">En</string>
+    <string name="rating_neutral">En osaa sanoa</string>
+    <string name="rating_title">Piditkö päivän ruoasta?</string>
     <string name="rating_more">Haluatko kertoa lisää? (lyhyt kuvaus riittää!)</string>
     <string name="dialog_rating_title">Arvioi päivän ruoka</string>
     <string name="dialog_rating_positive">Lähetä</string>
     <string name="toast_rating">Kiitos palautteestasi!</string>
     <string name="dialog_rating_negative">Peruuta</string>
+    <string name="dialog_nofood_title">Ei ruokaa tänään</string>
+    <string name="dialog_nofood_message">Tänään ei ole ruokaa.</string>
+    <string name="toast_fill_radio">Arvostellaksesi sinun täytyy valita jokin vaihtoehto</string>
     <string-array name="dialog_easter_items">
         <item>Yllätysmuna</item>
         <item>Pinikki</item>
