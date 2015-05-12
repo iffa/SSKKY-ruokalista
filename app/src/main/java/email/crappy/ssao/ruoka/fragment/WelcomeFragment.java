@@ -52,7 +52,7 @@ public class WelcomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        // TODO: Animate welcome-screen
+        // TODO: Beautify more :;D
         final PropertyAction titleAction = PropertyAction.newPropertyAction(view.findViewById(R.id.welcomeLayout)).
                 interpolator(new DecelerateInterpolator()).
                 translationY(-100).

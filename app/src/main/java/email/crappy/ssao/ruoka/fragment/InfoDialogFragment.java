@@ -54,7 +54,6 @@ public class InfoDialogFragment extends DialogFragment {
                         super.onPositive(dialog);
 
                         if (terminate) {
-                            // TODO: Perhaps handle this better?
                             System.exit(0);
                         }
                     }

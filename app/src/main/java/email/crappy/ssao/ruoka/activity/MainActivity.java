@@ -61,7 +61,7 @@ import icepick.Icepick;
 import icepick.Icicle;
 
 /**
- * TODO: Notification every day at 10am
+ * TODO: Fix notification
  *
  * @author Santeri 'iffa'
  */

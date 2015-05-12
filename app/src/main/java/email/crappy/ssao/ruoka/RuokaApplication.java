@@ -33,7 +33,6 @@ public class RuokaApplication extends Application {
         Parse.initialize(this, PARSE_APP_ID, PARSE_MASTER);
 
         // Anonymous users ftw
-        // TODO: Add rating the day's food (anonymously, with yes/no/50-50 and a short description)
         ParseUser.enableAutomaticUser();
         ParseUser.getCurrentUser().increment("RunCount");
         ParseUser.getCurrentUser().saveInBackground();

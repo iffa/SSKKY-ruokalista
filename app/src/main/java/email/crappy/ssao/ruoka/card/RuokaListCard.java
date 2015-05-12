@@ -20,7 +20,6 @@ import it.gmariotti.cardslib.library.prototypes.CardWithList;
 import it.gmariotti.cardslib.library.prototypes.LinearListView;
 
 /**
- * TODO: Complete background code work on this class (so this can be used to display the menu items)
  *
  * @author Santeri 'iffa'
  */
@@ -66,7 +65,6 @@ public class RuokaListCard extends CardWithList {
 
     @Override
     public View setupChildView(int childPosition, ListObject object, View view, ViewGroup parent) {
-        // TODO: The awesome dynamic food icons?
         TextView dayText = (TextView) view.findViewById(R.id.item_day);
         TextView dateText = (TextView) view.findViewById(R.id.item_date);
         TextView foodText = (TextView) view.findViewById(R.id.item_food);

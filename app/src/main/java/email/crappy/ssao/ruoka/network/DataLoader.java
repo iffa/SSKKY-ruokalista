@@ -48,7 +48,6 @@ public class DataLoader implements DownloadStatusListener {
 
     @Override
     public void onProgress(int i, long l, int i1) {
-        // TODO: Show progress?
         Logger.d("Loaded " + i1 + " of the data");
     }
 }
