@@ -52,7 +52,7 @@ public class RuokaListCard extends CardWithList {
                 item.setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(LinearListView linearListView, View view, int i, ListObject listObject) {
-                        EventBus.getDefault().post(new EasterEggEvent());
+                        EventBus.getDefault().post(new EasterEggEvent(false));
                     }
                 });
             }

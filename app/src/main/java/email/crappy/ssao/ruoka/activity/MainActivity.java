@@ -46,6 +46,7 @@ import email.crappy.ssao.ruoka.event.PinikkiEvent;
 import email.crappy.ssao.ruoka.event.RatingSaveEvent;
 import email.crappy.ssao.ruoka.fragment.CardGridFragment;
 import email.crappy.ssao.ruoka.fragment.EasterDialogFragment;
+import email.crappy.ssao.ruoka.fragment.EasterPasswordDialogFragment;
 import email.crappy.ssao.ruoka.fragment.InfoDialogFragment;
 import email.crappy.ssao.ruoka.fragment.LicenseDialogFragment;
 import email.crappy.ssao.ruoka.fragment.LoadingDialogFragment;
@@ -61,8 +62,6 @@ import icepick.Icepick;
 import icepick.Icicle;
 
 /**
- * TODO: Fix notification
- *
  * @author Santeri 'iffa'
  */
 public class MainActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
@@ -337,11 +336,15 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         showDialog(dialog, "errorDialog");
     }
 
-    // TODO: Add some protection so nobody unwanted gets in
     // Very manly easter egg get!
     public void onEvent(EasterEggEvent event) {
-        EasterDialogFragment dialog = new EasterDialogFragment();
-        showDialog(dialog, "easterDialog");
+        if (event.getShowEaster()) {
+            EasterDialogFragment dialog = new EasterDialogFragment();
+            showDialog(dialog, "easterDialog");
+        } else {
+            EasterPasswordDialogFragment dialog = new EasterPasswordDialogFragment();
+            showDialog(dialog, "easterPasswordDialog");
+        }
     }
 
     public void onEvent(PinikkiEvent event) {

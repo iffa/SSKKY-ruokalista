@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion "21.1.2"
 
     defaultConfig {
@@ -9,14 +9,14 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         // Continuing from where we left off (SSKKY-ruokalista V1)
-        versionCode 16
-        versionName "2.0.4"
+        versionCode 17
+        versionName "2.0.5"
         resValue "string", "tray__authority", "${applicationId}.tray" // add this to set a unique tray authority based on your applicationId
 
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -36,7 +36,7 @@ dependencies {
     provided 'frankiesardo:icepick-processor:3.0.2'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.mani:thindownloadmanager:1.0.0'
-    compile 'com.afollestad:material-dialogs:0.7.1.2'
+    compile 'com.afollestad:material-dialogs:0.7.4.0'
     compile 'com.eftimoff:androidplayer:1.0.0@aar'
     compile 'com.github.rahatarmanahmed:circularprogressview:2.2.1'
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1'

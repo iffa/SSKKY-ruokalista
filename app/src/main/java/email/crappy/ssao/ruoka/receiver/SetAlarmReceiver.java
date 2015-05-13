@@ -11,6 +11,7 @@ import com.orhanobut.logger.Logger;
 import java.util.Calendar;
 
 import email.crappy.ssao.ruoka.RuokaApplication;
+import email.crappy.ssao.ruoka.pojo.Ruoka;
 import email.crappy.ssao.ruoka.service.NotificationService;
 
 /**
@@ -29,7 +30,20 @@ public class SetAlarmReceiver extends BroadcastReceiver {
             Logger.d("SetAlarmReceiver called: " + intent.getAction());
 
             AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+            // Not going to mess with an existing alarm
+            boolean alarmUp = (PendingIntent.getService(context, 69,
+                    new Intent(context, NotificationService.class)
+                            .setAction(RuokaApplication.ACTION_FIRE_NOTIFICATION),
+                    PendingIntent.FLAG_NO_CREATE) != null);
+
+            if (alarmUp) {
+                Logger.d("Alarm was already up, not setting it again");
+                return;
+            }
+
             Intent i = new Intent(context, NotificationService.class);
+            i.setAction(RuokaApplication.ACTION_FIRE_NOTIFICATION);
             PendingIntent alarmIntent = PendingIntent.getService(context, 69,
                     i, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -38,7 +52,7 @@ public class SetAlarmReceiver extends BroadcastReceiver {
             calendar.setTimeInMillis(System.currentTimeMillis());
 
             // Avoid triggering alarm unintentionally
-            if (intent.getAction().equals(RuokaApplication.ACTION_SET_ALARM) || (calendar.get(Calendar.HOUR_OF_DAY) > 10 && calendar.get(Calendar.MINUTE) > 30)) {
+            if (calendar.get(Calendar.HOUR_OF_DAY) > 10) {
                 Logger.d("Added a day to the alarm time to avoid weird stuff");
                 calendar.add(Calendar.DATE, 1);
             }

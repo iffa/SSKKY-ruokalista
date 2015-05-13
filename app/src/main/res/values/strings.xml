@@ -42,6 +42,9 @@
     <string name="toast_fill_radio">Palautetta ei voi antaa tyhjänä</string>
     <string name="dialog_rated_already_message">Olet jo antanut palautteesi tämän päivän ruoasta.</string>
     <string name="dialog_parse_error_message">Palvelimeen ei saatu yhteyttä, yritä myöhemmin uudelleen.\n\nHuom: palautteen antaminen vaatii aktiivisen internet-yhteyden.</string>
+    <string name="dialog_password_title">Pääsy kielletty</string>
+    <string name="dialog_password_hint">:)</string>
+    <string name="toast_wrong_password">Väärä salasana</string>
     <string-array name="dialog_easter_items">
         <item>Yllätysmuna</item>
         <item>Pinikki</item>
