@@ -2,16 +2,15 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "21.1.2"
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "email.crappy.ssao.ruoka"
         minSdkVersion 15
         targetSdkVersion 22
-        // Continuing from where we left off (SSKKY-ruokalista V1)
         versionCode 17
         versionName "2.0.5"
-        resValue "string", "tray__authority", "${applicationId}.tray" // add this to set a unique tray authority based on your applicationId
+        resValue "string", "tray__authority", "${applicationId}.tray"
 
     }
     buildTypes {
