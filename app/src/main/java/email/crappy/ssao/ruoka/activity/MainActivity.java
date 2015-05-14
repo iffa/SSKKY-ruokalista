@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
         // Easter egg get!
-        if (appPreferences.getBoolean("easterFun", false)) {
+        if (appPreferences.getBoolean("easterFun", false) || isValentines()) {
             setTheme(R.style.AppThemeManly);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Window window = getWindow();
@@ -302,6 +302,14 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         }
         return false;
 
+    }
+
+    public static boolean isValentines() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        if (calendar.get(Calendar.DAY_OF_MONTH) == 14 && calendar.get(Calendar.MONTH) == 1) {
+            return true;
+        }
+        return false;
     }
 
     public void onEvent(LoadSuccessEvent event) {

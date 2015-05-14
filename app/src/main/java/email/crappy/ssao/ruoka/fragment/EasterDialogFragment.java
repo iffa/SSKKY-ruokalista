@@ -29,26 +29,16 @@ public class EasterDialogFragment extends DialogFragment {
                         switch (which) {
                             case 0:
                                 Intent i = new Intent(Intent.ACTION_VIEW);
-                                i.setData(Uri.parse("https://www.youtube.com/watch?v=LtRp79MQfV4"));
+                                i.setData(Uri.parse("https://www.youtube.com/watch?v=y6120QOlsfU"));
                                 startActivity(i);
                                 break;
                             case 1:
-                                // Pinikki get!
                                 EventBus.getDefault().post(new PinikkiEvent());
                                 break;
                             case 2:
-                                System.exit(0);
-                                break;
-                            case 3:
                                 Intent kevo = new Intent(Intent.ACTION_VIEW);
                                 kevo.setData(Uri.parse("http://bigassmessage.com/0bff0"));
                                 startActivity(kevo);
-                                break;
-                            case 4:
-                                // So wrong, but still so funny
-                                Intent i2 = new Intent(Intent.ACTION_VIEW);
-                                i2.setData(Uri.parse("https://www.youtube.com/watch?v=-1GHogrBLTE"));
-                                startActivity(i2);
                                 break;
                         }
                         return true;

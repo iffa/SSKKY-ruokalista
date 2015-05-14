@@ -12,53 +12,41 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:paddingTop="8dp"
+        android:minHeight="24dp"
         android:paddingBottom="8dp"
-        android:minHeight="24dp">
+        android:paddingTop="8dp">
 
         <LinearLayout
             android:id="@+id/item_day_header"
             android:layout_width="58dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        <TextView
-            android:id="@+id/item_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            tools:text="ti" />
 
-        <TextView
-            android:id="@+id/item_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            tools:text="7.4" />
+            <TextView
+                android:id="@+id/item_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                tools:text="ti" />
+
+            <TextView
+                android:id="@+id/item_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                tools:text="7.4" />
 
         </LinearLayout>
-
-        <!--
-
-        <ImageView
-            android:id="@+id/carddemo_weather_dayIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src=""/>
-
-        -->
 
         <TextView
             android:id="@+id/item_food"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/item_day_header"
             android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@id/item_day_header"
             android:paddingLeft="18dp"
-            android:textColor="@android:color/secondary_text_light"
             android:text="Jokapojan kalapala, yrttikastike, perunat, salaatti\nporkkanapihvi"
-
-            />
-
+            android:textColor="@android:color/secondary_text_light" />
 
     </RelativeLayout>
 

@@ -44,11 +44,9 @@
     <string name="sad_title">Jotakin meni särki&#x2026;</string>
     <string name="sad_message">(kosketa uudelleenkäynnistääksesi sovelluksen)</string>
     <string-array name="dialog_easter_items">
-        <item>Yllätysmuna</item>
-        <item>Pinikki</item>
-        <item>ALT + F4</item>
-        <item>Jonnet ei muista</item>
-        <item>Älä valitse tätä</item>
+        <item>Dududu</item>
+        <item>Pinkki-teema</item>
+        <item>V1 easter egg</item>
     </string-array>
     <string-array name="dialog_licenses_items">
         <item>ButterKnife</item>
