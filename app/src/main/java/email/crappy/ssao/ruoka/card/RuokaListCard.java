@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -68,6 +69,7 @@ public class RuokaListCard extends CardWithList {
         TextView dayText = (TextView) view.findViewById(R.id.item_day);
         TextView dateText = (TextView) view.findViewById(R.id.item_date);
         TextView foodText = (TextView) view.findViewById(R.id.item_food);
+        ImageView foodIcon = (ImageView) view.findViewById(R.id.item_food_type);
 
         // Setting the text for all TextViews from the item
         Item item = (Item) object;
@@ -82,6 +84,20 @@ public class RuokaListCard extends CardWithList {
             dayText.setTextColor(getContext().getResources().getColor(android.R.color.secondary_text_light));
             dateText.setTextColor(getContext().getResources().getColor(android.R.color.secondary_text_light));
         }
+
+        // Setting food icon to match the food
+        if (item.getKama().toLowerCase().contains("keitto")) {
+            foodIcon.setImageResource(R.drawable.ic_pot);
+        } else if (item.getKama().toLowerCase().contains("pasta")) {
+            foodIcon.setImageResource(R.drawable.ic_pasta);
+        } else if ((item.getKama().toLowerCase().contains("kala") && !item.getKama().toLowerCase().contains("kreikkalainen")) || item.getKama().toLowerCase().contains("lohi")) {
+            foodIcon.setImageResource(R.drawable.ic_fish);
+        } else if (item.getKama().toLowerCase().contains("broiler")) {
+            foodIcon.setImageResource(R.drawable.ic_chicken);
+        } else if (item.getKama().toLowerCase().contains("pihvi")) {
+            foodIcon.setImageResource(R.drawable.ic_steak);
+        }
+
 
         return view;
     }
