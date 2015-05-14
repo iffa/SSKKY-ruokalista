@@ -1,18 +1,17 @@
 package email.crappy.ssao.ruoka.activity;
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.PersistableBundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -34,13 +33,11 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.RuokaApplication;
 import email.crappy.ssao.ruoka.event.EasterEggEvent;
 import email.crappy.ssao.ruoka.event.LoadFailEvent;
-import email.crappy.ssao.ruoka.event.LoadStartEvent;
 import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
 import email.crappy.ssao.ruoka.event.PinikkiEvent;
 import email.crappy.ssao.ruoka.event.RatingSaveEvent;
@@ -49,10 +46,9 @@ import email.crappy.ssao.ruoka.fragment.EasterDialogFragment;
 import email.crappy.ssao.ruoka.fragment.EasterPasswordDialogFragment;
 import email.crappy.ssao.ruoka.fragment.InfoDialogFragment;
 import email.crappy.ssao.ruoka.fragment.LicenseDialogFragment;
-import email.crappy.ssao.ruoka.fragment.LoadingDialogFragment;
 import email.crappy.ssao.ruoka.fragment.RatingDialogFragment;
+import email.crappy.ssao.ruoka.fragment.SadFragment;
 import email.crappy.ssao.ruoka.fragment.WelcomeFragment;
-import email.crappy.ssao.ruoka.network.DataLoader;
 import email.crappy.ssao.ruoka.pojo.Item;
 import email.crappy.ssao.ruoka.pojo.PojoUtil;
 import email.crappy.ssao.ruoka.pojo.Rating;
@@ -65,7 +61,6 @@ import icepick.Icicle;
  * @author Santeri 'iffa'
  */
 public class MainActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
-    public static final String FILE_NAME = "Data.json";
     public TrayAppPreferences appPreferences;
     BillingProcessor bp;
     @Icicle
@@ -84,6 +79,12 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         // Easter egg get!
         if (appPreferences.getBoolean("easterFun", false)) {
             setTheme(R.style.AppThemeManly);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(getResources().getColor(R.color.manly));
+            }
+
         }
 
         setContentView(R.layout.activity_main);
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         setSupportActionBar((Toolbar) ButterKnife.findById(this, R.id.toolbar));
 
         // Show welcome screen if data is non-existent (possible first time user)
-        if (shouldDownloadData(getApplicationContext())) {
+        if (shouldDownloadData()) {
             WelcomeFragment fragment = new WelcomeFragment();
             Bundle args = new Bundle();
             args.putBoolean("update", false);
@@ -121,22 +122,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         }
     }
 
-    public void downloadData(boolean showDialog) {
-        if (showDialog) {
-            LoadingDialogFragment dialog = new LoadingDialogFragment();
-            dialog.show(getSupportFragmentManager(), "loadingDialog");
-        }
-
-        new DataLoader().loadData(new File(getApplicationContext().getFilesDir(), FILE_NAME).getPath());
-    }
-
-    private void showData() {
-        CardGridFragment fragment = new CardGridFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.enter, R.anim.exit);
-        transaction.replace(R.id.fragmentFrameLayout, fragment, "dataFragment").commit();
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -147,11 +132,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     protected void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override
@@ -166,7 +146,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
         return true;
     }
 
@@ -174,23 +153,9 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (data == null) {
-            return super.onOptionsItemSelected(item);
-        }
-
         if (id == R.id.action_about) {
-            InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_about_title), getResources().getString(R.string.dialog_about_message), false);
+            InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_about_title), getResources().getString(R.string.dialog_about_message));
             showDialog(dialog, "aboutDialog");
-            return true;
-        } else if (id == R.id.action_today) {
-            Item todayItem = getTodayItem();
-            if (todayItem != null) {
-                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_today_title), todayItem.getKama(), false);
-                showDialog(dialog, "todayDialog");
-            } else {
-                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_nofood_title), getResources().getString(R.string.dialog_nofood_message), false);
-                showDialog(dialog, "noFoodDialog");
-            }
             return true;
         } else if (id == R.id.action_licenses) {
             LicenseDialogFragment dialog = new LicenseDialogFragment();
@@ -200,10 +165,26 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
             bp.loadOwnedPurchasesFromGoogle();
             bp.purchase(this, "donation");
             return true;
+        }
+
+        if (data == null) {
+            return super.onOptionsItemSelected(item);
+        }
+
+        if (id == R.id.action_today) {
+            Item todayItem = getTodayItem();
+            if (todayItem != null) {
+                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_today_title), todayItem.getKama());
+                showDialog(dialog, "todayDialog");
+            } else {
+                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_nofood_title), getResources().getString(R.string.dialog_nofood_message));
+                showDialog(dialog, "noFoodDialog");
+            }
+            return true;
         } else if (id == R.id.action_rate) {
             Item todayItem = getTodayItem();
             if (todayItem == null) {
-                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_nofood_title), getResources().getString(R.string.dialog_nofood_message), false);
+                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_nofood_title), getResources().getString(R.string.dialog_nofood_message));
                 showDialog(dialog, "noFoodDialog");
             } else {
                 ParseQuery<Rating> query = Rating.getQuery();
@@ -216,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
                         if (e != null && e.getCode() != com.parse.ParseException.OBJECT_NOT_FOUND) {
                             Logger.d("ParseException: " + e.toString());
                             // ERROR IS BIG!! fukc
-                            InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.dialog_parse_error_message), false);
+                            InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.dialog_parse_error_message));
                             showDialog(dialog, "parseErrorDialog");
                             return;
                         }
@@ -227,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
                             showDialog(dialog, "ratingDialog");
                         } else {
                             Logger.d("Rating is not null = already exists?");
-                            InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.dialog_rated_already_message), false);
+                            InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.dialog_rated_already_message));
                             showDialog(dialog, "alreadyRatedDialog");
                         }
                     }
@@ -237,6 +218,42 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        Icepick.saveInstanceState(this, outState);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!bp.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void restartActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
+
+    private void showData() {
+        CardGridFragment fragment = new CardGridFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.enter, R.anim.exit);
+        transaction.replace(R.id.fragmentFrameLayout, fragment, "dataFragment").commit();
+    }
+
+    private void showSadFace() {
+        SadFragment fragment = new SadFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.enter, R.anim.exit);
+        transaction.replace(R.id.fragmentFrameLayout, fragment, "sadFragment").commit();
+    }
+
+    void showDialog(DialogFragment fragment, String tag) {
+        fragment.show(getSupportFragmentManager(), tag);
     }
 
     public Item getTodayItem() {
@@ -252,35 +269,16 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         return todayItem;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        Icepick.saveInstanceState(this, outState);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!bp.handleActivityResult(requestCode, resultCode, data))
-            super.onActivityResult(requestCode, resultCode, data);
-    }
-
-
-    /**
-     * Checks if local data exists and wether or not it needs to be downloaded
-     *
-     * @return True if data should be downloaded
-     */
-    public static boolean shouldDownloadData(Context context) {
-        // Checking if data needs to be downloaded (if no local file exists)
-        File data = new File(context.getFilesDir(), FILE_NAME);
+    public static boolean shouldDownloadData() {
+        File data = new File(RuokaApplication.DATA_PATH);
         return !data.exists();
     }
 
     public boolean dataExpired() {
-        Logger.d("Data expiration date: " + data.getExpiration());
         GregorianCalendar current = new GregorianCalendar();
         GregorianCalendar expire = new GregorianCalendar();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
         try {
             expire.setTime(sdf.parse(data.getExpiration()));
         } catch (ParseException e) {
@@ -290,30 +288,8 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         Logger.d("expire: " + expire.get(GregorianCalendar.DAY_OF_MONTH) + " " + expire.get(GregorianCalendar.MONTH) + " " + expire.get(GregorianCalendar.YEAR));
         Logger.d("current: " + current.get(GregorianCalendar.DAY_OF_MONTH) + " " + current.get(GregorianCalendar.MONTH) + " " + current.get(GregorianCalendar.YEAR));
 
-
         return current.after(expire);
 
-    }
-
-    public void onEvent(LoadSuccessEvent event) {
-        try {
-            data = PojoUtil.generatePojoFromJson(getApplicationContext());
-
-            if (getSupportFragmentManager().findFragmentByTag("loadingDialog") != null) {
-                ((LoadingDialogFragment) getSupportFragmentManager().findFragmentByTag("loadingDialog")).dismiss();
-            }
-
-            if (dataExpired()) {
-                data = null;
-                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_expired_title), getResources().getString(R.string.dialog_expired_message), true);
-                showDialog(dialog, "expiredDialog");
-            } else {
-                showData();
-            }
-        } catch (FileNotFoundException e) {
-            // Very unlikely to happen
-            Logger.d("Tried to generate data from JSON but it failed", e);
-        }
     }
 
     public static boolean isToday(String date) {
@@ -328,15 +304,29 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
     }
 
-    public void onEvent(LoadFailEvent event) {
-        if (getSupportFragmentManager().findFragmentByTag("loadingDialog") != null) {
-            ((LoadingDialogFragment) getSupportFragmentManager().findFragmentByTag("loadingDialog")).dismiss();
+    public void onEvent(LoadSuccessEvent event) {
+        try {
+            data = PojoUtil.generatePojoFromJson(getApplicationContext());
+
+            if (dataExpired()) {
+                data = null;
+                InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_expired_title), getResources().getString(R.string.dialog_expired_message));
+                showDialog(dialog, "expiredDialog");
+                showSadFace();
+            } else {
+                showData();
+            }
+        } catch (FileNotFoundException e) {
+            Logger.d("Tried to generate data from JSON but it failed", e);
         }
-        InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.load_failed) + "\n\n" + event.reason, true);
-        showDialog(dialog, "errorDialog");
     }
 
-    // Very manly easter egg get!
+    public void onEvent(LoadFailEvent event) {
+        InfoDialogFragment dialog = InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.load_failed) + "\n\n" + event.reason);
+        showDialog(dialog, "errorDialog");
+        showSadFace();
+    }
+
     public void onEvent(EasterEggEvent event) {
         if (event.getShowEaster()) {
             EasterDialogFragment dialog = new EasterDialogFragment();
@@ -349,11 +339,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
     public void onEvent(PinikkiEvent event) {
         appPreferences.put("easterFun", !appPreferences.getBoolean("easterFun", false));
-        System.exit(0);
-    }
-
-    public void onEvent(LoadStartEvent event) {
-        downloadData(event.getShowDialog());
+        restartActivity();
     }
 
     public void onEvent(RatingSaveEvent event) {
@@ -372,10 +358,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
         Toast successToast = Toast.makeText(this, R.string.toast_rating, Toast.LENGTH_SHORT);
         successToast.show();
-    }
-
-    void showDialog(DialogFragment fragment, String tag) {
-        fragment.show(getSupportFragmentManager(), tag);
     }
 
     @Override

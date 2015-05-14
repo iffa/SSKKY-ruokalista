@@ -30,7 +30,7 @@ public class NotificationService extends Service {
         Logger.d("NotificationService has been summoned");
 
         // Still not going to BG-download :)
-        if (MainActivity.shouldDownloadData(getApplicationContext())) {
+        if (MainActivity.shouldDownloadData()) {
             return START_NOT_STICKY;
         }
 
@@ -38,8 +38,6 @@ public class NotificationService extends Service {
         try {
             data = PojoUtil.generatePojoFromJson(getApplicationContext());
         } catch (FileNotFoundException e) {
-            // WHY ??? (c) SSAO-ruokalista/blob/master/app/src/main/java/email/crappy/ssao/ruoka/util/NotificationService.java @ 41
-            // :D
             e.printStackTrace();
             return START_NOT_STICKY;
         }

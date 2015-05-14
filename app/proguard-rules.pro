@@ -36,3 +36,8 @@
 
 # Parse
 -keep class com.parse.** { *; }
+
+# EventBus
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}

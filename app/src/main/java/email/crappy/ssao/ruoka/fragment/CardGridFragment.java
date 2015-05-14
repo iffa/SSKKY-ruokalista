@@ -41,7 +41,7 @@ public class CardGridFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ArrayList<Card> cards = new ArrayList<Card>();
+        ArrayList<Card> cards = new ArrayList<>();
         MainActivity activity = (MainActivity) getActivity();
 
         for (Ruoka ruokaItem : activity.data.getRuoka()) {

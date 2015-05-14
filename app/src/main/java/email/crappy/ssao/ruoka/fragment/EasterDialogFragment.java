@@ -22,7 +22,6 @@ public class EasterDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new MaterialDialog.Builder(getActivity())
-                .title(R.string.dialog_easter_title)
                 .items(R.array.dialog_easter_items)
                 .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override

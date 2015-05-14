@@ -11,6 +11,6 @@
     <style name="AppThemeManly" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/lessManly</item>
         <item name="colorPrimaryDark">@color/manly</item>
-        <item name="colorAccent">@color/blue</item>
+        <item name="colorAccent">@color/lessManly</item>
     </style>
 </resources>

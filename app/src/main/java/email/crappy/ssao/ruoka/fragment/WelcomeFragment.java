@@ -4,6 +4,7 @@ package email.crappy.ssao.ruoka.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,15 @@ import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
 import com.orhanobut.logger.Logger;
 
-import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
-import email.crappy.ssao.ruoka.event.LoadStartEvent;
 
 /**
  * @author Santeri 'iffa'
  */
 public class WelcomeFragment extends Fragment {
+    DownloadTaskFragment mTaskFragment;
+    private static final String TAG_TASK_FRAGMENT = "taskFragment";
+
     public WelcomeFragment() {
     }
 
@@ -35,64 +36,56 @@ public class WelcomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_welcome, container, false);
-
-        setRetainInstance(true);
-        ButterKnife.inject(view);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_welcome, container, false);
     }
 
-
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        Logger.d("onViewCreated has been called :D");
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        super.onViewCreated(view, savedInstanceState);
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        mTaskFragment = (DownloadTaskFragment) fm.findFragmentByTag(TAG_TASK_FRAGMENT);
 
-
-        // TODO: Beautify more :;D
-        final PropertyAction titleAction = PropertyAction.newPropertyAction(view.findViewById(R.id.welcomeLayout)).
-                interpolator(new DecelerateInterpolator()).
-                translationY(-100).
-                duration(550).
-                alpha(0.0f).
-                build();
-
-        final PropertyAction spinnerAction = PropertyAction.newPropertyAction(view.findViewById(R.id.loadingSpinner)).
-                interpolator(new AnticipateOvershootInterpolator()).
-                translationY(300).
-                duration(700).
-                alpha(0.0f).
-                build();
-
-        Player.init().animate(titleAction).then().animate(spinnerAction).play();
-
-        if (getArguments().getBoolean("update", false)) {
-            TextView title = (TextView) view.findViewById(R.id.welcomeTitle);
-            TextView message = (TextView) view.findViewById(R.id.welcomeMessage);
-            title.setText(R.string.welcome_update_title);
-            message.setText(R.string.welcome_update_message);
+        if (mTaskFragment == null) {
+            Logger.d("mTaskFragment was null, creating new");
+            mTaskFragment = new DownloadTaskFragment();
+            fm.beginTransaction().add(mTaskFragment, TAG_TASK_FRAGMENT).commit();
         }
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+        if (!mTaskFragment.isRunning()) {
+            mTaskFragment.setRunning(true);
+            Logger.d("Loading data (mTaskFragment is not running)");
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mTaskFragment.loadData();
+                }
+            }, 4000);
 
-        // Loading data
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                EventBus.getDefault().post(new LoadStartEvent(false));
+            // Showing animations if data loading is just beginning
+            final PropertyAction titleAction = PropertyAction.newPropertyAction(getView().findViewById(R.id.welcomeLayout)).
+                    interpolator(new DecelerateInterpolator()).
+                    translationY(-150).
+                    duration(550).
+                    alpha(0.0f).
+                    build();
+
+            final PropertyAction spinnerAction = PropertyAction.newPropertyAction(getView().findViewById(R.id.loadingSpinner)).
+                    interpolator(new AnticipateOvershootInterpolator()).
+                    translationY(300).
+                    duration(700).
+                    alpha(0.0f).
+                    build();
+
+            Player.init().animate(titleAction).then().animate(spinnerAction).play();
+
+            if (getArguments().getBoolean("update", false)) {
+                TextView title = (TextView) getView().findViewById(R.id.welcomeTitle);
+                TextView message = (TextView) getView().findViewById(R.id.welcomeMessage);
+                title.setText(R.string.welcome_update_title);
+                message.setText(R.string.welcome_update_message);
             }
-        }, 4000);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        }
     }
 }

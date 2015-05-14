@@ -1,25 +1,21 @@
 <resources>
     <string name="app_name">SSKKY-ruokalista</string>
     <string name="title_activity_main">SSKKY-ruokalista</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Asetukset</string>
     <string name="action_about">Tietoja sovelluksesta</string>
-    <string name="hello_blank_fragment">Minä olen Wörk in Prögress! :D</string>
     <string name="error">Virhe</string>
     <string name="load_failed">Ruokalistan lataaminen palvelimelta epäonnistui. Jos ongelma jatkuu, otathan yhteyttä minuun ja liität mukaan allaolevan virheen:</string>
     <string name="dialog_about_title">Tietoja sovelluksesta</string>
     <string name="dialog_about_message">SSKKY-ruokalista tekee Salon seudun koulutuskuntayhtymän koulujen ruokalistan katsomisesta helppoa ja nopeata.\n\nMuistathan, että SSKKY-ruokalista on epävirallinen sovellus: jos listassa on virheitä, listaa on muutettu ruokalan toimesta. Pahoitteluni!\n\nYhteydenotot voi jättää osoitteeseen iffa[at]crappy.email (Santeri Elo / ICT14A)</string>
     <string name="dialog_progress_title">Ladataan ruokalistaa</string>
-    <string name="dialog_progress_content">Odota hetki...</string>
+    <string name="dialog_progress_content">Odota hetki&#x2026;</string>
     <string name="welcome_title_text">Tervetuloa</string>
-    <string name="welcome_message_text">Ruokalistaa ladataan, tässä voi mennä hetki...</string>
-    <string name="dialog_easter_title">Onko nyt jo pääsiäinen?</string>
+    <string name="welcome_message_text">Ruokalistaa ladataan&#x2026;</string>
     <string name="dialog_easter_choose">easter egg get!</string>
     <string name="dialog_expired_title">Vanhentunut lista</string>
     <string name="dialog_expired_message">Palvelimelta saatu ruokalista on vanhentunut. Yritä myöhemmin uudelleen.</string>
     <string name="welcome_update_title">Päivitetään ruokalistaa</string>
-    <string name="welcome_update_message">Tässä kestää vain pieni tovi...</string>
+    <string name="welcome_update_message">Tässä menee vain hetki&#x2026;</string>
     <string name="action_today">Tänään ruokana</string>
     <string name="dialog_today_title">Tänään ruokana</string>
     <string name="welcome_tooltip">Tänään ruokana</string>
@@ -39,12 +35,14 @@
     <string name="dialog_rating_negative">Peruuta</string>
     <string name="dialog_nofood_title">Ei ruokaa</string>
     <string name="dialog_nofood_message">Tänään ei ole ruokaa (onko nälkä?).</string>
-    <string name="toast_fill_radio">Palautetta ei voi antaa tyhjänä</string>
+    <string name="toast_fill_radio">Et voi antaa tyhjää palautetta</string>
     <string name="dialog_rated_already_message">Olet jo antanut palautteesi tämän päivän ruoasta.</string>
-    <string name="dialog_parse_error_message">Palvelimeen ei saatu yhteyttä, yritä myöhemmin uudelleen.\n\nHuom: palautteen antaminen vaatii aktiivisen internet-yhteyden.</string>
+    <string name="dialog_parse_error_message">Palautteen antamista ei voitu aloittaa. Käynnistä sovellus uudelleen ja yritä myöhemmin uudestaan.\n\nHuom: palautteen antaminen vaatii aktiivisen internet-yhteyden.</string>
     <string name="dialog_password_title">Pääsy kielletty</string>
-    <string name="dialog_password_hint">:)</string>
+    <string name="dialog_password_hint">Salasana</string>
     <string name="toast_wrong_password">Väärä salasana</string>
+    <string name="sad_title">Jotakin meni särki&#x2026;</string>
+    <string name="sad_message">(kosketa uudelleenkäynnistääksesi sovelluksen)</string>
     <string-array name="dialog_easter_items">
         <item>Yllätysmuna</item>
         <item>Pinikki</item>
@@ -66,6 +64,7 @@
         <item>Cardslib</item>
         <item>Tray</item>
         <item>android-inapp-billing-v3</item>
+        <item>Android Ripple Background</item>
     </string-array>
 
 </resources>

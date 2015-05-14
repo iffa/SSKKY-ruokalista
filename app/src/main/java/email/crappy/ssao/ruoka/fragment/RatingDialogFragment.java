@@ -28,7 +28,6 @@ public class RatingDialogFragment extends DialogFragment {
                 .title(R.string.dialog_rating_title)
                 .positiveText(R.string.dialog_rating_positive)
                 .negativeText(R.string.dialog_rating_negative)
-                .cancelable(true)
                 .autoDismiss(false)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override

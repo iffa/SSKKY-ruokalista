@@ -8,14 +8,14 @@ android {
         applicationId "email.crappy.ssao.ruoka"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 17
-        versionName "2.0.5"
+        versionCode 18
+        versionName "2.0.6"
         resValue "string", "tray__authority", "${applicationId}.tray"
 
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -35,7 +35,7 @@ dependencies {
     provided 'frankiesardo:icepick-processor:3.0.2'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.mani:thindownloadmanager:1.0.0'
-    compile 'com.afollestad:material-dialogs:0.7.4.0'
+    compile 'com.afollestad:material-dialogs:0.7.4.1'
     compile 'com.eftimoff:androidplayer:1.0.0@aar'
     compile 'com.github.rahatarmanahmed:circularprogressview:2.2.1'
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1'
@@ -43,4 +43,5 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-extra-staggeredgrid:2.0.1'
     compile 'net.grandcentrix.tray:tray:0.9'
     compile 'com.anjlab.android.iab.v3:library:1.0.24@aar'
+    compile 'com.skyfishjy.ripplebackground:library:1.0.1'
 }
