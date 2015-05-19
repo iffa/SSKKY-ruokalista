@@ -1,7 +1,5 @@
 package email.crappy.ssao.ruoka.fragment;
 
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

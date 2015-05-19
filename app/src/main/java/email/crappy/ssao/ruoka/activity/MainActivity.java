@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.PersistableBundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -93,16 +94,17 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         setSupportActionBar((Toolbar) ButterKnife.findById(this, R.id.toolbar));
 
         // Show welcome screen if data is non-existent (possible first time user)
-        if (shouldDownloadData()) {
+        if (getSupportFragmentManager().findFragmentByTag("sadFragment") != null) {
+            Logger.d("sadFragment is not null = showing error screen?");
+        } else if (shouldDownloadData()) {
+            Logger.d("shouldDownloadData() = true");
             WelcomeFragment fragment = new WelcomeFragment();
             Bundle args = new Bundle();
             args.putBoolean("update", false);
             fragment.setArguments(args);
-            getSupportFragmentManager().beginTransaction().add(R.id.fragmentFrameLayout, fragment, "welcomeFragment").commit();
-        }
-
-        // If data is already loaded -> generate POJO -> validate -> etc.
-        if (data == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrameLayout, fragment, "welcomeFragment").commit();
+        } else if (data == null) {
+            Logger.d("data == null");
             try {
                 data = PojoUtil.generatePojoFromJson(getApplicationContext());
 
@@ -112,12 +114,12 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
                     Bundle args = new Bundle();
                     args.putBoolean("update", true);
                     fragment.setArguments(args);
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragmentFrameLayout, fragment, "welcomeFragment").commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrameLayout, fragment, "welcomeFragment").commit();
                 } else {
                     showData();
                 }
             } catch (FileNotFoundException e) {
-                Logger.d("Tried to generate data from JSON but it failed", e);
+                Logger.e("Tried to generate data from JSON but it failed", e);
             }
         }
     }
