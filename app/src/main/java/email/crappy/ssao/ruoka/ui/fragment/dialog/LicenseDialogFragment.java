@@ -35,30 +35,27 @@ public class LicenseDialogFragment extends DialogFragment {
                                 intent.setData(Uri.parse("https://code.google.com/p/google-gson/"));
                                 break;
                             case 2:
-                                intent.setData(Uri.parse("https://github.com/frankiesardo/icepick/"));
-                                break;
-                            case 3:
                                 intent.setData(Uri.parse("https://github.com/greenrobot/EventBus/"));
                                 break;
-                            case 4:
+                            case 3:
                                 intent.setData(Uri.parse("https://github.com/smanikandan14/ThinDownloadManager/"));
                                 break;
-                            case 5:
+                            case 4:
                                 intent.setData(Uri.parse("https://github.com/afollestad/material-dialogs/"));
                                 break;
-                            case 6:
+                            case 5:
                                 intent.setData(Uri.parse("https://github.com/geftimov/android-player/"));
                                 break;
-                            case 7:
+                            case 6:
                                 intent.setData(Uri.parse("https://github.com/rahatarmanahmed/CircularProgressView/"));
                                 break;
-                            case 8:
+                            case 7:
                                 intent.setData(Uri.parse("https://github.com/gabrielemariotti/cardslib/"));
                                 break;
-                            case 9:
+                            case 8:
                                 intent.setData(Uri.parse("https://github.com/anjlab/android-inapp-billing-v3/"));
                                 break;
-                            case 10:
+                            case 9:
                                 intent.setData(Uri.parse("https://github.com/skyfishjy/android-ripple-background"));
                                 break;
                         }

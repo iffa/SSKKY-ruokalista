@@ -26,8 +26,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile 'com.orhanobut:logger:1.5'
     compile 'com.google.code.gson:gson:2.3'
-    compile "frankiesardo:icepick:3.0.2"
-    provided 'frankiesardo:icepick-processor:3.0.2'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.mani:thindownloadmanager:1.0.0'
     compile 'com.afollestad:material-dialogs:0.7.4.1'

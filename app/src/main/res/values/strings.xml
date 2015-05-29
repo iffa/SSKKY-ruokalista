@@ -51,7 +51,6 @@
     <string-array name="dialog_licenses_items">
         <item>Logger</item>
         <item>GSON</item>
-        <item>Icepick</item>
         <item>EventBus</item>
         <item>ThinDownloadManager</item>
         <item>Material Dialogs</item>
