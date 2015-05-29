@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.service;
+package email.crappy.ssao.ruoka;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,10 +14,10 @@ import com.orhanobut.logger.Logger;
 
 import java.io.FileNotFoundException;
 
-import email.crappy.ssao.ruoka.R;
-import email.crappy.ssao.ruoka.activity.MainActivity;
+import email.crappy.ssao.ruoka.ui.activity.MainActivity;
 import email.crappy.ssao.ruoka.pojo.Item;
-import email.crappy.ssao.ruoka.pojo.PojoUtil;
+import email.crappy.ssao.ruoka.util.DateUtil;
+import email.crappy.ssao.ruoka.util.PojoUtil;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 
@@ -29,12 +29,11 @@ public class NotificationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Logger.d("NotificationService has been summoned");
 
-        // Still not going to BG-download :)
-        if (MainActivity.shouldDownloadData()) {
+        if (RuokaApplication.shouldDownloadData()) {
             return START_NOT_STICKY;
         }
 
-        RuokaJsonObject data = null;
+        RuokaJsonObject data;
         try {
             data = PojoUtil.generatePojoFromJson(getApplicationContext());
         } catch (FileNotFoundException e) {
@@ -42,18 +41,13 @@ public class NotificationService extends Service {
             return START_NOT_STICKY;
         }
 
-        Item todayItem = null;
         for (Ruoka ruoka : data.getRuoka()) {
             for (Item item : ruoka.getItems()) {
-                if (MainActivity.isToday(item.getPvm())) {
-                    todayItem = item;
+                if (DateUtil.isToday(item.getPvm())) {
+                    showNotification(item);
                     break;
                 }
             }
-        }
-
-        if (todayItem != null) {
-            showNotification(todayItem);
         }
 
         return START_NOT_STICKY;

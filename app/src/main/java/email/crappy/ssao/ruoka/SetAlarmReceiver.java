@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.receiver;
+package email.crappy.ssao.ruoka;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -9,10 +9,6 @@ import android.content.Intent;
 import com.orhanobut.logger.Logger;
 
 import java.util.Calendar;
-
-import email.crappy.ssao.ruoka.RuokaApplication;
-import email.crappy.ssao.ruoka.pojo.Ruoka;
-import email.crappy.ssao.ruoka.service.NotificationService;
 
 /**
  * Called on boot & app launch

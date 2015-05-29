@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 
-import butterknife.OnItemClick;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.prototypes.CardWithList;
 

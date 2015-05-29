@@ -1,7 +1,11 @@
 package email.crappy.ssao.ruoka;
 
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 
 import com.orhanobut.logger.Logger;
 import com.parse.Parse;
@@ -11,11 +15,13 @@ import com.parse.ParseUser;
 import java.io.File;
 
 import email.crappy.ssao.ruoka.pojo.Rating;
+import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 
 /**
  * @author Santeri 'iffa'
  */
 public class RuokaApplication extends Application {
+    public static RuokaJsonObject data;
     public static String DATA_PATH = null;
     public static final String ACTION_SET_ALARM = "email.crappy.ssao.ruoka.SET_ALARM";
     public static final String ACTION_FIRE_NOTIFICATION = "email.crappy.ssao.ruoka.FIRE_NOTIFICATION";
@@ -46,4 +52,35 @@ public class RuokaApplication extends Application {
         DATA_PATH = new File(getApplicationContext().getFilesDir(), "Data.json").getPath();
         Logger.d("DATA_PATH = " + DATA_PATH);
     }
+
+    public static boolean shouldDownloadData() {
+        File data = new File(DATA_PATH);
+        return !data.exists();
+    }
+
+    public static void doRestart(Context c) {
+        try {
+            if (c != null) {
+                PackageManager pm = c.getPackageManager();
+                if (pm != null) {
+                    Intent mStartActivity = pm.getLaunchIntentForPackage(
+                            c.getPackageName()
+                    );
+                    if (mStartActivity != null) {
+                        mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        int mPendingIntentId = 69696969;
+                        PendingIntent mPendingIntent = PendingIntent
+                                .getActivity(c, mPendingIntentId, mStartActivity,
+                                        PendingIntent.FLAG_CANCEL_CURRENT);
+                        AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+                        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 50, mPendingIntent);
+                        System.exit(0);
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

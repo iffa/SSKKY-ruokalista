@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.fragment;
+package email.crappy.ssao.ruoka.ui.fragment.dialog;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
-import email.crappy.ssao.ruoka.event.PinikkiEvent;
+import email.crappy.ssao.ruoka.event.TogglePinkEvent;
 
 /**
  * @author Santeri 'iffa'
@@ -33,7 +33,7 @@ public class EasterDialogFragment extends DialogFragment {
                                 startActivity(i);
                                 break;
                             case 1:
-                                EventBus.getDefault().post(new PinikkiEvent());
+                                EventBus.getDefault().post(new TogglePinkEvent());
                                 break;
                             case 2:
                                 Intent kevo = new Intent(Intent.ACTION_VIEW);

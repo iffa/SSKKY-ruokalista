@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.fragment;
+package email.crappy.ssao.ruoka.ui.fragment.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.parse.ParseUser;
 
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;

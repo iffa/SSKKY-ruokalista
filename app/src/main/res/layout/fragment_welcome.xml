@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="email.crappy.ssao.ruoka.fragment.WelcomeFragment">
+    tools:context="email.crappy.ssao.ruoka.ui.fragment.WelcomeFragment">
 
     <RelativeLayout
         android:id="@+id/welcomeLayout"

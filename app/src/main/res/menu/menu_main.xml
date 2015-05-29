@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="email.crappy.ssao.ruoka.activity.MainActivity">
+    tools:context="email.crappy.ssao.ruoka.ui.activity.MainActivity">
     <item android:id="@+id/action_today" android:icon="@drawable/ic_action_action_query_builder" android:title="@string/action_today"
         android:orderInCategory="100" app:showAsAction="always" />
     <item android:id="@+id/action_rate" android:icon="@drawable/ic_action_action_thumbs_up_down" android:title="@string/rating_title"

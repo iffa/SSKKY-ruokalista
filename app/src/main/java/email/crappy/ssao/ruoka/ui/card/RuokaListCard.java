@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.card;
+package email.crappy.ssao.ruoka.ui.card;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -12,10 +12,11 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
-import email.crappy.ssao.ruoka.activity.MainActivity;
+import email.crappy.ssao.ruoka.ui.activity.MainActivity;
 import email.crappy.ssao.ruoka.event.EasterEggEvent;
 import email.crappy.ssao.ruoka.pojo.Item;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
+import email.crappy.ssao.ruoka.util.DateUtil;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.prototypes.CardWithList;
 import it.gmariotti.cardslib.library.prototypes.LinearListView;
@@ -77,7 +78,7 @@ public class RuokaListCard extends CardWithList {
         dateText.setText(item.getPvm());
         foodText.setText(item.getKama());
 
-        if (MainActivity.isToday(item.getPvm())) {
+        if (DateUtil.isToday(item.getPvm())) {
             // Setting today bold
             dayText.setTypeface(null, Typeface.BOLD);
             dateText.setTypeface(null, Typeface.BOLD);

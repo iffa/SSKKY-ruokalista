@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="email.crappy.ssao.ruoka.fragment.SadFragment">
+    tools:context="email.crappy.ssao.ruoka.ui.fragment.SadFragment">
 
     <com.skyfishjy.library.RippleBackground xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rippleBackground"

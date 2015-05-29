@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.fragment;
+package email.crappy.ssao.ruoka.ui.fragment.dialog;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -29,45 +29,36 @@ public class LicenseDialogFragment extends DialogFragment {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         switch (i) {
                             case 0:
-                                intent.setData(Uri.parse("http://jakewharton.github.io/butterknife/"));
-                                break;
-                            case 1:
                                 intent.setData(Uri.parse("https://github.com/orhanobut/logger/"));
                                 break;
-                            case 2:
-                                intent.setData(Uri.parse("http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_9.html#License"));
-                                break;
-                            case 3:
+                            case 1:
                                 intent.setData(Uri.parse("https://code.google.com/p/google-gson/"));
                                 break;
-                            case 4:
+                            case 2:
                                 intent.setData(Uri.parse("https://github.com/frankiesardo/icepick/"));
                                 break;
-                            case 5:
+                            case 3:
                                 intent.setData(Uri.parse("https://github.com/greenrobot/EventBus/"));
                                 break;
-                            case 6:
+                            case 4:
                                 intent.setData(Uri.parse("https://github.com/smanikandan14/ThinDownloadManager/"));
                                 break;
-                            case 7:
+                            case 5:
                                 intent.setData(Uri.parse("https://github.com/afollestad/material-dialogs/"));
                                 break;
-                            case 8:
+                            case 6:
                                 intent.setData(Uri.parse("https://github.com/geftimov/android-player/"));
                                 break;
-                            case 9:
+                            case 7:
                                 intent.setData(Uri.parse("https://github.com/rahatarmanahmed/CircularProgressView/"));
                                 break;
-                            case 10:
+                            case 8:
                                 intent.setData(Uri.parse("https://github.com/gabrielemariotti/cardslib/"));
                                 break;
-                            case 11:
-                                intent.setData(Uri.parse("https://github.com/grandcentrix/tray/"));
-                                break;
-                            case 12:
+                            case 9:
                                 intent.setData(Uri.parse("https://github.com/anjlab/android-inapp-billing-v3/"));
                                 break;
-                            case 13:
+                            case 10:
                                 intent.setData(Uri.parse("https://github.com/skyfishjy/android-ripple-background"));
                                 break;
                         }

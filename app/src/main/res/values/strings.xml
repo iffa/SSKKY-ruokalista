@@ -49,9 +49,7 @@
         <item>V1 easter egg</item>
     </string-array>
     <string-array name="dialog_licenses_items">
-        <item>ButterKnife</item>
         <item>Logger</item>
-        <item>ORMLite</item>
         <item>GSON</item>
         <item>Icepick</item>
         <item>EventBus</item>
@@ -60,7 +58,6 @@
         <item>android-player</item>
         <item>CircularProgressView</item>
         <item>Cardslib</item>
-        <item>Tray</item>
         <item>android-inapp-billing-v3</item>
         <item>Android Ripple Background</item>
     </string-array>

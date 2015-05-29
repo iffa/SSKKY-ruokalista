@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.fragment;
+package email.crappy.ssao.ruoka.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import com.skyfishjy.library.RippleBackground;
 
 import email.crappy.ssao.ruoka.R;
-import email.crappy.ssao.ruoka.activity.MainActivity;
+import email.crappy.ssao.ruoka.RuokaApplication;
+import email.crappy.ssao.ruoka.ui.activity.MainActivity;
 
 /**
  * @author Santeri 'iffa'
@@ -37,6 +38,6 @@ public class SadFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        ((MainActivity)getActivity()).restartActivity();
+        RuokaApplication.doRestart(getActivity().getApplicationContext());
     }
 }

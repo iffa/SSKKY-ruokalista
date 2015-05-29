@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.pojo;
+package email.crappy.ssao.ruoka.util;
 
 import android.content.Context;
 
@@ -10,27 +10,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 import email.crappy.ssao.ruoka.RuokaApplication;
-import email.crappy.ssao.ruoka.activity.MainActivity;
+import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 
 /**
  * @author Santeri 'iffa'
  */
 public class PojoUtil {
-
-    /**
-     * Generates a POJO object from the source JSON file
-     *
-     * @param context Context
-     * @return Generated POJO object (RuokaJsonObject)
-     * @throws FileNotFoundException
-     */
     public static RuokaJsonObject generatePojoFromJson(Context context) throws FileNotFoundException {
-        File dataFile;
-        if (RuokaApplication.DATA_PATH != null) { // Just in case
-            dataFile = new File(RuokaApplication.DATA_PATH);
-        } else {
-            dataFile = new File(context.getFilesDir(), "Data.json");
-        }
+        File dataFile = new File(context.getFilesDir(), "Data.json");
         Gson gson = new Gson();
         BufferedReader br = new BufferedReader(new FileReader(dataFile));
         return gson.fromJson(br, RuokaJsonObject.class);

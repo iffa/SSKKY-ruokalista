@@ -16,18 +16,11 @@
 #   public *;
 #}
 
-# ButterKnife
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewInjector { *; }
-
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
+# Parcelable
+-keepclassmembers class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
 }
 
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
 
 # IcePick
 -dontwarn icepick.**
@@ -41,3 +34,17 @@
 -keepclassmembers class ** {
     public void onEvent*(**);
 }
+
+# Gson
+-keepattributes Signature
+-keepattributes *Annotation*
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+
+-keep class email.crappy.ssao.ruoka.pojo.** { *; }
+
+# Parse
+-keep class com.parse.** { *; }
