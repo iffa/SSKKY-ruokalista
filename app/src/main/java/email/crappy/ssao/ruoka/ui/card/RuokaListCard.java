@@ -25,7 +25,7 @@ import it.gmariotti.cardslib.library.prototypes.LinearListView;
  *
  * @author Santeri 'iffa'
  */
-public class RuokaListCard extends CardWithList {
+public class RuokaListCard extends CardWithList implements CardWithList.OnItemClickListener {
     private Ruoka ruoka;
 
     public RuokaListCard(Context context, Ruoka ruoka) {
@@ -51,12 +51,7 @@ public class RuokaListCard extends CardWithList {
 
         for(Item item : ruoka.getItems()) {
             if (item.getKama().toLowerCase().contains("talon tapaan")) {
-                item.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(LinearListView linearListView, View view, int i, ListObject listObject) {
-                        EventBus.getDefault().post(new EasterEggEvent(false));
-                    }
-                });
+                item.setOnItemClickListener(this);
             }
             mObjects.add(item);
 
@@ -107,5 +102,10 @@ public class RuokaListCard extends CardWithList {
     @Override
     public int getChildLayoutId() {
         return R.layout.card_list_item;
+    }
+
+    @Override
+    public void onItemClick(LinearListView linearListView, View view, int i, ListObject listObject) {
+        EventBus.getDefault().post(new EasterEggEvent(false));
     }
 }

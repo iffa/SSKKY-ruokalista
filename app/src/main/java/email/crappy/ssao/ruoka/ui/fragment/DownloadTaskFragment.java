@@ -12,8 +12,7 @@ import com.thin.downloadmanager.ThinDownloadManager;
 
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.RuokaApplication;
-import email.crappy.ssao.ruoka.event.LoadFailEvent;
-import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
+import email.crappy.ssao.ruoka.event.DownloadCompleteEvent;
 
 /**
  * @author Santeri 'iffa'
@@ -25,34 +24,10 @@ public class DownloadTaskFragment extends Fragment implements DownloadStatusList
     private boolean mRunning;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         downloadManager = new ThinDownloadManager(DOWNLOAD_THREAD_POOL_SIZE);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        setTargetFragment(null, -1);
-    }
-
-    public void setRunning(boolean running) {
-        mRunning = running;
-    }
-
-    public boolean isRunning() {
-        return mRunning;
     }
 
     public void loadData() {
@@ -67,19 +42,43 @@ public class DownloadTaskFragment extends Fragment implements DownloadStatusList
         downloadManager.add(downloadRequest);
     }
 
-    @Override
-    public void onDownloadComplete(int i) {
-        mRunning = false;
-        EventBus.getDefault().post(new LoadSuccessEvent());
+    public void setRunning(boolean running) {
+        mRunning = running;
+    }
+
+    public boolean isRunning() {
+        return mRunning;
     }
 
     @Override
-    public void onDownloadFailed(int i, int i1, String s) {
+    public void onDownloadComplete(int i) {
         mRunning = false;
-        EventBus.getDefault().post(new LoadFailEvent(s));
+        EventBus.getDefault().post(new DownloadCompleteEvent(true, null));
+    }
+
+    @Override
+    public void onDownloadFailed(int i, int i1, String reason) {
+        mRunning = false;
+        EventBus.getDefault().post(new DownloadCompleteEvent(false, reason));
     }
 
     @Override
     public void onProgress(int i, long l, int i1) {
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        setTargetFragment(null, -1);
     }
 }

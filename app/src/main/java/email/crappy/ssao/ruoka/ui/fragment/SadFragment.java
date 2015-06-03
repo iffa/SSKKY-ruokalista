@@ -19,10 +19,8 @@ public class SadFragment extends Fragment implements View.OnClickListener {
     public SadFragment() {
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sad, container, false);
     }
 
@@ -33,7 +31,7 @@ public class SadFragment extends Fragment implements View.OnClickListener {
         final RippleBackground rippleBackground = (RippleBackground) getView().findViewById(R.id.rippleBackground);
         rippleBackground.startRippleAnimation();
 
-        getView().findViewById(R.id.sadFaceLayout).setOnClickListener(this);
+        getView().findViewById(R.id.sadFaceText).setOnClickListener(this);
     }
 
     @Override

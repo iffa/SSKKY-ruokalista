@@ -21,19 +21,21 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:cardview-v7:22.0.0'
+    compile 'com.android.support:cardview-v7:22.2.0'
     compile 'com.parse.bolts:bolts-android:1.2.0'
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
-    compile 'com.orhanobut:logger:1.5'
+    compile 'com.orhanobut:logger:1.10'
     compile 'com.google.code.gson:gson:2.3'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.mani:thindownloadmanager:1.0.0'
-    compile 'com.afollestad:material-dialogs:0.7.4.1'
-    compile 'com.eftimoff:androidplayer:1.0.0@aar'
-    compile 'com.github.rahatarmanahmed:circularprogressview:2.2.1'
-    compile 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1'
-    compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.0.1'
-    compile 'com.github.gabrielemariotti.cards:cardslib-extra-staggeredgrid:2.0.1'
+    compile 'com.afollestad:material-dialogs:0.7.5.1'
+    compile 'com.eftimoff:androidplayer:1.0.2@aar'
+    compile 'com.github.rahatarmanahmed:circularprogressview:2.3.0'
+    compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
+    compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'
+    compile 'com.github.gabrielemariotti.cards:cardslib-extra-staggeredgrid:2.1.0'
     compile 'com.anjlab.android.iab.v3:library:1.0.24@aar'
     compile 'com.skyfishjy.ripplebackground:library:1.0.1'
+    compile 'com.nhaarman.listviewanimations:lib-core:3.1.0@aar'
+    compile 'com.nineoldandroids:library:2.4.0' // Goddammit android-player
 }

@@ -28,16 +28,16 @@
             android:text="@string/welcome_message_text"
             android:textColor="@android:color/secondary_text_light"
             android:textSize="16sp" />
-    </RelativeLayout>
 
-    <com.github.rahatarmanahmed.cpv.CircularProgressView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/loadingSpinner"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_below="@id/welcomeLayout"
-        android:layout_centerHorizontal="true"
-        app:cpv_animAutostart="true"
-        app:cpv_indeterminate="true" />
+        <com.github.rahatarmanahmed.cpv.CircularProgressView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/loadingSpinner"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/welcomeMessage"
+            android:layout_centerHorizontal="true"
+            app:cpv_animAutostart="true"
+            app:cpv_indeterminate="true" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

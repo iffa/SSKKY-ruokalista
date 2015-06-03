@@ -10,7 +10,7 @@ public class EasterEggEvent {
         this.showEaster = showEaster;
     }
 
-    public boolean getShowEaster() {
+    public boolean showEasterDialog() {
         return showEaster;
     }
 }

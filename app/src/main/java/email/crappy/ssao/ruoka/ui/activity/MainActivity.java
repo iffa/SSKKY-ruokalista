@@ -1,6 +1,5 @@
 package email.crappy.ssao.ruoka.ui.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -28,12 +27,11 @@ import java.io.FileNotFoundException;
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.RuokaApplication;
+import email.crappy.ssao.ruoka.event.DownloadCompleteEvent;
 import email.crappy.ssao.ruoka.event.EasterEggEvent;
-import email.crappy.ssao.ruoka.event.LoadFailEvent;
-import email.crappy.ssao.ruoka.event.LoadSuccessEvent;
 import email.crappy.ssao.ruoka.event.TogglePinkEvent;
 import email.crappy.ssao.ruoka.event.RatingSaveEvent;
-import email.crappy.ssao.ruoka.ui.fragment.CardGridFragment;
+import email.crappy.ssao.ruoka.ui.fragment.DataFragment;
 import email.crappy.ssao.ruoka.ui.fragment.dialog.EasterDialogFragment;
 import email.crappy.ssao.ruoka.ui.fragment.dialog.EasterPasswordDialogFragment;
 import email.crappy.ssao.ruoka.ui.fragment.dialog.InfoDialogFragment;
@@ -51,7 +49,7 @@ import email.crappy.ssao.ruoka.util.DateUtil;
  * @author Santeri 'iffa'
  */
 public class MainActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
-    BillingProcessor bp;
+    private BillingProcessor bp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,21 +59,13 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         bp = new BillingProcessor(this, RuokaApplication.BILLING_KEY, this);
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
-        // Easter egg get!
-        if (getPreferences(MODE_PRIVATE).getBoolean("pinkTheme", false) || DateUtil.isValentines()) {
-            setTheme(R.style.AppThemeManly);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(getResources().getColor(R.color.manly));
-            }
-
-        }
-
+        // Initialize content & theme
+        setPinkTheme();
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        if (getSupportFragmentManager().findFragmentByTag("sadFragment") != null) {
+        // Showing a fragment already, don't mess with it
+        if (getSupportFragmentManager().findFragmentByTag("sadFragment") != null || getSupportFragmentManager().findFragmentByTag("dataFragment") != null || getSupportFragmentManager().findFragmentByTag("welcomeFragment") != null) {
             return;
         }
 
@@ -111,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     }
 
     private void showDataFragment(boolean anim) {
-        CardGridFragment fragment = new CardGridFragment();
+        DataFragment fragment = new DataFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (anim) {
             transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.enter, R.anim.exit);
@@ -126,6 +116,17 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         transaction.replace(R.id.fragmentFrameLayout, fragment, "sadFragment").commit();
     }
 
+    private void setPinkTheme() {
+        if (getPreferences(MODE_PRIVATE).getBoolean("pinkTheme", false) || DateUtil.isValentines()) {
+            setTheme(R.style.AppThemeManly);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(getResources().getColor(R.color.manly));
+            }
+        }
+    }
+
     public Item getTodayItem() {
         for (Ruoka ruoka : RuokaApplication.data.getRuoka()) {
             for (Item ruokaItem : ruoka.getItems()) {
@@ -138,30 +139,29 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     }
 
     @SuppressWarnings("unused")
-    public void onEvent(LoadSuccessEvent event) {
-        try {
-            RuokaApplication.data = PojoUtil.generatePojoFromJson(getApplicationContext());
+    public void onEvent(DownloadCompleteEvent event) {
+        if (event.wasSuccessful()) {
+            try {
+                RuokaApplication.data = PojoUtil.generatePojoFromJson(getApplicationContext());
 
-            if (DateUtil.isDataExpired(RuokaApplication.data.getExpiration())) {
-                InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_expired_title), getResources().getString(R.string.dialog_expired_message)).show(getSupportFragmentManager(), "expiredDialog");
-                showErrorFragment();
-            } else {
-                showDataFragment(true);
+                if (DateUtil.isDataExpired(RuokaApplication.data.getExpiration())) {
+                    InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_expired_title), getResources().getString(R.string.dialog_expired_message)).show(getSupportFragmentManager(), "expiredDialog");
+                    showErrorFragment();
+                } else {
+                    showDataFragment(true);
+                }
+            } catch (FileNotFoundException e) {
+                Logger.d("Tried to generate data from JSON but it failed", e);
             }
-        } catch (FileNotFoundException e) {
-            Logger.d("Tried to generate data from JSON but it failed", e);
+        } else {
+            InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.load_failed) + "\n\n" + event.getReason()).show(getSupportFragmentManager(), "errorDialog");
+            showErrorFragment();
         }
     }
 
     @SuppressWarnings("unused")
-    public void onEvent(LoadFailEvent event) {
-        InfoDialogFragment.newInstance(getResources().getString(R.string.error), getResources().getString(R.string.load_failed) + "\n\n" + event.reason).show(getSupportFragmentManager(), "errorDialog");
-        showErrorFragment();
-    }
-
-    @SuppressWarnings("unused")
     public void onEvent(EasterEggEvent event) {
-        if (event.getShowEaster()) {
+        if (event.showEasterDialog()) {
             new EasterDialogFragment().show(getSupportFragmentManager(), "easterDialog");
         } else {
             new EasterPasswordDialogFragment().show(getSupportFragmentManager(), "easterPasswordDialog");
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     public void onEvent(TogglePinkEvent event) {
         SharedPreferences.Editor edit = getPreferences(MODE_PRIVATE).edit();
         edit.putBoolean("pinkTheme", !(getPreferences(MODE_PRIVATE).getBoolean("pinkTheme", false)));
-        edit.commit();
+        edit.commit(); // use .commit() because app terminates after this
 
         RuokaApplication.doRestart(getApplicationContext());
     }
@@ -228,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        // Non-menu dependent items
         if (id == R.id.action_about) {
             InfoDialogFragment.newInstance(getResources().getString(R.string.dialog_about_title), getResources().getString(R.string.dialog_about_message)).show(getSupportFragmentManager(), "aboutDialog");
             return true;
@@ -240,6 +241,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
             return true;
         }
 
+        // Don't proceed further if data has not been loaded
         if (RuokaApplication.data == null) {
             return super.onOptionsItemSelected(item);
         }
@@ -286,6 +288,8 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
         return super.onOptionsItemSelected(item);
     }
+
+    /* Useless Overrides, stuff that doesn't need to be touched */
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {

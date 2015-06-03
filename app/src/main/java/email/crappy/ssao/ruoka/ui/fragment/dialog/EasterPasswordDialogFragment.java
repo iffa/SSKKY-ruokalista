@@ -23,6 +23,7 @@ public class EasterPasswordDialogFragment extends DialogFragment {
         return new MaterialDialog.Builder(getActivity())
                 .title(R.string.dialog_password_title)
                 .autoDismiss(false)
+                .negativeText(R.string.cancel)
                 .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)
                 .inputMaxLength(16)
                 .input(getResources().getString(R.string.dialog_password_hint), "", new MaterialDialog.InputCallback() {
@@ -35,6 +36,13 @@ public class EasterPasswordDialogFragment extends DialogFragment {
                             Toast toast = Toast.makeText(getActivity(), R.string.toast_wrong_password, Toast.LENGTH_SHORT);
                             toast.show();
                         }
+                    }
+                })
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        super.onNegative(dialog);
+                        dialog.dismiss();
                     }
                 })
                 .build();

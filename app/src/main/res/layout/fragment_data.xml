@@ -5,11 +5,12 @@
 
     <it.gmariotti.cardslib.library.extra.staggeredgrid.view.CardGridStaggeredView
         android:id="@+id/card_grid"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:card_layout_resourceID="@layout/card_list_layout"
-        card:column_count_landscape="1"
+        card:item_margin="8dp"
         card:column_count_portrait="1"
-        card:item_margin="8dp" />
+        card:column_count_landscape="1"
+        card:card_layout_resourceID="@layout/native_cardwithlist_layout"
+        />
+
 </RelativeLayout>

@@ -64,6 +64,5 @@ public class LicenseDialogFragment extends DialogFragment {
                 })
                 .autoDismiss(false)
                 .show();
-
     }
 }

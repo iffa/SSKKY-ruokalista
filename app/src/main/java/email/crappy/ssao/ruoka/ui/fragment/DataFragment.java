@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nhaarman.listviewanimations.appearance.AnimationAdapter;
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
+
 import java.util.ArrayList;
 
 import email.crappy.ssao.ruoka.R;
@@ -16,18 +19,20 @@ import email.crappy.ssao.ruoka.pojo.Ruoka;
 import it.gmariotti.cardslib.library.extra.staggeredgrid.internal.CardGridStaggeredArrayAdapter;
 import it.gmariotti.cardslib.library.extra.staggeredgrid.view.CardGridStaggeredView;
 import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
+import it.gmariotti.cardslib.library.view.CardListView;
 
 /**
  * @author Santeri 'iffa'
  */
-public class CardGridFragment extends Fragment {
-    public CardGridFragment() {
+public class DataFragment extends Fragment {
+    public DataFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_card_grid, container, false);
+        return inflater.inflate(R.layout.fragment_data, container, false);
     }
 
     @Override
@@ -43,9 +48,9 @@ public class CardGridFragment extends Fragment {
         }
 
         CardGridStaggeredArrayAdapter mCardArrayAdapter = new CardGridStaggeredArrayAdapter(getActivity(), cards);
-        CardGridStaggeredView mGridView = (CardGridStaggeredView) view.findViewById(R.id.card_grid);
-        if (mGridView != null) {
-            mGridView.setAdapter(mCardArrayAdapter);
-        }
+        AnimationAdapter animCardArrayAdapter = new AlphaInAnimationAdapter(mCardArrayAdapter);
+        CardGridStaggeredView listView = (CardGridStaggeredView) getActivity().findViewById(R.id.card_grid);
+        animCardArrayAdapter.setAbsListView(listView);
+        listView.setExternalAdapter(animCardArrayAdapter,mCardArrayAdapter);
     }
 }

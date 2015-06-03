@@ -19,7 +19,6 @@ public class SetAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent == null || context == null || intent.getAction() == null) {
-            Logger.d("someone sent us null in SetAlarmReceiver >:(");
             return;
         }
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED") || intent.getAction().equals(RuokaApplication.ACTION_SET_ALARM)) {
