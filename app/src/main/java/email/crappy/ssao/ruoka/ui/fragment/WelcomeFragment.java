@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Property;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
@@ -46,6 +48,13 @@ public class WelcomeFragment extends Fragment {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         mTaskFragment = (DownloadTaskFragment) fm.findFragmentByTag(TAG_TASK_FRAGMENT);
 
+        if (getArguments().getBoolean("update", false)) {
+            TextView title = (TextView) getView().findViewById(R.id.welcomeTitle);
+            TextView message = (TextView) getView().findViewById(R.id.welcomeMessage);
+            title.setText(R.string.welcome_update_title);
+            message.setText(R.string.welcome_update_message);
+        }
+
         if (mTaskFragment == null) {
             Logger.d("mTaskFragment was null, creating new");
             mTaskFragment = new DownloadTaskFragment();
@@ -78,14 +87,24 @@ public class WelcomeFragment extends Fragment {
                     alpha(0.0f).
                     build();
 
-            Player.init().animate(titleAction).then().animate(spinnerAction).play();
+            final PropertyAction iconAction = PropertyAction.newPropertyAction(getView().findViewById(R.id.ruokaIconLayout))
+                    .interpolator(new AccelerateDecelerateInterpolator())
+                    .duration(400)
+                    .alpha(0.0f)
+                    .scaleX(0.5f)
+                    .scaleY(0.5f)
+                    .build();
 
-            if (getArguments().getBoolean("update", false)) {
-                TextView title = (TextView) getView().findViewById(R.id.welcomeTitle);
-                TextView message = (TextView) getView().findViewById(R.id.welcomeMessage);
-                title.setText(R.string.welcome_update_title);
-                message.setText(R.string.welcome_update_message);
-            }
+            final PropertyAction iconAction2 = PropertyAction.newPropertyAction(getView().findViewById(R.id.ruokaIconLayout2))
+                    .interpolator(new AccelerateDecelerateInterpolator())
+                    .duration(400)
+                    .delay(400)
+                    .alpha(0.0f)
+                    .scaleX(0.5f)
+                    .scaleY(0.5f)
+                    .build();
+
+            Player.init().animate(titleAction).then().animate(spinnerAction).then().animate(iconAction).then().animate(iconAction2).play();
         }
     }
 }

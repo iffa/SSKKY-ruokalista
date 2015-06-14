@@ -292,11 +292,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     /* Useless Overrides, stuff that doesn't need to be touched */
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (!bp.handleActivityResult(requestCode, resultCode, data))
             super.onActivityResult(requestCode, resultCode, data);

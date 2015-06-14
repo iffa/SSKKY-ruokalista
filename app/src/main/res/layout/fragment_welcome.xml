@@ -6,16 +6,44 @@
 
     <RelativeLayout
         android:id="@+id/welcomeLayout"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:id="@+id/ruokaIconLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_carrot" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_chicken" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_fish" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/welcomeTitle"
             android:layout_width="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
-            android:text="@string/welcome_title_text"
+            android:layout_below="@id/ruokaIconLayout"
+            android:layout_centerHorizontal="true"
+            android:text="@string/welcome_message_text"
             android:textColor="@android:color/primary_text_light"
             android:textSize="22sp" />
 
@@ -23,9 +51,9 @@
             android:id="@+id/welcomeMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/welcomeTitle"
-            android:text="@string/welcome_message_text"
+            android:layout_centerHorizontal="true"
+            android:text="@string/welcome_update_message"
             android:textColor="@android:color/secondary_text_light"
             android:textSize="16sp" />
 
@@ -37,6 +65,34 @@
             android:layout_centerHorizontal="true"
             app:cpv_animAutostart="true"
             app:cpv_indeterminate="true" />
+
+        <LinearLayout
+            android:id="@+id/ruokaIconLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loadingSpinner"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_pasta" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_pot" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_steak" />
+
+        </LinearLayout>
     </RelativeLayout>
 
 

@@ -15,7 +15,7 @@
     <string name="dialog_expired_title">Vanhentunut lista</string>
     <string name="dialog_expired_message">Palvelimelta saatu ruokalista on vanhentunut. Yritä myöhemmin uudelleen.</string>
     <string name="welcome_update_title">Päivitetään ruokalistaa</string>
-    <string name="welcome_update_message">Tässä menee vain hetki&#x2026;</string>
+    <string name="welcome_update_message">Tässä menee vain pieni hetki&#x2026;</string>
     <string name="action_today">Tänään ruokana</string>
     <string name="dialog_today_title">Tänään ruokana</string>
     <string name="welcome_tooltip">Tänään ruokana</string>
