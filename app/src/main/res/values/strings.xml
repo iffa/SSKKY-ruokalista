@@ -6,7 +6,7 @@
     <string name="error">Virhe</string>
     <string name="load_failed">Ruokalistan lataaminen palvelimelta epäonnistui. Jos ongelma jatkuu, otathan yhteyttä minuun ja liität mukaan allaolevan virheen:</string>
     <string name="dialog_about_title">Tietoja sovelluksesta</string>
-    <string name="dialog_about_message">SSKKY-ruokalista on epävirallinen sovellus: jos listassa on virheitä, listaa on muutettu ruokalan toimesta.\n\nYhteydenotot voi jättää osoitteeseen iffa[at]crappy.email (Santeri Elo / ICT14)\n\nKiitos ruokakuvakkeista Icons8:lle (https://icons8.com)</string>
+    <string name="dialog_about_message">SSKKY-ruokalista on epävirallinen sovellus: jos listassa on virheitä, listaa on muutettu ruokalan toimesta.\n\nJos pidät sovelluksesta, muistathan jättää arvostelun Play-kaupassa!\n\nYhteydenotot voi jättää osoitteeseen iffa[at]crappy.email (Santeri Elo / ICT14)\n\nKiitos ruokakuvakkeista Icons8:lle (https://icons8.com)</string>
     <string name="dialog_progress_title">Ladataan ruokalistaa</string>
     <string name="dialog_progress_content">Odota hetki&#x2026;</string>
     <string name="welcome_title_text">Tervetuloa</string>
@@ -61,6 +61,7 @@
         <item>Cardslib</item>
         <item>android-inapp-billing-v3</item>
         <item>Android Ripple Background</item>
+        <item>ListViewAnimations</item>
     </string-array>
 
 </resources>

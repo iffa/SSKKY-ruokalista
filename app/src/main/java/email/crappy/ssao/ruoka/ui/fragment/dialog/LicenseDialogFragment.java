@@ -58,6 +58,9 @@ public class LicenseDialogFragment extends DialogFragment {
                             case 9:
                                 intent.setData(Uri.parse("https://github.com/skyfishjy/android-ripple-background"));
                                 break;
+                            case 10:
+                                intent.setData(Uri.parse("https://github.com/nhaarman/ListViewAnimations"));
+                                break;
                         }
                         startActivity(intent);
                     }

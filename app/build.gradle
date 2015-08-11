@@ -8,7 +8,7 @@ android {
         applicationId "email.crappy.ssao.ruoka"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 23
+        versionCode 24
         versionName "2.0.9"
     }
     buildTypes {
