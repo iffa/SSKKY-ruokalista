@@ -14,12 +14,12 @@ import com.orhanobut.logger.Logger;
 
 import java.io.FileNotFoundException;
 
-import email.crappy.ssao.ruoka.ui.activity.MainActivity;
 import email.crappy.ssao.ruoka.pojo.Item;
-import email.crappy.ssao.ruoka.util.DateUtil;
-import email.crappy.ssao.ruoka.util.PojoUtil;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
+import email.crappy.ssao.ruoka.ui.activity.MainActivity;
+import email.crappy.ssao.ruoka.util.DateUtil;
+import email.crappy.ssao.ruoka.util.PojoUtil;
 
 /**
  * @author Santeri 'iffa'

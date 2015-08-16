@@ -10,7 +10,6 @@ import com.skyfishjy.library.RippleBackground;
 
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.RuokaApplication;
-import email.crappy.ssao.ruoka.ui.activity.MainActivity;
 
 /**
  * @author Santeri 'iffa'

@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import email.crappy.ssao.ruoka.RuokaApplication;
 import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
 
 /**

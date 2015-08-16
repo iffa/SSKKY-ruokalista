@@ -3,9 +3,10 @@ package email.crappy.ssao.ruoka.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.annotations.Expose;
 
 public class RuokaJsonObject implements Parcelable {
     @Expose
