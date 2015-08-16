@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,23 +18,26 @@
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <in.raveesh.proteus.ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_carrot" />
+                android:src="@drawable/ic_carrot"
+                app:paint="@color/gold" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <in.raveesh.proteus.ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_chicken" />
+                android:src="@drawable/ic_chicken"
+                app:paint="@color/gold" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <in.raveesh.proteus.ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_fish" />
+                android:src="@drawable/ic_fish"
+                app:paint="@color/gold" />
 
         </LinearLayout>
 
@@ -74,23 +78,26 @@
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <in.raveesh.proteus.ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_pasta" />
+                android:src="@drawable/ic_pasta"
+                app:paint="@color/gold" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <in.raveesh.proteus.ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_pot" />
+                android:src="@drawable/ic_pot"
+                app:paint="@color/gold" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <in.raveesh.proteus.ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_steak" />
+                android:src="@drawable/ic_steak"
+                app:paint="@color/gold" />
 
         </LinearLayout>
     </RelativeLayout>

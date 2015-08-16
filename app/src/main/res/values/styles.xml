@@ -13,13 +13,4 @@
         <item name="colorPrimaryDark">@color/manly</item>
         <item name="colorAccent">@color/lessManly</item>
     </style>
-
-    <style name="CardMainLayout">
-        <item name="android:foreground">?android:selectableItemBackground</item>
-        <item name="android:background">@color/card_native_background</item>
-        <item name="android:layout_marginTop">@dimen/card_main_layout_native_view_margin_top</item>
-        <item name="android:layout_marginBottom">@dimen/card_main_layout_native_view_margin_bottom</item>
-        <item name="android:layout_marginLeft">@dimen/card_main_layout_native_view_margin_left</item>
-        <item name="android:layout_marginRight">@dimen/card_main_layout_native_view_margin_right</item>
-    </style>
 </resources>

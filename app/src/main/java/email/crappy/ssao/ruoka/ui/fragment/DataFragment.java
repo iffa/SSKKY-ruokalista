@@ -12,15 +12,16 @@ import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter
 
 import java.util.ArrayList;
 
+import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.RuokaApplication;
-import email.crappy.ssao.ruoka.ui.card.RuokaListCard;
+import email.crappy.ssao.ruoka.event.OpenShareDialogEvent;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
+import email.crappy.ssao.ruoka.ui.card.RuokaListCard;
+import email.crappy.ssao.ruoka.ui.fragment.dialog.ShareFoodDialogFragment;
 import it.gmariotti.cardslib.library.extra.staggeredgrid.internal.CardGridStaggeredArrayAdapter;
 import it.gmariotti.cardslib.library.extra.staggeredgrid.view.CardGridStaggeredView;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
-import it.gmariotti.cardslib.library.view.CardListView;
 
 /**
  * @author Santeri 'iffa'
@@ -39,6 +40,8 @@ public class DataFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        EventBus.getDefault().register(this);
+
         ArrayList<Card> cards = new ArrayList<>();
 
         for (Ruoka ruokaItem : RuokaApplication.data.getRuoka()) {
@@ -51,6 +54,10 @@ public class DataFragment extends Fragment {
         AnimationAdapter animCardArrayAdapter = new AlphaInAnimationAdapter(mCardArrayAdapter);
         CardGridStaggeredView listView = (CardGridStaggeredView) getActivity().findViewById(R.id.card_grid);
         animCardArrayAdapter.setAbsListView(listView);
-        listView.setExternalAdapter(animCardArrayAdapter,mCardArrayAdapter);
+        listView.setExternalAdapter(animCardArrayAdapter, mCardArrayAdapter);
+    }
+
+    public void onEvent(OpenShareDialogEvent event) {
+        ShareFoodDialogFragment.newInstance(event.dates).show(getFragmentManager(), "shareFoodDialog");
     }
 }

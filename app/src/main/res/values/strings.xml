@@ -45,6 +45,9 @@
     <string name="sad_message">(kosketa uudelleenkäynnistääksesi sovelluksen)</string>
     <string name="ratingTextHint">Kastike oli hyvää, perunat hieman raakoja</string>
     <string name="cancel">Peruuta</string>
+    <string name="action_share">Jaa</string>
+    <string name="dialog_share_description">Minkä päivän ruoan haluat jakaa?</string>
+    <string name="share_via">Jaa</string>
     <string-array name="dialog_easter_items">
         <item>Dududu</item>
         <item>Pinkki-teema</item>
@@ -62,6 +65,7 @@
         <item>android-inapp-billing-v3</item>
         <item>Android Ripple Background</item>
         <item>ListViewAnimations</item>
+        <item>Proteus</item>
     </string-array>
 
 </resources>

@@ -27,7 +27,7 @@ public class RuokaApplication extends Application {
     public static final String ACTION_FIRE_NOTIFICATION = "email.crappy.ssao.ruoka.FIRE_NOTIFICATION";
     public static final String BILLING_KEY = null;
     public static final String PARSE_APP_ID = null;
-    public static final String PARSE_MASTER = null;
+    public static final String PARSE_CLIENT = null;
 
     @Override
     public void onCreate() {
@@ -41,7 +41,7 @@ public class RuokaApplication extends Application {
         // Initialize Parse
         Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(Rating.class);
-        Parse.initialize(this, PARSE_APP_ID, PARSE_MASTER);
+        Parse.initialize(this, PARSE_APP_ID, PARSE_CLIENT);
 
         // Anonymous users ftw
         ParseUser.enableAutomaticUser();
