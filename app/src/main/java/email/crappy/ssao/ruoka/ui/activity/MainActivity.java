@@ -172,8 +172,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         SharedPreferences.Editor edit = getPreferences(MODE_PRIVATE).edit();
         edit.putBoolean("pinkTheme", !(getPreferences(MODE_PRIVATE).getBoolean("pinkTheme", false)));
         edit.commit(); // use .commit() because app terminates after this
-
-        RuokaApplication.doRestart(getApplicationContext());
     }
 
     @SuppressWarnings("unused")

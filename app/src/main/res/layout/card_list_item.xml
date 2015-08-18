@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -50,14 +49,13 @@
             android:text="Jokapojan kalapala, yrttikastike, perunat, salaatti\nporkkanapihvi"
             android:textColor="@android:color/secondary_text_light" />
 
-        <in.raveesh.proteus.ImageView
+        <ImageView
             android:id="@+id/item_food_type"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_cutlery"
-            app:paint="@color/gold" />
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_cutlery" />
 
     </RelativeLayout>
 

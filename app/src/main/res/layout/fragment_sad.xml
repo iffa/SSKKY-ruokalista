@@ -4,41 +4,30 @@
     android:layout_height="match_parent"
     tools:context="email.crappy.ssao.ruoka.ui.fragment.SadFragment">
 
-    <com.skyfishjy.library.RippleBackground xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/rippleBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:rb_color="@color/blue"
-        app:rb_duration="1500"
-        app:rb_radius="32dp"
-        app:rb_rippleAmount="3"
-        app:rb_scale="3">
+    <LinearLayout
+        android:id="@+id/sadFaceLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/sadFaceLayout"
+        <TextView
+            android:id="@+id/sadFaceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@drawable/ic_emoji_sad"
+            android:text="@string/sad_title"
+            android:textColor="@android:color/primary_text_light"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/sadFaceText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:drawableTop="@drawable/ic_emoji_sad"
-                android:text="@string/sad_title"
-                android:textColor="@android:color/primary_text_light"
-                android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/sad_message"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="12sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/sad_message"
-                android:textColor="@android:color/secondary_text_light"
-                android:textSize="12sp" />
-
-        </LinearLayout>
-    </com.skyfishjy.library.RippleBackground>
+    </LinearLayout>
 </RelativeLayout>

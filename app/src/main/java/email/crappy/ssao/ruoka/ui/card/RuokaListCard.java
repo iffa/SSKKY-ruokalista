@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import email.crappy.ssao.ruoka.event.ShareFoodEvent;
 import email.crappy.ssao.ruoka.pojo.Item;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
 import email.crappy.ssao.ruoka.util.DateUtil;
-import in.raveesh.proteus.ImageView;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
 import it.gmariotti.cardslib.library.prototypes.CardWithList;
@@ -52,7 +52,7 @@ public class RuokaListCard extends CardWithList implements CardWithList.OnItemCl
 
     @Override
     protected List<ListObject> initChildren() {
-        List<ListObject> mObjects = new ArrayList<ListObject>();
+        List<ListObject> mObjects = new ArrayList<>();
 
         for (Item item : ruoka.getItems()) {
             if (item.getKama().toLowerCase().contains("talon tapaan")) {
@@ -90,19 +90,14 @@ public class RuokaListCard extends CardWithList implements CardWithList.OnItemCl
         // Setting food icon to match the food
         if (item.getKama().toLowerCase().contains("keitto")) {
             foodIcon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_spoon));
-            foodIcon.setPaintResource(R.color.gold);
         } else if (item.getKama().toLowerCase().contains("pasta")) {
             foodIcon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_pasta));
-            foodIcon.setPaintResource(R.color.gold);
         } else if ((item.getKama().toLowerCase().contains("kala") && !item.getKama().toLowerCase().contains("kreikkalainen")) || item.getKama().toLowerCase().contains("lohi")) {
             foodIcon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_fish));
-            foodIcon.setPaintResource(R.color.gold);
         } else if (item.getKama().toLowerCase().contains("broiler")) {
             foodIcon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_chicken));
-            foodIcon.setPaintResource(R.color.gold);
         } else if (item.getKama().toLowerCase().contains("pihvi")) {
             foodIcon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_steak));
-            foodIcon.setPaintResource(R.color.gold);
         }
 
 

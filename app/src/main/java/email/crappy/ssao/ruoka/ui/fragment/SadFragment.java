@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.skyfishjy.library.RippleBackground;
-
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.RuokaApplication;
 
@@ -26,15 +24,9 @@ public class SadFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        final RippleBackground rippleBackground = (RippleBackground) getView().findViewById(R.id.rippleBackground);
-        rippleBackground.startRippleAnimation();
-
-        getView().findViewById(R.id.sadFaceText).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        RuokaApplication.doRestart(getActivity().getApplicationContext());
     }
 }

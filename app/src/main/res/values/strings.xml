@@ -42,7 +42,7 @@
     <string name="dialog_password_hint">Salasana</string>
     <string name="toast_wrong_password">Väärä salasana</string>
     <string name="sad_title">Jotakin meni särki&#x2026;</string>
-    <string name="sad_message">(kosketa uudelleenkäynnistääksesi sovelluksen)</string>
+    <string name="sad_message">(yritä myöhemmin uudelleen)</string>
     <string name="ratingTextHint">Kastike oli hyvää, perunat hieman raakoja</string>
     <string name="cancel">Peruuta</string>
     <string name="action_share">Jaa</string>
@@ -63,9 +63,7 @@
         <item>CircularProgressView</item>
         <item>Cardslib</item>
         <item>android-inapp-billing-v3</item>
-        <item>Android Ripple Background</item>
         <item>ListViewAnimations</item>
-        <item>Proteus</item>
     </string-array>
 
 </resources>

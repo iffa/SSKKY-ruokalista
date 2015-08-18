@@ -18,26 +18,23 @@
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
-            <in.raveesh.proteus.ImageView
+            <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_carrot"
-                app:paint="@color/gold" />
+                android:src="@drawable/ic_carrot" />
 
-            <in.raveesh.proteus.ImageView
+            <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_chicken"
-                app:paint="@color/gold" />
+                android:src="@drawable/ic_chicken" />
 
-            <in.raveesh.proteus.ImageView
+            <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_fish"
-                app:paint="@color/gold" />
+                android:src="@drawable/ic_fish" />
 
         </LinearLayout>
 
@@ -78,26 +75,23 @@
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
-            <in.raveesh.proteus.ImageView
+            <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_pasta"
-                app:paint="@color/gold" />
+                android:src="@drawable/ic_pasta" />
 
-            <in.raveesh.proteus.ImageView
+            <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_pot"
-                app:paint="@color/gold" />
+                android:src="@drawable/ic_pot" />
 
-            <in.raveesh.proteus.ImageView
+            <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_steak"
-                app:paint="@color/gold" />
+                android:src="@drawable/ic_steak" />
 
         </LinearLayout>
     </RelativeLayout>
