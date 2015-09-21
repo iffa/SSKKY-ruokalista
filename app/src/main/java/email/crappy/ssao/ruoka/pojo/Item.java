@@ -5,11 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.prototypes.CardWithList;
-
-public class Item implements Parcelable, CardWithList.ListObject {
-    CardWithList.OnItemClickListener mClickListener;
+public class Item implements Parcelable {
 
     @Expose
     private String pvm;
@@ -73,44 +69,4 @@ public class Item implements Parcelable, CardWithList.ListObject {
             return new Item[size];
         }
     };
-
-    @Override
-    public String getObjectId() {
-        return pvm;
-    }
-
-    @Override
-    public Card getParentCard() {
-        return null;
-    }
-
-    @Override
-    public void setOnItemClickListener(CardWithList.OnItemClickListener onItemClickListener) {
-        mClickListener = onItemClickListener;
-    }
-
-    @Override
-    public CardWithList.OnItemClickListener getOnItemClickListener() {
-        return mClickListener;
-    }
-
-    @Override
-    public boolean isSwipeable() {
-        return false;
-    }
-
-    @Override
-    public void setSwipeable(boolean b) {
-
-    }
-
-    @Override
-    public CardWithList.OnItemSwipeListener getOnItemSwipeListener() {
-        return null;
-    }
-
-    @Override
-    public void setOnItemSwipeListener(CardWithList.OnItemSwipeListener onItemSwipeListener) {
-
-    }
 }

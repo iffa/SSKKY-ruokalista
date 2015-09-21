@@ -1,5 +1,6 @@
 package email.crappy.ssao.ruoka.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -33,8 +34,7 @@ import email.crappy.ssao.ruoka.event.TogglePinkEvent;
 import email.crappy.ssao.ruoka.pojo.Item;
 import email.crappy.ssao.ruoka.pojo.Rating;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
-import email.crappy.ssao.ruoka.ui.fragment.DataFragment;
-import email.crappy.ssao.ruoka.ui.fragment.SadFragment;
+import email.crappy.ssao.ruoka.mvp.FoodFragment;
 import email.crappy.ssao.ruoka.ui.fragment.WelcomeFragment;
 import email.crappy.ssao.ruoka.ui.fragment.dialog.EasterDialogFragment;
 import email.crappy.ssao.ruoka.ui.fragment.dialog.EasterPasswordDialogFragment;
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     }
 
     private void showDataFragment(boolean anim) {
-        DataFragment fragment = new DataFragment();
+        FoodFragment fragment = new FoodFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (anim) {
             transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.enter, R.anim.exit);
@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     }
 
     @SuppressWarnings("unused")
+    @SuppressLint("CommitPrefEdits")
     public void onEvent(TogglePinkEvent event) {
         SharedPreferences.Editor edit = getPreferences(MODE_PRIVATE).edit();
         edit.putBoolean("pinkTheme", !(getPreferences(MODE_PRIVATE).getBoolean("pinkTheme", false)));

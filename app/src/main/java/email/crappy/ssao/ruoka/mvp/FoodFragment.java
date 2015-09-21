@@ -1,39 +1,49 @@
-package email.crappy.ssao.ruoka.ui.fragment;
-
+package email.crappy.ssao.ruoka.mvp;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
-import com.nhaarman.listviewanimations.appearance.AnimationAdapter;
-import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.MvpLceViewStateFragment;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.RuokaApplication;
-import email.crappy.ssao.ruoka.event.OpenShareDialogEvent;
 import email.crappy.ssao.ruoka.pojo.Ruoka;
-import email.crappy.ssao.ruoka.ui.card.RuokaListCard;
-import email.crappy.ssao.ruoka.ui.fragment.dialog.ShareFoodDialogFragment;
-import it.gmariotti.cardslib.library.extra.staggeredgrid.internal.CardGridStaggeredArrayAdapter;
-import it.gmariotti.cardslib.library.extra.staggeredgrid.view.CardGridStaggeredView;
-import it.gmariotti.cardslib.library.internal.Card;
 
 /**
  * @author Santeri 'iffa'
  */
-public class DataFragment extends Fragment {
-    public DataFragment() {
+public class FoodFragment extends MvpLceViewStateFragment<RelativeLayout, List<Ruoka>, FoodView, FoodPresenter> implements FoodView {
+    public FoodFragment() {
+    }
+
+    @Override
+    public FoodPresenter createPresenter() {
+        return new FoodPresenter();
+    }
+
+    @Override
+    public LceViewState<List<Ruoka>, FoodView> createViewState() {
+        setRetainInstance(true);
+        return new RetainingLceViewState<>();
+    }
+
+    @Override
+    public List<Ruoka> getData() {
+        return null;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_data, container, false);
+        return inflater.inflate(R.layout.fragment_food, container, false);
     }
 
     @Override
@@ -42,22 +52,37 @@ public class DataFragment extends Fragment {
 
         EventBus.getDefault().register(this);
 
-        ArrayList<Card> cards = new ArrayList<>();
+        //ArrayList<Card> cards = new ArrayList<>();
 
         for (Ruoka ruokaItem : RuokaApplication.data.getRuoka()) {
+            /*
             RuokaListCard card = new RuokaListCard(getActivity(), ruokaItem);
             card.init();
             cards.add(card);
+            */
         }
 
+        /*
         CardGridStaggeredArrayAdapter mCardArrayAdapter = new CardGridStaggeredArrayAdapter(getActivity(), cards);
         AnimationAdapter animCardArrayAdapter = new AlphaInAnimationAdapter(mCardArrayAdapter);
         CardGridStaggeredView listView = (CardGridStaggeredView) getActivity().findViewById(R.id.card_grid);
         animCardArrayAdapter.setAbsListView(listView);
         listView.setExternalAdapter(animCardArrayAdapter, mCardArrayAdapter);
+        */
     }
 
-    public void onEvent(OpenShareDialogEvent event) {
-        ShareFoodDialogFragment.newInstance(event.dates).show(getFragmentManager(), "shareFoodDialog");
+    @Override
+    protected String getErrorMessage(Throwable throwable, boolean b) {
+        return null;
+    }
+
+    @Override
+    public void setData(List<Ruoka> data) {
+
+    }
+
+    @Override
+    public void loadData(boolean pullToRefresh) {
+        presenter.loadCurrentWeek();
     }
 }
