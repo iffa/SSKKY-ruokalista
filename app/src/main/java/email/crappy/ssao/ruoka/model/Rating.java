@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.pojo;
+package email.crappy.ssao.ruoka.model;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;

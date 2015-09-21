@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <include layout="@layout/view_loading" />
 
@@ -13,10 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Main recycler view showing current week's menu -->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <!-- Secondary recycler view, showing all available weeks -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/secondaryRecyclerView"
+            android:layout_below="@id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
-</LinearLayout>
+</FrameLayout>

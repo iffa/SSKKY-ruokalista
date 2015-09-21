@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka;
+package email.crappy.ssao.ruoka.notification;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,43 +12,24 @@ import android.support.v4.app.TaskStackBuilder;
 
 import com.orhanobut.logger.Logger;
 
-import java.io.FileNotFoundException;
-
-import email.crappy.ssao.ruoka.pojo.Item;
-import email.crappy.ssao.ruoka.pojo.Ruoka;
-import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
+import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.model.Item;
+import email.crappy.ssao.ruoka.model.Ruoka;
+import email.crappy.ssao.ruoka.model.RuokaJsonObject;
 import email.crappy.ssao.ruoka.ui.activity.MainActivity;
 import email.crappy.ssao.ruoka.util.DateUtil;
-import email.crappy.ssao.ruoka.util.PojoUtil;
+import email.crappy.ssao.ruoka.util.RetrofitService;
+import rx.Observer;
 
 /**
  * @author Santeri 'iffa'
  */
-public class NotificationService extends Service {
+public class NotificationService extends Service implements Observer<RuokaJsonObject> {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Logger.d("NotificationService has been summoned");
 
-        if (RuokaApplication.shouldDownloadData()) {
-            return START_NOT_STICKY;
-        }
-
-        RuokaJsonObject data;
-        try {
-            data = PojoUtil.generatePojoFromJson(getApplicationContext());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return START_NOT_STICKY;
-        }
-
-        for (Ruoka ruoka : data.getRuoka()) {
-            for (Item item : ruoka.getItems()) {
-                if (DateUtil.isToday(item.getPvm())) {
-                    showNotification(item);
-                    break;
-                }
-            }
-        }
+        new RetrofitService().getFood(this, false);
 
         return START_NOT_STICKY;
     }
@@ -85,5 +66,28 @@ public class NotificationService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onCompleted() {
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        // Fail silently
+        Logger.d("FoodApi call failed for notification, not showing anything");
+    }
+
+    @Override
+    public void onNext(RuokaJsonObject ruokaJsonObject) {
+        for (Ruoka ruoka : ruokaJsonObject.getRuoka()) {
+            for (Item item : ruoka.getItems()) {
+                if (DateUtil.isToday(item.getPvm())) {
+                    showNotification(item);
+                    break;
+                }
+            }
+        }
     }
 }

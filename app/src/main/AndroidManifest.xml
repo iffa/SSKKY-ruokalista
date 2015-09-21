@@ -25,14 +25,14 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".SetAlarmReceiver"
+            android:name=".notification.SetAlarmReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="email.crappy.ssao.ruoka.SET_ALARM" />
             </intent-filter>
         </receiver>
-        <service android:name=".NotificationService" />
+        <service android:name=".notification.NotificationService" />
     </application>
 
 </manifest>

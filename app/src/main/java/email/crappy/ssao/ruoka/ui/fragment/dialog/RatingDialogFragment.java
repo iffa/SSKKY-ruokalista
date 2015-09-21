@@ -14,7 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.event.RatingSaveEvent;
-import email.crappy.ssao.ruoka.pojo.Rating;
+import email.crappy.ssao.ruoka.model.Rating;
 
 /**
  * @author Santeri 'iffa'

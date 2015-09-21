@@ -1,6 +1,7 @@
-package email.crappy.ssao.ruoka.ui.recycler;
+package email.crappy.ssao.ruoka.recycler;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,12 +12,13 @@ import com.hannesdorfmann.annotatedadapter.support.recyclerview.SupportAnnotated
 import java.util.List;
 
 import email.crappy.ssao.ruoka.R;
-import email.crappy.ssao.ruoka.pojo.Item;
+import email.crappy.ssao.ruoka.model.Item;
+import email.crappy.ssao.ruoka.util.DateUtil;
 
 /**
  * @author Santeri Elo
  */
-public class CurrentWeekAdapter extends SupportAnnotatedAdapter implements CurrentWeekAdapterBinder {
+public class SelectedWeekAdapter extends SupportAnnotatedAdapter implements SelectedWeekAdapterBinder {
     @ViewType(
             layout = R.layout.item_list_current_week,
             views = {
@@ -30,8 +32,16 @@ public class CurrentWeekAdapter extends SupportAnnotatedAdapter implements Curre
 
     List<Item> items;
 
-    public CurrentWeekAdapter(Context context, List<Item> items) {
+    public SelectedWeekAdapter(Context context) {
         super(context);
+    }
+
+    public SelectedWeekAdapter(Context context, List<Item> items) {
+        super(context);
+        this.items = items;
+    }
+
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
@@ -41,13 +51,24 @@ public class CurrentWeekAdapter extends SupportAnnotatedAdapter implements Curre
     }
 
     @Override
-    public void bindViewHolder(CurrentWeekAdapterHolders.DefaultTypeViewHolder vh, int position) {
+    public void bindViewHolder(SelectedWeekAdapterHolders.DefaultTypeViewHolder vh, int position) {
         Item item = items.get(position);
 
         vh.date.setText(item.getPvm());
         vh.day.setText(item.getPaiva());
         vh.food.setText(item.getKama());
 
-        // TODO: image switch case
+        // Highlight today's food in the list
+        if (DateUtil.isToday(item.getPvm())) {
+            vh.date.setTypeface(null, Typeface.BOLD);
+            vh.day.setTypeface(null, Typeface.BOLD);
+            vh.food.setTypeface(null, Typeface.BOLD);
+        } else { // To fix random items appearing bold >:(
+            vh.date.setTypeface(null, Typeface.NORMAL);
+            vh.day.setTypeface(null, Typeface.NORMAL);
+            vh.food.setTypeface(null, Typeface.NORMAL);
+        }
+
+        // TODO: image switch case, copy pasta from V2
     }
 }

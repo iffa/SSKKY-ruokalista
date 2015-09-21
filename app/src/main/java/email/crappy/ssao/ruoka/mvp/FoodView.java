@@ -4,7 +4,7 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 
 import java.util.List;
 
-import email.crappy.ssao.ruoka.pojo.Ruoka;
+import email.crappy.ssao.ruoka.model.Ruoka;
 
 /**
  * @author Santeri Elo

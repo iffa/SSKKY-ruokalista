@@ -38,6 +38,21 @@ public class DateUtil {
 
     }
 
+    public static boolean isThisWeek(String date) {
+        GregorianCalendar current = new GregorianCalendar();
+        GregorianCalendar item = new GregorianCalendar();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
+        try {
+            item.setTime(sdf.parse(date + "." + current.get(Calendar.YEAR)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return item.get(Calendar.WEEK_OF_YEAR) == current.get(Calendar.WEEK_OF_YEAR);
+    }
+
     public static boolean isValentines() {
         GregorianCalendar calendar = new GregorianCalendar();
         return calendar.get(Calendar.DAY_OF_MONTH) == 14 && calendar.get(Calendar.MONTH) == 1;

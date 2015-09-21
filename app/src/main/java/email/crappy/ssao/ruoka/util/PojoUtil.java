@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import email.crappy.ssao.ruoka.pojo.RuokaJsonObject;
+import email.crappy.ssao.ruoka.model.RuokaJsonObject;
 
 /**
  * @author Santeri 'iffa'
