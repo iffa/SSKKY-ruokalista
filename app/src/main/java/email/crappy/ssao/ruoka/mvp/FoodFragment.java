@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -22,13 +23,16 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.event.EasterEggEvent;
 import email.crappy.ssao.ruoka.model.Item;
 import email.crappy.ssao.ruoka.model.Ruoka;
 import email.crappy.ssao.ruoka.mvp.fixed.MvpLceViewStateFragmentFixed;
 import email.crappy.ssao.ruoka.recycler.AllWeeksAdapter;
 import email.crappy.ssao.ruoka.recycler.RecyclerItemClickListener;
 import email.crappy.ssao.ruoka.recycler.SelectedWeekAdapter;
+import email.crappy.ssao.ruoka.ui.activity.MainActivity;
 import email.crappy.ssao.ruoka.util.DateUtil;
 
 /**
@@ -45,6 +49,8 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
     ListView foodListView;
     @Bind(R.id.recycler_other_weeks)
     RecyclerView weeksRecyclerView;
+    @Bind(R.id.card_current_header)
+    LinearLayout cardHeader;
 
     @NonNull
     @Override
@@ -74,6 +80,11 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        if (MainActivity.EASTER_PINK_THEME) { // Easter egg get! :D
+            // TODO: (after initial release) MANLY versions of food icons for consistency!
+            cardHeader.setBackgroundResource(R.color.manly);
+        }
 
         selectedWeekAdapter = new SelectedWeekAdapter(getActivity());
         allWeeksAdapter = new AllWeeksAdapter(getActivity());
@@ -148,6 +159,9 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
         // TODO: Share dialog or something
         Toast toast = Toast.makeText(getActivity(), "TODO: share dialog", Toast.LENGTH_SHORT);
         toast.show();
+
+        // Easter egg for now
+        EventBus.getDefault().post(new EasterEggEvent(false));
 
         return true;
     }

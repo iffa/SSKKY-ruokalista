@@ -42,6 +42,7 @@ import email.crappy.ssao.ruoka.util.DateUtil;
  */
 public class MainActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
     private BillingProcessor bp;
+    public static boolean EASTER_PINK_THEME = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,29 +63,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
                     .add(R.id.frame_fragment, new FoodFragment())
                     .commit();
         }
-
-        /*
-        if (RuokaApplication.shouldDownloadData()) {
-            Logger.d("shouldDownloadData() = true");
-            showWelcomeFragment(false);
-            return;
-        }
-
-        if (RuokaApplication.data == null) {
-            Logger.d("data == null");
-            try {
-                RuokaApplication.data = PojoUtil.generatePojoFromJson(getApplicationContext());
-
-                if (DateUtil.isDataExpired(RuokaApplication.data.getExpiration())) {
-                    showWelcomeFragment(true);
-                } else {
-                    showDataFragment(true);
-                }
-            } catch (FileNotFoundException e) {
-                Logger.e("Tried to generate data from JSON but it failed", e);
-            }
-        }
-        */
     }
 
     private void setPinkTheme() {
@@ -95,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(getResources().getColor(R.color.manly));
             }
+            EASTER_PINK_THEME = true;
         }
     }
 

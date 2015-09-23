@@ -3,20 +3,13 @@
     <string name="title_activity_main">SSKKY-ruokalista</string>
     <string name="action_settings">Asetukset</string>
     <string name="action_about">Tietoja sovelluksesta</string>
-    <string name="error">Virhe</string>
-    <string name="load_failed">Ruokalistan lataaminen palvelimelta epäonnistui. Jos ongelma jatkuu, otathan yhteyttä minuun ja liität mukaan allaolevan virheen:</string>
     <string name="dialog_about_title">Tietoja sovelluksesta</string>
-    <string name="dialog_about_message">SSKKY-ruokalista on epävirallinen sovellus: jos listassa on virheitä, listaa on muutettu ruokalan toimesta.\n\nJos pidät sovelluksesta, muistathan jättää arvostelun Play-kaupassa!\n\nYhteydenotot voi jättää osoitteeseen iffa[at]crappy.email (Santeri Elo / ICT14)\n\nKiitos ruokakuvakkeista Icons8:lle (https://icons8.com)</string>
-    <string name="dialog_progress_title">Ladataan ruokalistaa</string>
-    <string name="dialog_progress_content">Odota hetki&#x2026;</string>
-    <string name="welcome_title_text">Tervetuloa</string>
-    <string name="welcome_message_text">Ruokalistaa ladataan&#x2026;</string>
+    <string name="dialog_about_message">TODO: Settings fragment / activity instead of dialogs, move this there</string>
     <string name="dialog_easter_choose">easter egg get!</string>
-    <string name="dialog_expired_title">Vanhentunut lista</string>
-    <string name="dialog_expired_message">Palvelimelta saatu ruokalista on vanhentunut. Yritä myöhemmin uudelleen.</string>
     <string name="welcome_update_title">Päivitetään ruokalistaa</string>
     <string name="welcome_update_message">Tässä menee vain pieni hetki&#x2026;</string>
     <string name="action_today">Tänään ruokana</string>
+    <string name="error">Virhe</string>
     <string name="dialog_today_title">Tänään ruokana</string>
     <string name="welcome_tooltip">Tänään ruokana</string>
     <string name="action_donate">Tue kehittäjää</string>
@@ -45,8 +38,6 @@
     <string name="sad_message">(yritä myöhemmin uudelleen)</string>
     <string name="ratingTextHint">Kastike oli hyvää, perunat hieman raakoja</string>
     <string name="cancel">Peruuta</string>
-    <string name="action_share">Jaa</string>
-    <string name="dialog_share_description">Minkä päivän ruoan haluat jakaa?</string>
     <string name="share_via">Jaa</string>
     <string-array name="dialog_easter_items">
         <item>Dududu</item>
@@ -54,16 +45,13 @@
         <item>V1 easter egg</item>
     </string-array>
     <string-array name="dialog_licenses_items">
-        <item>Logger</item>
-        <item>GSON</item>
-        <item>EventBus</item>
-        <item>ThinDownloadManager</item>
-        <item>Material Dialogs</item>
-        <item>android-player</item>
-        <item>CircularProgressView</item>
-        <item>Cardslib</item>
-        <item>android-inapp-billing-v3</item>
-        <item>ListViewAnimations</item>
+        <item>TODO:</item>
+        <item>Move</item>
+        <item>these</item>
+        <item>to</item>
+        <item>settings</item>
+        <item>thank you very much.</item>
+        <item>...</item>
+        <item>also: this list up to date</item>
     </string-array>
-
 </resources>
