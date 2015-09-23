@@ -38,7 +38,14 @@ public class DateUtil {
 
     }
 
-    public static boolean isThisWeek(String date) {
+    public static boolean isCurrentWeek(String weekString) {
+        GregorianCalendar current = new GregorianCalendar();
+        int week = Integer.parseInt(weekString);
+
+        return current.get(Calendar.WEEK_OF_YEAR) == week;
+    }
+
+    public static boolean isDateThisWeek(String date) {
         GregorianCalendar current = new GregorianCalendar();
         GregorianCalendar item = new GregorianCalendar();
 

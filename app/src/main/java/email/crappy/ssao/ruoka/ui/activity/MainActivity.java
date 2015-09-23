@@ -29,13 +29,12 @@ import email.crappy.ssao.ruoka.event.RatingSaveEvent;
 import email.crappy.ssao.ruoka.event.TogglePinkEvent;
 import email.crappy.ssao.ruoka.model.Item;
 import email.crappy.ssao.ruoka.model.Rating;
-import email.crappy.ssao.ruoka.model.Ruoka;
 import email.crappy.ssao.ruoka.mvp.FoodFragment;
-import email.crappy.ssao.ruoka.ui.fragment.dialog.EasterDialogFragment;
-import email.crappy.ssao.ruoka.ui.fragment.dialog.EasterPasswordDialogFragment;
-import email.crappy.ssao.ruoka.ui.fragment.dialog.InfoDialogFragment;
-import email.crappy.ssao.ruoka.ui.fragment.dialog.LicenseDialogFragment;
-import email.crappy.ssao.ruoka.ui.fragment.dialog.RatingDialogFragment;
+import email.crappy.ssao.ruoka.ui.dialog.EasterDialogFragment;
+import email.crappy.ssao.ruoka.ui.dialog.EasterPasswordDialogFragment;
+import email.crappy.ssao.ruoka.ui.dialog.InfoDialogFragment;
+import email.crappy.ssao.ruoka.ui.dialog.LicenseDialogFragment;
+import email.crappy.ssao.ruoka.ui.dialog.RatingDialogFragment;
 import email.crappy.ssao.ruoka.util.DateUtil;
 
 /**
