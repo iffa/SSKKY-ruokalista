@@ -99,6 +99,7 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
         weeksRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), this));
 
         setListViewHeightBasedOnItems(foodListView); // Make room for grid
+        // TODO: RecyclerView dynamic height for sliding pane
     }
 
     @Override
