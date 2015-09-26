@@ -5,7 +5,8 @@
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/blueDark</item>
         <item name="colorAccent">@color/blue</item>
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <!-- Do something manly with colors achieved :D -->
@@ -13,6 +14,7 @@
         <item name="colorPrimary">@color/lessManly</item>
         <item name="colorPrimaryDark">@color/manly</item>
         <item name="colorAccent">@color/lessManly</item>
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>

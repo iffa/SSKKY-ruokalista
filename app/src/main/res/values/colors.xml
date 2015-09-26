@@ -6,6 +6,8 @@
     <color name="blueDark">#004480</color>
     <color name="gold">#FAA21B</color>
 
+    <color name="divider">#80323232</color>
+
     <color name="manly">#D416FA</color>
     <color name="lessManly">#D377E6</color>
     <color name="veryNotManly">#ECB5F7</color>

@@ -26,6 +26,12 @@ import rx.schedulers.Schedulers;
 public class RetrofitService {
     private static final long SIZE_OF_CACHE = 15 * 1024 * 1024;
 
+    /**
+     * Calls the API and subscribes on given observer
+     *
+     * @param observer Observer
+     * @param network True if access to network
+     */
     public void getFood(Observer<RuokaJsonObject> observer, boolean network) {
         Retrofit retrofit = createRetrofit(network);
         FoodApi foodApi = retrofit.create(FoodApi.class);
@@ -36,6 +42,12 @@ public class RetrofitService {
                 .subscribe(observer);
     }
 
+    /**
+     * Creates the Retrofit instance for use
+     *
+     * @param network True if access to network (use 3 days stale info)
+     * @return new Retrofit instance
+     */
     private Retrofit createRetrofit(boolean network) {
         Cache cache = new Cache(RuokaApplication.cacheDir, SIZE_OF_CACHE);
         OkHttpClient httpClient = new OkHttpClient();
@@ -59,23 +71,29 @@ public class RetrofitService {
                 .build();
     }
 
+    /**
+     * Cache interceptor for normal behavior i.e. network connection exists
+     */
     private static final Interceptor NORMAL_CACHE_INTERCEPTOR = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Response originalResponse = chain.proceed(chain.request());
             return originalResponse.newBuilder()
-                    // tbh I've no idea what those things do, I hope it works
-                    .header("Cache-Control", String.format("max-age=%d, only-if-cached, max-stale=%d", 5184000, 0)) // 60 days, TODO: tweak if needed
+                    // If cached data is
+                    .header("Cache-Control", String.format("max-age=%d, only-if-cached, max-stale=%d", 259200, 0)) // 3 days
                     .build();
         }
     };
 
+    /**
+     * Cache interceptor for non-network usage
+     */
     private static final Interceptor ONLY_CACHE_INTERCEPTOR = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Response originalResponse = chain.proceed(chain.request());
             return originalResponse.newBuilder()
-                    .header("Cache-Control", String.format("only-if-cached, max-stale=%d", 5184000)) // TODO: tweak if needed
+                    .header("Cache-Control", String.format("only-if-cached, max-age=%d", 2592000)) // 30 days max stale, for when network is nowhere to be found
                     .build();
         }
     };

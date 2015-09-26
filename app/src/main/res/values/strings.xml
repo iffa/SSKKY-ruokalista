@@ -39,6 +39,7 @@
     <string name="ratingTextHint">Kastike oli hyvää, perunat hieman raakoja</string>
     <string name="cancel">Peruuta</string>
     <string name="share_via">Jaa</string>
+    <string name="undefined">n/a</string>
     <string-array name="dialog_easter_items">
         <item>Dududu</item>
         <item>Pinkki-teema</item>

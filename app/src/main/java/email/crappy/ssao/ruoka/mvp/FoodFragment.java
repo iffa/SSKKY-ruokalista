@@ -2,13 +2,13 @@ package email.crappy.ssao.ruoka.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 import com.orhanobut.logger.Logger;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,32 +26,34 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.adapter.AllWeeksAdapter;
+import email.crappy.ssao.ruoka.adapter.SelectedWeekAdapter;
 import email.crappy.ssao.ruoka.event.EasterEggEvent;
 import email.crappy.ssao.ruoka.model.Item;
 import email.crappy.ssao.ruoka.model.Ruoka;
 import email.crappy.ssao.ruoka.mvp.fixed.MvpLceViewStateFragmentFixed;
-import email.crappy.ssao.ruoka.recycler.AllWeeksAdapter;
-import email.crappy.ssao.ruoka.recycler.RecyclerItemClickListener;
-import email.crappy.ssao.ruoka.recycler.SelectedWeekAdapter;
+import email.crappy.ssao.ruoka.ui.DividerItemDecoration;
 import email.crappy.ssao.ruoka.ui.activity.MainActivity;
 import email.crappy.ssao.ruoka.util.DateUtil;
 
 /**
- * TODO: Fix layout :D
- * TODO: Selected week card, other weeks also cards, but smaller? How to?
- *
  * @author Santeri 'iffa'
  */
-public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, List<Ruoka>, FoodView, FoodPresenter> implements FoodView, AdapterView.OnItemLongClickListener, RecyclerItemClickListener.OnItemClickListener {
+@SuppressWarnings("JavaDoc")
+public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, List<Ruoka>, FoodView, FoodPresenter> implements FoodView, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener, SlidingUpPanelLayout.PanelSlideListener {
     private List<Ruoka> data;
     SelectedWeekAdapter selectedWeekAdapter;
     AllWeeksAdapter allWeeksAdapter;
-    @Bind(R.id.list_current_food)
-    ListView foodListView;
-    @Bind(R.id.recycler_other_weeks)
-    RecyclerView weeksRecyclerView;
-    @Bind(R.id.card_current_header)
-    LinearLayout cardHeader;
+    @Bind(R.id.recycler_food_list)
+    RecyclerView foodRecyclerView;
+    //@Bind(R.id.grid_other_weeks)
+    //GridView weeksGridView;
+    //@Bind(R.id.card_current_header)
+    //LinearLayout cardHeader;
+    //@Bind(R.id.layout_panel)
+    //SlidingUpPanelLayout panelLayout;
+    //@Bind(R.id.panel_slide_text)
+    //TextSwitcher panelTextSwitcher;
 
     @NonNull
     @Override
@@ -73,7 +76,7 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_food, container, false);
+        return inflater.inflate(R.layout.fragment_food_experimental, container, false);
     }
 
     @Override
@@ -83,23 +86,35 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
 
         if (MainActivity.EASTER_PINK_THEME) { // Easter egg get! :D
             // TODO: (after initial release) MANLY versions of food icons for consistency!
-            cardHeader.setBackgroundResource(R.color.manly);
+            //cardHeader.setBackgroundResource(R.color.manly);
         }
+
+        //panelLayout.setPanelSlideListener(this);
 
         selectedWeekAdapter = new SelectedWeekAdapter(getActivity());
         allWeeksAdapter = new AllWeeksAdapter(getActivity());
 
-        foodListView.setAdapter(selectedWeekAdapter);
-        foodListView.setOnItemLongClickListener(this);
+        foodRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        foodRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        foodRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        foodRecyclerView.setAdapter(selectedWeekAdapter);
+        //foodRecyclerView.setOnItemLongClickListener(this);
 
-        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        weeksRecyclerView.setLayoutManager(gridLayoutManager);
-        weeksRecyclerView.setHasFixedSize(true);
-        weeksRecyclerView.setAdapter(allWeeksAdapter);
-        weeksRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), this));
+        /*
+        weeksGridView.setAdapter(allWeeksAdapter);
+        weeksGridView.setOnItemClickListener(this);
 
-        setListViewHeightBasedOnItems(foodListView); // Make room for grid
-        // TODO: RecyclerView dynamic height for sliding pane
+        TextView slideExpandTextView = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.view_text_panel_slide, null);
+        TextView slideCollapseTextView = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.view_text_panel_slide, null);
+        Animation in = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
+        Animation out = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_out_right);
+        panelTextSwitcher.setInAnimation(in);
+        panelTextSwitcher.setOutAnimation(out);
+        panelTextSwitcher.addView(slideExpandTextView);
+        panelTextSwitcher.addView(slideCollapseTextView);
+
+        setListViewHeightBasedOnItems(foodRecyclerView); // Make room for grid
+        */
     }
 
     @Override
@@ -167,13 +182,9 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
         return true;
     }
 
-    /**
-     * Called when a recycler item is clicked (other weeks)
-     * @param view
-     * @param position
-     */
+
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Logger.d("Other week item clicked, pos: " + position);
         String clicked = allWeeksAdapter.getItem(position);
 
@@ -184,6 +195,7 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
 
     /**
      * wrap_content of sorts for ListView
+     *
      * @param listView ListView to modify
      * @return true if height was set
      */
@@ -209,5 +221,32 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
             return true;
         }
         return false;
+    }
+
+    /* Sliding panel listener methods */
+
+    @Override
+    public void onPanelSlide(View panel, float slideOffset) {
+
+    }
+
+    @Override
+    public void onPanelCollapsed(View panel) {
+        //panelTextSwitcher.setText("Pyyhkäise ylös valitaksesi näytettävän viikon");
+    }
+
+    @Override
+    public void onPanelExpanded(View panel) {
+        //panelTextSwitcher.setText("Valitse haluamasi viikko, tai pyyhkäise alas");
+    }
+
+    @Override
+    public void onPanelAnchored(View panel) {
+
+    }
+
+    @Override
+    public void onPanelHidden(View panel) {
+
     }
 }

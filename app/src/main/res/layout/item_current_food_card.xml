@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_layout"
+    android:id="@+id/item_info_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="8dp"
@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
+            android:textSize="14sp"
             tools:text="ti" />
 
         <TextView
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
+            android:textSize="14sp"
             tools:text="7.4" />
 
     </LinearLayout>
@@ -41,6 +43,7 @@
         android:layout_toRightOf="@id/item_day_header"
         android:paddingLeft="18dp"
         android:text="Jokapojan kalapala, yrttikastike, perunat, salaatti\nporkkanapihvi"
+        android:textSize="14sp"
         android:textColor="@android:color/secondary_text_light" />
 
     <ImageView

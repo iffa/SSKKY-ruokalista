@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         setPinkTheme();
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        // Set the padding to match the Status Bar height
+        findViewById(R.id.toolbar).setPadding(0, getStatusBarHeight(), 0, 0);
 
         // Showing a fragment already, don't mess with it
         if (savedInstanceState == null) {
@@ -63,6 +65,15 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
                     .add(R.id.frame_fragment, new FoodFragment())
                     .commit();
         }
+    }
+
+    private int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 
     private void setPinkTheme() {
