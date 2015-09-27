@@ -28,6 +28,7 @@
     <string name="dialog_rating_negative">Peruuta</string>
     <string name="dialog_nofood_title">Ei ruokaa</string>
     <string name="dialog_nofood_message">Tänään ei ole ruokaa (onko nälkä?).</string>
+    <string name="dialog_nofood_sunday">Tänään ei ole ruokaa, mutta huomenna on!\n</string>
     <string name="toast_fill_radio">Et voi antaa tyhjää palautetta</string>
     <string name="dialog_rated_already_message">Olet jo antanut palautteesi tämän päivän ruoasta.</string>
     <string name="dialog_parse_error_message">Palautteen antamista ei voitu aloittaa. Käynnistä sovellus uudelleen ja yritä myöhemmin uudestaan.\n\nHuom: palautteen antaminen vaatii aktiivisen internet-yhteyden.</string>
