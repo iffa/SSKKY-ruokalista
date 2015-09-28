@@ -13,4 +13,10 @@
         <item name="colorPrimaryDark">@color/manly</item>
         <item name="colorAccent">@color/lessManly</item>
     </style>
+
+    <style name="AppThemeYolo" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/lessYolo</item>
+        <item name="colorPrimaryDark">@color/yolo</item>
+        <item name="colorAccent">@color/veryNotYolo</item>
+    </style>
 </resources>

@@ -11,4 +11,9 @@
     <color name="manly">#D416FA</color>
     <color name="lessManly">#D377E6</color>
     <color name="veryNotManly">#ECB5F7</color>
+
+    <color name="yolo">#91FF00</color>
+    <color name="lessYolo">#FF45DA</color>
+    <color name="veryNotYolo">#00F2FF</color>
+    <color name="transparentNotYolo">#9900F2FF</color>
 </resources>

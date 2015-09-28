@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     android:layout_marginTop="8dp"
+    android:background="#f9f9f9"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="2dp"
     card_view:cardPreventCornerOverlap="false"
@@ -34,7 +35,6 @@
             android:id="@+id/list_item1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="8dp">
 
@@ -88,7 +88,6 @@
             android:id="@+id/list_item2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="8dp">
 
@@ -142,7 +141,6 @@
             android:id="@+id/list_item3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="8dp">
 
@@ -196,7 +194,6 @@
             android:id="@+id/list_item4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="8dp">
 
@@ -250,7 +247,6 @@
             android:id="@+id/list_item5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="8dp">
 

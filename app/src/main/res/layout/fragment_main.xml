@@ -4,15 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:contentDescription="@string/undefined"
+        android:id="@+id/bg_easter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_ayy_tile"
+        android:visibility="invisible" />
+
     <include layout="@layout/view_loading" />
 
     <include layout="@layout/view_error" />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_current_food"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
         android:dividerHeight="-1dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"

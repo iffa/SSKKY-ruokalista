@@ -18,10 +18,11 @@ package email.crappy.ssao.ruoka.mvp.fixed;
 
 import android.os.Bundle;
 import android.view.View;
+
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
-import com.hannesdorfmann.mosby.mvp.delegate.FragmentMvpViewStateDelegateImpl;
-import com.hannesdorfmann.mosby.mvp.delegate.FragmentMvpDelegate;
 import com.hannesdorfmann.mosby.mvp.delegate.BaseMvpViewStateDelegateCallback;
+import com.hannesdorfmann.mosby.mvp.delegate.FragmentMvpDelegate;
+import com.hannesdorfmann.mosby.mvp.delegate.FragmentMvpViewStateDelegateImpl;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceFragment;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
@@ -54,7 +55,8 @@ public abstract class MvpLceViewStateFragmentFixed<CV extends View, M, V extends
      */
     public abstract LceViewState<M, V> createViewState();
 
-    @Override protected FragmentMvpDelegate<V, P> getMvpDelegate() {
+    @Override
+    protected FragmentMvpDelegate<V, P> getMvpDelegate() {
         if (mvpDelegate == null) {
             mvpDelegate = new FragmentMvpViewStateDelegateImpl<V, P>(this);
         }
@@ -62,45 +64,55 @@ public abstract class MvpLceViewStateFragmentFixed<CV extends View, M, V extends
         return mvpDelegate;
     }
 
-    @Override public ViewState getViewState() {
+    @Override
+    public ViewState getViewState() {
         return viewState;
     }
 
-    @Override public void setViewState(ViewState<V> viewState) {
+    @Override
+    public void setViewState(ViewState<V> viewState) {
         this.viewState = (LceViewState<M, V>) viewState;
     }
 
-    @Override public void showContent() {
+    @Override
+    public void showContent() {
         super.showContent();
         viewState.setStateShowContent(getData());
     }
 
-    @Override public void showError(Throwable e, boolean pullToRefresh) {
+    @Override
+    public void showError(Throwable e, boolean pullToRefresh) {
         viewState.setStateShowError(e, pullToRefresh);
     }
 
-    @Override public void showLoading(boolean pullToRefresh) {
+    @Override
+    public void showLoading(boolean pullToRefresh) {
         super.showLoading(pullToRefresh);
         viewState.setStateShowLoading(pullToRefresh);
     }
 
-    @Override public void setRestoringViewState(boolean restoringViewState) {
+    @Override
+    public void setRestoringViewState(boolean restoringViewState) {
         this.restoringViewState = restoringViewState;
     }
 
-    @Override public boolean isRestoringViewState() {
+    @Override
+    public boolean isRestoringViewState() {
         return restoringViewState;
     }
 
-    @Override public void onViewStateInstanceRestored(boolean instanceStateRetained) {
+    @Override
+    public void onViewStateInstanceRestored(boolean instanceStateRetained) {
         // Not needed in general. override it in subclass if you need this callback
     }
 
-    @Override public void onNewViewStateInstance() {
+    @Override
+    public void onNewViewStateInstance() {
         loadData(false);
     }
 
-    @Override protected void showLightError(String msg) {
+    @Override
+    protected void showLightError(String msg) {
         if (isRestoringViewState()) {
             return; // Do not display toast again while restoring viewstate
         }

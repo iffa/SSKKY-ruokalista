@@ -30,7 +30,7 @@ public class RetrofitService {
      * Calls the API and subscribes on given observer
      *
      * @param observer Observer
-     * @param network True if access to network
+     * @param network  True if access to network
      */
     public void getFood(Observer<RuokaJsonObject> observer, boolean network) {
         Retrofit retrofit = createRetrofit(network);

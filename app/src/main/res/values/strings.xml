@@ -12,7 +12,7 @@
     <string name="error">Virhe</string>
     <string name="dialog_today_title">Tänään ruokana</string>
     <string name="welcome_tooltip">Tänään ruokana</string>
-    <string name="action_donate">Tue kehittäjää</string>
+    <string name="action_donate">Lahjoita</string>
     <string name="action_licenses">Kirjastojen lisenssit</string>
     <string name="dialog_licenses_title">Kirjastojen lisenssit</string>
     <string name="dialog_licenses_message">Sovelluksen kehityksen mahdollistivat nämä mahtavat avoimen lähdekoodin kirjastot:</string>
@@ -28,7 +28,7 @@
     <string name="dialog_rating_negative">Peruuta</string>
     <string name="dialog_nofood_title">Ei ruokaa</string>
     <string name="dialog_nofood_message">Tänään ei ole ruokaa (onko nälkä?).</string>
-    <string name="dialog_nofood_sunday">Tänään ei ole ruokaa, mutta huomenna on!\n</string>
+    <string name="dialog_nofood_sunday">Tänään ei ole ruokaa, mutta huomenna on</string>
     <string name="toast_fill_radio">Et voi antaa tyhjää palautetta</string>
     <string name="dialog_rated_already_message">Olet jo antanut palautteesi tämän päivän ruoasta.</string>
     <string name="dialog_parse_error_message">Palautteen antamista ei voitu aloittaa. Käynnistä sovellus uudelleen ja yritä myöhemmin uudestaan.\n\nHuom: palautteen antaminen vaatii aktiivisen internet-yhteyden.</string>
@@ -41,6 +41,18 @@
     <string name="cancel">Peruuta</string>
     <string name="share_via">Jaa</string>
     <string name="undefined">n/a</string>
+    <string name="settings_general">Yleiset</string>
+    <string name="settings_about_summary">Mikä ihmeen SSKKY-ruokalista?</string>
+    <string name="settings_licenses_summary">Tietoja sovelluksessa käytetyistä kirjastoista</string>
+    <string name="settings_notifications">Ilmoita päivän ruoasta</string>
+    <string name="settings_theme">Sovelluksen teema</string>
+    <string name="settings_github">GitHub</string>
+    <string name="settings_github_summary">Selaa sovelluksen lähdekoodia</string>
+    <string name="settings_other">Muuta</string>
+    <string name="settings_donate_summary">Lahjoita limsarahaa kehittäjälle</string>
+    <string name="settings_theme_summary">Teeman vaihtaminen vaatii sovelluksen uudelleenkäynnistämisen</string>
+    <string name="easter_get">ayy lmao GET!</string>
+    <string name="easter_one_more">JUST DO IT!</string>
     <string-array name="dialog_easter_items">
         <item>Dududu</item>
         <item>Pinkki-teema</item>
@@ -55,5 +67,13 @@
         <item>thank you very much.</item>
         <item>...</item>
         <item>also: this list up to date</item>
+    </string-array>
+    <string-array name="settings_themes">
+        <item>Oletus (koulun värit)</item>
+        <item>Pinkki</item>
+    </string-array>
+    <string-array name="settings_themes_values">
+        <item>1</item>
+        <item>2</item>
     </string-array>
 </resources>

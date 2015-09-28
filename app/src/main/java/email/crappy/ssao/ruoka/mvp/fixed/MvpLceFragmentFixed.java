@@ -22,6 +22,7 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
+
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.R;
@@ -40,14 +41,14 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
  * </ul>
  *
  * @param <CV> The type of the content view with the id = R.id.contentView. Can be any kind of
- * android view widget like ListView, RecyclerView, ScrollView or a simple layout like Framelayout
- * etc. (everything that extends from android.view.View)
- * @param <M> The underlying data model that will be displayed with this view
- * @param <V> The View interface that must be implemented by this view. You can use {@link
- * MvpLceView}, but if you want to add more methods you have to provide your own view interface
- * that
- * extends from {@link MvpLceView}
- * @param <P> The type of the Presenter. Must extend from {@link MvpPresenter}
+ *             android view widget like ListView, RecyclerView, ScrollView or a simple layout like Framelayout
+ *             etc. (everything that extends from android.view.View)
+ * @param <M>  The underlying data model that will be displayed with this view
+ * @param <V>  The View interface that must be implemented by this view. You can use {@link
+ *             MvpLceView}, but if you want to add more methods you have to provide your own view interface
+ *             that
+ *             extends from {@link MvpLceView}
+ * @param <P>  The type of the Presenter. Must extend from {@link MvpPresenter}
  * @author Hannes Dorfmann
  * @author Santeri Elo
  * @since 1.0.0
@@ -60,7 +61,9 @@ public abstract class MvpLceFragmentFixed<CV extends View, M, V extends MvpLceVi
     protected View errorView;
 
     @SuppressLint("WrongViewCast")
-    @CallSuper @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    @CallSuper
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         loadingView = view.findViewById(R.id.loadingView);
@@ -88,13 +91,15 @@ public abstract class MvpLceFragmentFixed<CV extends View, M, V extends MvpLceVi
         }
 
         errorView.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 onErrorViewClicked();
             }
         });
     }
 
-    @Override public void showLoading(boolean pullToRefresh) {
+    @Override
+    public void showLoading(boolean pullToRefresh) {
 
         if (!pullToRefresh) {
             animateLoadingViewIn();
@@ -110,7 +115,8 @@ public abstract class MvpLceFragmentFixed<CV extends View, M, V extends MvpLceVi
         LceAnimatorFixed.showLoading(loadingView, contentView, errorView);
     }
 
-    @Override public void showContent() {
+    @Override
+    public void showContent() {
         animateContentViewIn();
     }
 
@@ -155,7 +161,8 @@ public abstract class MvpLceFragmentFixed<CV extends View, M, V extends MvpLceVi
         LceAnimatorFixed.showErrorView(loadingView, contentView, errorView);
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         loadingView = null;
         contentView = null;

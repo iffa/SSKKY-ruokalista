@@ -5,18 +5,21 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import com.orhanobut.logger.Logger;
 
+import email.crappy.ssao.ruoka.MainActivity;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.model.Item;
 import email.crappy.ssao.ruoka.model.Ruoka;
 import email.crappy.ssao.ruoka.model.RuokaJsonObject;
-import email.crappy.ssao.ruoka.ui.activity.MainActivity;
+import email.crappy.ssao.ruoka.settings.SettingsActivity;
 import email.crappy.ssao.ruoka.util.DateUtil;
 import email.crappy.ssao.ruoka.util.RetrofitService;
 import rx.Observer;
@@ -27,9 +30,16 @@ import rx.Observer;
 public class NotificationService extends Service implements Observer<RuokaJsonObject> {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Logger.d("NotificationService has been summoned");
+        Logger.d("NotificationService has been summoned, checking preferences");
 
-        new RetrofitService().getFood(this, false);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean enabled = sharedPref.getBoolean(SettingsActivity.KEY_NOTIFICATIONS_ENABLED, true);
+        if (enabled) {
+            Logger.d("Notifications are good to go, call FoodApi");
+            new RetrofitService().getFood(this, false);
+        } else {
+            Logger.d("Notifications are disabled by user");
+        }
 
         return START_NOT_STICKY;
     }
@@ -75,8 +85,7 @@ public class NotificationService extends Service implements Observer<RuokaJsonOb
 
     @Override
     public void onError(Throwable e) {
-        // Fail silently
-        Logger.d("FoodApi call failed for notification, not showing anything");
+        Logger.d("FoodApi call failed, not showing notification");
     }
 
     @Override

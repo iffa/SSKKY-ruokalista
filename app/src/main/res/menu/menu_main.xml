@@ -1,15 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="email.crappy.ssao.ruoka.ui.activity.MainActivity">
-    <item android:id="@+id/action_today" android:icon="@drawable/ic_action_action_query_builder" android:title="@string/action_today"
-        android:orderInCategory="100" app:showAsAction="always" />
-    <item android:id="@+id/action_rate" android:icon="@drawable/ic_action_action_thumbs_up_down" android:title="@string/rating_title"
-        android:orderInCategory="150" app:showAsAction="always" />
-    <item android:id="@+id/action_about" android:icon="@drawable/ic_action_action_info_outline" android:title="@string/action_about"
-        android:orderInCategory="200" app:showAsAction="ifRoom" />
-    <item android:id="@+id/action_donate" android:title="@string/action_donate"
-        android:orderInCategory="300" app:showAsAction="never" />
-    <item android:id="@+id/action_licenses" android:title="@string/action_licenses"
-        android:orderInCategory="400" app:showAsAction="never" />
+    tools:context="email.crappy.ssao.ruoka.MainActivity">
+    <item
+        android:id="@+id/action_today"
+        android:icon="@drawable/ic_action_action_query_builder"
+        android:orderInCategory="100"
+        android:title="@string/action_today"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_rate"
+        android:icon="@drawable/ic_action_action_thumbs_up_down"
+        android:orderInCategory="150"
+        android:title="@string/rating_title"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="300"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 </menu>

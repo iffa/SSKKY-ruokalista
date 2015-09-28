@@ -24,7 +24,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.TextView;
 
 /**
  * Little helper class for animating content, error and loading view
@@ -66,12 +65,14 @@ public class LceAnimatorFixed {
 
         set.addListener(new AnimatorListenerAdapter() {
 
-            @Override public void onAnimationStart(Animator animation) {
+            @Override
+            public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
                 errorView.setVisibility(View.VISIBLE);
             }
 
-            @Override public void onAnimationEnd(Animator animation) {
+            @Override
+            public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 loadingView.setVisibility(View.GONE);
                 loadingView.setAlpha(1f); // For future showLoading calls
@@ -111,13 +112,15 @@ public class LceAnimatorFixed {
 
             set.addListener(new AnimatorListenerAdapter() {
 
-                @Override public void onAnimationStart(Animator animation) {
+                @Override
+                public void onAnimationStart(Animator animation) {
                     contentView.setTranslationY(0);
                     loadingView.setTranslationY(0);
                     contentView.setVisibility(View.VISIBLE);
                 }
 
-                @Override public void onAnimationEnd(Animator animation) {
+                @Override
+                public void onAnimationEnd(Animator animation) {
                     loadingView.setVisibility(View.GONE);
                     loadingView.setAlpha(1f); // For future showLoading calls
                     contentView.setTranslationY(0);

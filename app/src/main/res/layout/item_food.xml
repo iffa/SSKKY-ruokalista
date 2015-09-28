@@ -3,8 +3,7 @@
     android:id="@+id/item_list_food"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"

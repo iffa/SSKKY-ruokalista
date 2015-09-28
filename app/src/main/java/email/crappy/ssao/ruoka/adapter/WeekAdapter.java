@@ -1,6 +1,7 @@
 package email.crappy.ssao.ruoka.adapter;
 
 import android.graphics.Typeface;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Random;
 
+import email.crappy.ssao.ruoka.MainActivity;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.model.Item;
 import email.crappy.ssao.ruoka.model.Ruoka;
@@ -34,8 +37,7 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
     @Override
     public WeekAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_week, parent, false);
-        ViewHolder vh = new ViewHolder(view);
-        return vh;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -46,9 +48,13 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
         vh.title.setText(ruoka.getTitle());
         String week = ruoka.getTitle().split("\\s+")[1];
         if (DateUtil.isCurrentWeek(week)) {
-            vh.title.setTypeface(null,  Typeface.BOLD);
+            vh.title.setTypeface(null, Typeface.BOLD);
         } else {
-            vh.title.setTypeface(null,  Typeface.NORMAL);
+            vh.title.setTypeface(null, Typeface.NORMAL);
+        }
+
+        if (MainActivity.EASTER_YOLO) {
+            vh.title.setText(vh.title.getText() + " ( ͡o ͜ʖ ͡o)");
         }
 
         for (Item item : items) {
@@ -71,17 +77,44 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
                 vh.getMainFood(pos).setTypeface(null, Typeface.NORMAL);
             }
 
-            if (item.getKama().toLowerCase().contains("keitto")) {
-                vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_spoon));
-            } else if (item.getKama().toLowerCase().contains("pasta")) {
-                vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_pasta));
-            } else if ((item.getKama().toLowerCase().contains("kala") && !item.getKama().toLowerCase().contains("kreikkalainen")) || item.getKama().toLowerCase().contains("lohi")) {
-                vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_fish));
-            } else if (item.getKama().toLowerCase().contains("broiler")) {
-                vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_chicken));
-            } else if (item.getKama().toLowerCase().contains("pihvi")) {
-                vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_steak));
+            if (MainActivity.EASTER_YOLO) {
+                Random r = new Random();
+                int random = r.nextInt(4);
+                switch(random) {
+                    case 0:
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_okay));
+                        break;
+                    case 1:
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_snoop));
+                        break;
+                    case 2:
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_triforce));
+                        break;
+                    case 3:
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_dank));
+                        break;
+                }
+
+            } else {
+                if (item.getKama().toLowerCase().contains("keitto")) {
+                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_spoon));
+                } else if (item.getKama().toLowerCase().contains("pasta")) {
+                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_pasta));
+                } else if ((item.getKama().toLowerCase().contains("kala") && !item.getKama().toLowerCase().contains("kreikkalainen")) || item.getKama().toLowerCase().contains("lohi")) {
+                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_fish));
+                } else if (item.getKama().toLowerCase().contains("broiler")) {
+                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_chicken));
+                } else if (item.getKama().toLowerCase().contains("pihvi")) {
+                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_steak));
+                } else {
+                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_cutlery));
+                }
             }
+
+            if (MainActivity.EASTER_YOLO) {
+                vh.mainLayout.setBackgroundResource(R.color.transparentNotYolo);
+            }
+
         }
     }
 
@@ -92,7 +125,7 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
-        LinearLayout cardLayout;
+        CardView mainLayout;
 
         TextView date1;
         TextView mainFood1;
@@ -123,7 +156,7 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.card_header_title);
-            cardLayout = (LinearLayout) itemView.findViewById(R.id.layout_card);
+            mainLayout = (CardView) itemView.findViewById(R.id.item_info_layout);
 
             date1 = (TextView) itemView.findViewById(R.id.item_date1);
             date2 = (TextView) itemView.findViewById(R.id.item_date2);

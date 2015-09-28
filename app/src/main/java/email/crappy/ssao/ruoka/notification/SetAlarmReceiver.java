@@ -24,8 +24,6 @@ public class SetAlarmReceiver extends BroadcastReceiver {
             return;
         }
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED") || intent.getAction().equals(RuokaApplication.ACTION_SET_ALARM)) {
-            Logger.d("SetAlarmReceiver called: " + intent.getAction());
-
             AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
             // Not going to mess with an existing alarm
@@ -50,7 +48,7 @@ public class SetAlarmReceiver extends BroadcastReceiver {
 
             // Avoid triggering alarm unintentionally
             if (calendar.get(Calendar.HOUR_OF_DAY) > 10) {
-                Logger.d("Added a day to the alarm time to avoid weird stuff");
+                Logger.d("Added a day to the alarm time to avoid notification firing at incorrect times");
                 calendar.add(Calendar.DATE, 1);
             }
 

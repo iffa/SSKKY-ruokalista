@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/settings_general">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="settings_notifications"
+            android:title="@string/settings_notifications" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/settings_themes"
+            android:entryValues="@array/settings_themes_values"
+            android:key="settings_theme"
+            android:summary="@string/settings_theme_summary"
+            android:title="@string/settings_theme" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_other">
+        <Preference
+            android:key="settings_about"
+            android:summary="@string/settings_about_summary"
+            android:title="@string/action_about" />
+        <Preference
+            android:key="settings_donate"
+            android:summary="@string/settings_donate_summary"
+            android:title="@string/action_donate" />
+        <Preference
+            android:key="settings_licenses"
+            android:summary="@string/settings_licenses_summary"
+            android:title="@string/action_licenses" />
+        <Preference
+            android:key="settings_github"
+            android:summary="@string/settings_github_summary"
+            android:title="@string/settings_github">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://github.com/iffa/SSKKY-ruokalista" />
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>
