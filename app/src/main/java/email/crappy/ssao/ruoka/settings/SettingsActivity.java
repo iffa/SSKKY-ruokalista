@@ -24,6 +24,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Sha
     public static final String KEY_NOTIFICATIONS_ENABLED = "settings_notifications";
     public static final String KEY_THEME = "settings_theme";
     public static final String KEY_ABOUT = "settings_about";
+    private boolean easterTheme = false;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     int easter = 1;
@@ -54,6 +55,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Sha
                 return false;
             }
         });
+
+        if (easterTheme) {
+            findViewById(R.id.bg_easter).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -92,7 +97,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Sha
                     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                     window.setStatusBarColor(getResources().getColor(R.color.yolo));
                 }
-                findViewById(R.id.bg_easter).setVisibility(View.VISIBLE);
+                easterTheme = true;
                 break;
         }
     }
