@@ -47,8 +47,6 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
     WeekAdapter adapter;
     @Bind(R.id.list_current_food)
     RecyclerView foodListView;
-    @Bind(R.id.bg_easter)
-    ImageView easterBackground;
 
     @NonNull
     @Override
@@ -92,7 +90,7 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
         ButterKnife.bind(this, view);
 
         if (MainActivity.EASTER_YOLO) {
-            easterBackground.setVisibility(View.VISIBLE);
+            foodListView.setBackgroundResource(R.drawable.bg_ayy_tile);
         }
 
         adapter = new WeekAdapter();
