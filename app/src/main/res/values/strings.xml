@@ -42,7 +42,7 @@
     <string name="share_via">Jaa</string>
     <string name="undefined">n/a</string>
     <string name="settings_general">Yleiset</string>
-    <string name="settings_about_summary">Mikä ihmeen SSKKY-ruokalista?</string>
+    <string name="settings_about_summary">Se helpompi tapa katsoa mitä on ruokana. Ruokalista kulkee sovelluksen ansiosta aina mukana, eikä tarvitse nähdä vaivaa PDF-tiedoston lataamiseen tai ruokalan luona käymiseen.</string>
     <string name="settings_licenses_summary">Tietoja sovelluksessa käytetyistä kirjastoista</string>
     <string name="settings_notifications">Ilmoita päivän ruoasta</string>
     <string name="settings_theme">Sovelluksen teema</string>
@@ -50,9 +50,14 @@
     <string name="settings_github_summary">Selaa sovelluksen lähdekoodia</string>
     <string name="settings_other">Muuta</string>
     <string name="settings_donate_summary">Lahjoita limsarahaa kehittäjälle</string>
-    <string name="settings_theme_summary">Teeman vaihtaminen vaatii sovelluksen uudelleenkäynnistämisen</string>
-    <string name="easter_get">ayy lmao GET!</string>
-    <string name="easter_one_more">JUST DO IT!</string>
+    <string name="settings_theme_summary">Koska vaihtelu virkistää, vähän niin kuin kylmä Jaffa</string>
+    <string name="easter_one_more">Just do it! Pari kertaa vielä! ;)</string>
+    <string name="settings_debug_summary">Ottaa käyttöön kehittäjälle tarkoitettuja ominaisuuksia, kuten testausruokalistan. Älä laita tätä ominaisuutta päälle, ellet tiedä mitä olet tekemässä!</string>
+    <string name="settings_debug">Debug-tila</string>
+    <string name="settings_debug_warning">Toivottavasti tiedät mitä olet tekemässä. :)</string>
+    <string name="settings_donate_thanks">Kiitos lahjoituksestasi!</string>
+    <string name="settings_credits_summary">Sovelluksen kehittänyt Santeri Elo (me@santeri.xyz)\n\nErityiskiitokset alkuperäiselle ICT14A-luokalle, kaikille Internet-muukalaisille ja Teho-tölkeille ketkä olivat mukana sovelluksen kehittämisessä ja mahdollistivat tämän kaiken. Never forget ❤!\n\nööö joo :3 © Matias Tieranta</string>
+    <string name="settings_credits">Tekijä ja kunniamaininnat</string>
     <string-array name="dialog_easter_items">
         <item>Dududu</item>
         <item>Pinkki-teema</item>

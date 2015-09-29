@@ -32,14 +32,22 @@ public class RetrofitService {
      * @param observer Observer
      * @param network  True if access to network
      */
-    public void getFood(Observer<RuokaJsonObject> observer, boolean network) {
+    public void getFood(Observer<RuokaJsonObject> observer, boolean network, boolean debug) {
         Retrofit retrofit = createRetrofit(network);
         FoodApi foodApi = retrofit.create(FoodApi.class);
 
-        foodApi.getFood()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+        if (debug) {
+            foodApi.getFoodDebug()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
+        } else {
+            foodApi.getFood()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
+        }
+
     }
 
     /**

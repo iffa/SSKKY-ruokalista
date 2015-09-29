@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.adapter;
+package email.crappy.ssao.ruoka.recycler;
 
 import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
@@ -53,8 +53,71 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
             vh.title.setTypeface(null, Typeface.NORMAL);
         }
 
-        if (MainActivity.EASTER_YOLO) {
-            vh.title.setText(vh.title.getText() + " ( ͡o ͜ʖ ͡o)");
+        int itemsToHide = 5 - items.size();
+        switch (itemsToHide) {
+            case 0:
+                vh.item1.setVisibility(View.VISIBLE);
+                vh.item2.setVisibility(View.VISIBLE);
+                vh.item3.setVisibility(View.VISIBLE);
+                vh.item4.setVisibility(View.VISIBLE);
+                vh.item5.setVisibility(View.VISIBLE);
+
+                vh.divider1.setVisibility(View.VISIBLE);
+                vh.divider2.setVisibility(View.VISIBLE);
+                vh.divider3.setVisibility(View.VISIBLE);
+                vh.divider4.setVisibility(View.VISIBLE);
+                break;
+            case 1:
+                vh.item1.setVisibility(View.VISIBLE);
+                vh.item2.setVisibility(View.VISIBLE);
+                vh.item3.setVisibility(View.VISIBLE);
+                vh.item4.setVisibility(View.VISIBLE);
+                vh.item5.setVisibility(View.GONE);
+
+                vh.divider1.setVisibility(View.VISIBLE);
+                vh.divider2.setVisibility(View.VISIBLE);
+                vh.divider3.setVisibility(View.VISIBLE);
+                vh.divider4.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                vh.item1.setVisibility(View.VISIBLE);
+                vh.item2.setVisibility(View.VISIBLE);
+                vh.item3.setVisibility(View.VISIBLE);
+                vh.item4.setVisibility(View.GONE);
+                vh.item5.setVisibility(View.GONE);
+
+                vh.divider1.setVisibility(View.VISIBLE);
+                vh.divider2.setVisibility(View.VISIBLE);
+                vh.divider3.setVisibility(View.VISIBLE);
+                vh.divider4.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                vh.item1.setVisibility(View.VISIBLE);
+                vh.item2.setVisibility(View.VISIBLE);
+                vh.item3.setVisibility(View.GONE);
+                vh.item4.setVisibility(View.GONE);
+                vh.item5.setVisibility(View.GONE);
+
+                vh.divider1.setVisibility(View.VISIBLE);
+                vh.divider2.setVisibility(View.GONE);
+                vh.divider3.setVisibility(View.GONE);
+                vh.divider4.setVisibility(View.GONE);
+                break;
+            case 4:
+                vh.item1.setVisibility(View.VISIBLE);
+                vh.item2.setVisibility(View.GONE);
+                vh.item3.setVisibility(View.GONE);
+                vh.item4.setVisibility(View.GONE);
+                vh.item5.setVisibility(View.GONE);
+
+                vh.divider1.setVisibility(View.GONE);
+                vh.divider2.setVisibility(View.GONE);
+                vh.divider3.setVisibility(View.GONE);
+                vh.divider4.setVisibility(View.GONE);
+                break;
+            case 5:
+                // I hope this won't happen, so no implementation
+                break;
         }
 
         for (Item item : items) {
@@ -80,7 +143,7 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
             if (MainActivity.EASTER_YOLO) {
                 Random r = new Random();
                 int random = r.nextInt(4);
-                switch(random) {
+                switch (random) {
                     case 0:
                         vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_okay));
                         break;
@@ -97,24 +160,53 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
 
             } else {
                 if (item.getKama().toLowerCase().contains("keitto")) {
-                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_spoon));
+                    if (MainActivity.EASTER_PINK_THEME) {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_spoon_pink));
+                    } else {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_spoon));
+                    }
                 } else if (item.getKama().toLowerCase().contains("pasta")) {
-                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_pasta));
+                    if (MainActivity.EASTER_PINK_THEME) {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_pasta_pink));
+                    } else {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_pasta));
+                    }
                 } else if ((item.getKama().toLowerCase().contains("kala") && !item.getKama().toLowerCase().contains("kreikkalainen")) || item.getKama().toLowerCase().contains("lohi")) {
-                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_fish));
+                    if (MainActivity.EASTER_PINK_THEME) {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_fish_pink));
+                    } else {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_fish));
+                    }
                 } else if (item.getKama().toLowerCase().contains("broiler")) {
-                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_chicken));
+                    if (MainActivity.EASTER_PINK_THEME) {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_chicken_pink));
+                    } else {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_chicken));
+                    }
                 } else if (item.getKama().toLowerCase().contains("pihvi")) {
-                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_steak));
+                    if (MainActivity.EASTER_PINK_THEME) {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_steak_pink));
+                    } else {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_steak));
+                    }
+                } else if (item.getKama().toLowerCase().contains("pata")) {
+                    if (MainActivity.EASTER_PINK_THEME) {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_pot_pink));
+                    } else {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_pot));
+                    }
                 } else {
-                    vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_cutlery));
+                    if (MainActivity.EASTER_PINK_THEME) {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_cutlery_pink));
+                    } else {
+                        vh.getFoodType(pos).setImageDrawable(vh.itemView.getResources().getDrawable(R.drawable.ic_cutlery));
+                    }
                 }
             }
 
             if (MainActivity.EASTER_YOLO) {
                 vh.mainLayout.setBackgroundResource(R.color.transparentNotYolo);
             }
-
         }
     }
 
@@ -126,6 +218,17 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         CardView mainLayout;
+
+        LinearLayout item1;
+        LinearLayout item2;
+        LinearLayout item3;
+        LinearLayout item4;
+        LinearLayout item5;
+
+        View divider1;
+        View divider2;
+        View divider3;
+        View divider4;
 
         TextView date1;
         TextView mainFood1;
@@ -158,6 +261,17 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
             title = (TextView) itemView.findViewById(R.id.card_header_title);
             mainLayout = (CardView) itemView.findViewById(R.id.item_info_layout);
 
+            item1 = (LinearLayout) itemView.findViewById(R.id.list_item1);
+            item2 = (LinearLayout) itemView.findViewById(R.id.list_item2);
+            item3 = (LinearLayout) itemView.findViewById(R.id.list_item3);
+            item4 = (LinearLayout) itemView.findViewById(R.id.list_item4);
+            item5 = (LinearLayout) itemView.findViewById(R.id.list_item5);
+
+            divider1 = itemView.findViewById(R.id.list_divider1);
+            divider2 = itemView.findViewById(R.id.list_divider2);
+            divider3 = itemView.findViewById(R.id.list_divider3);
+            divider4 = itemView.findViewById(R.id.list_divider4);
+
             date1 = (TextView) itemView.findViewById(R.id.item_date1);
             date2 = (TextView) itemView.findViewById(R.id.item_date2);
             date3 = (TextView) itemView.findViewById(R.id.item_date3);
@@ -182,6 +296,8 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
             foodType4 = (ImageView) itemView.findViewById(R.id.item_food_type4);
             foodType5 = (ImageView) itemView.findViewById(R.id.item_food_type5);
         }
+
+        /* Ugly workaround to make this work */
 
         public TextView getDate(int pos) {
             switch (pos) {
@@ -247,4 +363,6 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
             return null;
         }
     }
+
+
 }

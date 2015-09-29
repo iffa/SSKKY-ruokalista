@@ -1,27 +1,38 @@
 package email.crappy.ssao.ruoka.settings;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import email.crappy.ssao.ruoka.MainActivity;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.RuokaApplication;
 
 /**
  * @author Santeri Elo
  */
-public class SettingsActivity extends AppCompatPreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsActivity extends AppCompatPreferenceActivity implements BillingProcessor.IBillingHandler, SharedPreferences.OnSharedPreferenceChangeListener {
+    private BillingProcessor bp;
     public static final String KEY_NOTIFICATIONS_ENABLED = "settings_notifications";
+    public static final String KEY_DEBUG = "settings_debug";
     public static final String KEY_THEME = "settings_theme";
     public static final String KEY_ABOUT = "settings_about";
     private boolean easterTheme = false;
@@ -32,25 +43,40 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Sha
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initializing billing
+        bp = new BillingProcessor(this, RuokaApplication.BILLING_KEY, this);
+
+        // Initializing content
         setTheme();
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).registerOnSharedPreferenceChangeListener(this);
         addPreferencesFromResource(R.xml.settings);
         findPreference(KEY_ABOUT).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @SuppressLint("CommitPrefEdits")
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                if (easter < 5) {
-                    if (easter == 4) {
+                if (easter < 10) {
+                    if (easter == 5) {
                         Snackbar.make(findViewById(R.id.contentView), R.string.easter_one_more, Snackbar.LENGTH_SHORT).show();
                     }
                     easter++;
                 } else {
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     sp.edit().putString(KEY_THEME, "3").commit();
-                    Snackbar.make(findViewById(R.id.contentView), R.string.easter_get, Snackbar.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
+        findPreference(KEY_DEBUG).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                if (((CheckBoxPreference) preference).isChecked()) {
+                    Snackbar.make(findViewById(R.id.contentView), R.string.settings_debug_warning, Snackbar.LENGTH_LONG).show();
                 }
                 return false;
             }
@@ -64,16 +90,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Sha
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
     }
 
     private void setTheme() {
@@ -102,5 +123,48 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Sha
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        if (bp != null) {
+            bp.release();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!bp.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onProductPurchased(String s, TransactionDetails transactionDetails) {
+        Snackbar.make(findViewById(R.id.contentView), R.string.settings_donate_thanks, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {
+
+    }
+
+    @Override
+    public void onBillingError(int i, Throwable throwable) {
+
+    }
+
+    @Override
+    public void onBillingInitialized() {
+
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(KEY_THEME)) {
+            TaskStackBuilder.create(this)
+                    .addNextIntent(new Intent(this, MainActivity.class))
+                    .addNextIntent(this.getIntent())
+                    .startActivities();
+        }
+    }
 }
 

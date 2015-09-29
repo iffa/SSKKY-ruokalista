@@ -36,7 +36,7 @@ public class NotificationService extends Service implements Observer<RuokaJsonOb
         boolean enabled = sharedPref.getBoolean(SettingsActivity.KEY_NOTIFICATIONS_ENABLED, true);
         if (enabled) {
             Logger.d("Notifications are good to go, call FoodApi");
-            new RetrofitService().getFood(this, false);
+            new RetrofitService().getFood(this, false, sharedPref.getBoolean(SettingsActivity.KEY_DEBUG, false));
         } else {
             Logger.d("Notifications are disabled by user");
         }

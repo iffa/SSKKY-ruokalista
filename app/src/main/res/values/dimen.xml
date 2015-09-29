@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="card_default_radius">4dp</dimen>
-    <dimen name="card_background_default_radius">4dp</dimen>
-    <dimen name="card_shadow_height">6dp</dimen>
-    <dimen name="fab_compat_margin">0dp</dimen>
-</resources>

@@ -12,8 +12,6 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
 import com.parse.ParseAnalytics;
 
 import de.greenrobot.event.EventBus;
@@ -24,8 +22,7 @@ import email.crappy.ssao.ruoka.settings.SettingsActivity;
 /**
  * @author Santeri 'iffa'
  */
-public class MainActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
-    private BillingProcessor bp;
+public class MainActivity extends AppCompatActivity {
     public static boolean EASTER_PINK_THEME = false;
     public static boolean EASTER_YOLO = false;
 
@@ -33,8 +30,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initializing billing & Parse
-        bp = new BillingProcessor(this, RuokaApplication.BILLING_KEY, this);
+        // Initializing Parse
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
         // Initialize content & theme
@@ -52,9 +48,12 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
     private void setTheme() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        
         int theme = Integer.parseInt(sp.getString(SettingsActivity.KEY_THEME, "1"));
         switch (theme) {
             case 1:
+                EASTER_PINK_THEME = false;
+                EASTER_YOLO = false;
                 break;
             case 2:
                 setTheme(R.style.AppThemeManly);
@@ -88,14 +87,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     }
 
     @Override
-    protected void onDestroy() {
-        if (bp != null) {
-            bp.release();
-        }
-        super.onDestroy();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -119,33 +110,5 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /* Useless Overrides, stuff that doesn't need to be touched */
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!bp.handleActivityResult(requestCode, resultCode, data))
-            super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onProductPurchased(String s, TransactionDetails transactionDetails) {
-
-    }
-
-    @Override
-    public void onPurchaseHistoryRestored() {
-
-    }
-
-    @Override
-    public void onBillingError(int i, Throwable throwable) {
-
-    }
-
-    @Override
-    public void onBillingInitialized() {
-
     }
 }

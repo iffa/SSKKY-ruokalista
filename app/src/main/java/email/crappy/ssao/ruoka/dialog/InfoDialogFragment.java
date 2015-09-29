@@ -1,4 +1,4 @@
-package email.crappy.ssao.ruoka.ui.dialog;
+package email.crappy.ssao.ruoka.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;

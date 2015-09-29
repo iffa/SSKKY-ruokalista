@@ -4,6 +4,7 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 
 import email.crappy.ssao.ruoka.model.RuokaJsonObject;
+import email.crappy.ssao.ruoka.settings.SettingsActivity;
 import email.crappy.ssao.ruoka.util.RetrofitService;
 import rx.Observer;
 
@@ -16,7 +17,8 @@ public class FoodPresenter extends MvpBasePresenter<FoodView> implements MvpPres
         getView().showLoading(false);
 
         // Loading food data
-        new RetrofitService().getFood(this, true);
+        boolean debug = getView().getPreferences().getBoolean(SettingsActivity.KEY_DEBUG, false);
+        new RetrofitService().getFood(this, true, debug);
     }
 
     @Override

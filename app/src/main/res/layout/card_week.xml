@@ -82,7 +82,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/view_divider" />
+        <include layout="@layout/view_divider" android:id="@+id/list_divider1" />
 
         <LinearLayout
             android:id="@+id/list_item2"
@@ -135,7 +135,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/view_divider" />
+        <include layout="@layout/view_divider" android:id="@+id/list_divider2" />
 
         <LinearLayout
             android:id="@+id/list_item3"
@@ -188,7 +188,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/view_divider" />
+        <include layout="@layout/view_divider" android:id="@+id/list_divider3" />
 
         <LinearLayout
             android:id="@+id/list_item4"
@@ -241,7 +241,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/view_divider" />
+        <include layout="@layout/view_divider" android:id="@+id/list_divider4" />
 
         <LinearLayout
             android:id="@+id/list_item5"
