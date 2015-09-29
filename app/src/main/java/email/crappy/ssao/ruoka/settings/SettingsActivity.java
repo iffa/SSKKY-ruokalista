@@ -13,7 +13,6 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -22,9 +21,9 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import email.crappy.ssao.ruoka.BuildConfig;
 import email.crappy.ssao.ruoka.MainActivity;
 import email.crappy.ssao.ruoka.R;
-import email.crappy.ssao.ruoka.RuokaApplication;
 
 /**
  * @author Santeri Elo
@@ -35,7 +34,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Bil
     public static final String KEY_DEBUG = "settings_debug";
     public static final String KEY_THEME = "settings_theme";
     public static final String KEY_ABOUT = "settings_about";
-    private boolean easterTheme = false;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     int easter = 1;
@@ -45,7 +43,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Bil
         super.onCreate(savedInstanceState);
 
         // Initializing billing
-        bp = new BillingProcessor(this, RuokaApplication.BILLING_KEY, this);
+        bp = new BillingProcessor(this, BuildConfig.BILLING_API_KEY, this);
 
         // Initializing content
         setTheme();
@@ -54,6 +52,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Bil
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Setting up preferences
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).registerOnSharedPreferenceChangeListener(this);
         addPreferencesFromResource(R.xml.settings);
         findPreference(KEY_ABOUT).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -81,10 +80,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Bil
                 return false;
             }
         });
-
-        if (easterTheme) {
-            findViewById(R.id.bg_easter).setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
@@ -118,8 +113,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Bil
                     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                     window.setStatusBarColor(getResources().getColor(R.color.yolo));
                 }
-                easterTheme = true;
                 break;
+        }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(KEY_THEME)) { // Restarting activities to change theme immediately
+            TaskStackBuilder.create(this)
+                    .addNextIntent(new Intent(this, MainActivity.class))
+                    .addNextIntent(this.getIntent())
+                    .startActivities();
         }
     }
 
@@ -144,27 +148,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Bil
 
     @Override
     public void onPurchaseHistoryRestored() {
-
     }
 
     @Override
     public void onBillingError(int i, Throwable throwable) {
-
     }
 
     @Override
     public void onBillingInitialized() {
-
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(KEY_THEME)) {
-            TaskStackBuilder.create(this)
-                    .addNextIntent(new Intent(this, MainActivity.class))
-                    .addNextIntent(this.getIntent())
-                    .startActivities();
-        }
     }
 }
 

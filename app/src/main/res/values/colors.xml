@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background_window">#FFE5E5E5</color>
+    <color name="divider">#80323232</color>
+
+    <!-- Default theme colors -->
     <color name="lightBlue">#B5DAF5</color>
     <color name="blue">#006BB6</color>
     <color name="blueDark">#004480</color>
     <color name="gold">#FAA21B</color>
 
-    <color name="divider">#80323232</color>
-
+    <!-- Pink theme colors -->
     <color name="manly">#D416FA</color>
     <color name="lessManly">#D377E6</color>
     <color name="veryNotManly">#ECB5F7</color>
 
+    <!-- Easter egg theme colors -->
     <color name="yolo">#91FF00</color>
     <color name="lessYolo">#FF45DA</color>
     <color name="veryNotYolo">#00F2FF</color>

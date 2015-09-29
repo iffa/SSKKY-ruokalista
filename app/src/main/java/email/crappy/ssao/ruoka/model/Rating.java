@@ -21,10 +21,6 @@ public class Rating extends ParseObject {
         put("description", description);
     }
 
-    public String getOpinion() {
-        return getString("opinion");
-    }
-
     public void setOpinion(String opinion) {
         put("opinion", opinion);
     }
@@ -37,10 +33,6 @@ public class Rating extends ParseObject {
         put("date", date);
     }
 
-    public String getFood() {
-        return getString("food");
-    }
-
     public void setFood(String food) {
         put("food", food);
     }
@@ -48,10 +40,6 @@ public class Rating extends ParseObject {
     public void setUuidString() {
         UUID uuid = UUID.randomUUID();
         put("uuid", uuid.toString());
-    }
-
-    public String getUuidString() {
-        return getString("uuid");
     }
 
     public void setUser(ParseUser user) {

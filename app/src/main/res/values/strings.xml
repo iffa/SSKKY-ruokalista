@@ -2,20 +2,13 @@
     <string name="app_name">SSKKY-ruokalista</string>
     <string name="title_activity_main">SSKKY-ruokalista</string>
     <string name="action_settings">Asetukset</string>
-    <string name="action_about">Tietoja sovelluksesta</string>
-    <string name="dialog_about_title">Tietoja sovelluksesta</string>
-    <string name="dialog_about_message">TODO: Settings fragment / activity instead of dialogs, move this there</string>
-    <string name="dialog_easter_choose">easter egg get!</string>
-    <string name="welcome_update_title">Päivitetään ruokalistaa</string>
-    <string name="welcome_update_message">Tässä menee vain pieni hetki&#x2026;</string>
+    <string name="settings_about">Tietoja sovelluksesta</string>
     <string name="action_today">Tänään ruokana</string>
     <string name="error">Virhe</string>
     <string name="dialog_today_title">Tänään ruokana</string>
     <string name="welcome_tooltip">Tänään ruokana</string>
-    <string name="action_donate">Lahjoita</string>
-    <string name="action_licenses">Kirjastojen lisenssit</string>
-    <string name="dialog_licenses_title">Kirjastojen lisenssit</string>
-    <string name="dialog_licenses_message">Sovelluksen kehityksen mahdollistivat nämä mahtavat avoimen lähdekoodin kirjastot:</string>
+    <string name="settings_donate">Lahjoita</string>
+    <string name="settings_licenses">Kirjastojen lisenssit</string>
     <string name="notification_title">Tänään ruokana</string>
     <string name="rating_positive">Kyllä</string>
     <string name="rating_negative">En</string>
@@ -34,12 +27,10 @@
     <string name="dialog_parse_error_message">Palautteen antamista ei voitu aloittaa. Käynnistä sovellus uudelleen ja yritä myöhemmin uudestaan.\n\nHuom: palautteen antaminen vaatii aktiivisen internet-yhteyden.</string>
     <string name="dialog_password_title">Pääsy kielletty</string>
     <string name="dialog_password_hint">Salasana</string>
-    <string name="toast_wrong_password">Väärä salasana</string>
     <string name="sad_title">Jotakin meni särki&#x2026;</string>
     <string name="sad_message">(yritä myöhemmin uudelleen)</string>
     <string name="ratingTextHint">Kastike oli hyvää, perunat hieman raakoja</string>
     <string name="cancel">Peruuta</string>
-    <string name="share_via">Jaa</string>
     <string name="undefined">n/a</string>
     <string name="settings_general">Yleiset</string>
     <string name="settings_about_summary">Se helpompi tapa katsoa mitä on ruokana. Ruokalista kulkee sovelluksen ansiosta aina mukana, eikä tarvitse nähdä vaivaa PDF-tiedoston lataamiseen tai ruokalan luona käymiseen.</string>
@@ -58,21 +49,12 @@
     <string name="settings_donate_thanks">Kiitos lahjoituksestasi!</string>
     <string name="settings_credits_summary">Sovelluksen kehittänyt Santeri Elo (me@santeri.xyz)\n\nErityiskiitokset alkuperäiselle ICT14A-luokalle, kaikille Internet-muukalaisille ja Teho-tölkeille ketkä olivat mukana sovelluksen kehittämisessä ja mahdollistivat tämän kaiken. Never forget ❤!\n\nööö joo :3 © Matias Tieranta</string>
     <string name="settings_credits">Tekijä ja kunniamaininnat</string>
-    <string-array name="dialog_easter_items">
-        <item>Dududu</item>
-        <item>Pinkki-teema</item>
-        <item>V1 easter egg</item>
-    </string-array>
-    <string-array name="dialog_licenses_items">
-        <item>TODO:</item>
-        <item>Move</item>
-        <item>these</item>
-        <item>to</item>
-        <item>settings</item>
-        <item>thank you very much.</item>
-        <item>...</item>
-        <item>also: this list up to date</item>
-    </string-array>
+    <string name="rate_title">Arvostele sovellus</string>
+    <string name="rate_message">Haluatko arvostella sovelluksen Play-kaupassa? (ei pakollista!)</string>
+    <string name="rate_btn_positive">Let\'s go</string>
+    <string name="rate_btn_neutral">Myöhemmin</string>
+    <string name="rate_btn_negative">En ikinä</string>
+    <string name="rate_snackbar_negative">Nyyh t. Iines - ehkä joskus toiste!</string>
     <string-array name="settings_themes">
         <item>Oletus (koulun värit)</item>
         <item>Pinkki</item>

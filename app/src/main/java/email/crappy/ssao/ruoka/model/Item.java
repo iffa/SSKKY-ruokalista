@@ -18,26 +18,13 @@ public class Item implements Parcelable {
         return pvm;
     }
 
-    public void setPvm(String pvm) {
-        this.pvm = pvm;
-    }
-
     public String getPaiva() {
         return paiva;
-    }
-
-    public void setPaiva(String paiva) {
-        this.paiva = paiva;
     }
 
     public String getKama() {
         return kama;
     }
-
-    public void setKama(String kama) {
-        this.kama = kama;
-    }
-
 
     protected Item(Parcel in) {
         pvm = in.readString();

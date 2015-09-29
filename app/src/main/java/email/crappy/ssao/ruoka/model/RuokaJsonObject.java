@@ -11,8 +11,6 @@ import java.util.List;
 public class RuokaJsonObject implements Parcelable {
     @Expose
     private List<Ruoka> ruoka = new ArrayList<Ruoka>();
-    @Expose
-    private String expiration;
 
     public List<Ruoka> getRuoka() {
         return ruoka;
@@ -22,14 +20,6 @@ public class RuokaJsonObject implements Parcelable {
         this.ruoka = ruoka;
     }
 
-    public String getExpiration() {
-        return expiration;
-    }
-
-    public void setExpiration(String expiration) {
-        this.expiration = expiration;
-    }
-
     protected RuokaJsonObject(Parcel in) {
         if (in.readByte() == 0x01) {
             ruoka = new ArrayList<Ruoka>();
@@ -37,7 +27,6 @@ public class RuokaJsonObject implements Parcelable {
         } else {
             ruoka = null;
         }
-        expiration = in.readString();
     }
 
     @Override
@@ -53,7 +42,6 @@ public class RuokaJsonObject implements Parcelable {
             dest.writeByte((byte) (0x01));
             dest.writeList(ruoka);
         }
-        dest.writeString(expiration);
     }
 
     @SuppressWarnings("unused")

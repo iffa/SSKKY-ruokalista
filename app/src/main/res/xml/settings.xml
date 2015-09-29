@@ -17,20 +17,20 @@
         <Preference
             android:key="settings_about"
             android:summary="@string/settings_about_summary"
-            android:title="@string/action_about" />
+            android:title="@string/settings_about" />
         <Preference
             android:key="settings_credits"
             android:selectable="false"
-            android:title="@string/settings_credits"
-            android:summary="@string/settings_credits_summary" />
+            android:summary="@string/settings_credits_summary"
+            android:title="@string/settings_credits" />
         <Preference
             android:key="settings_donate"
             android:summary="@string/settings_donate_summary"
-            android:title="@string/action_donate" />
+            android:title="@string/settings_donate" />
         <Preference
             android:key="settings_licenses"
             android:summary="@string/settings_licenses_summary"
-            android:title="@string/action_licenses">
+            android:title="@string/settings_licenses">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/iffa/SSKKY-ruokalista/blob/master/THIRDPARTYLICENSES.md" />
@@ -44,6 +44,7 @@
                 android:data="http://github.com/iffa/SSKKY-ruokalista" />
         </Preference>
         <CheckBoxPreference
+            android:defaultValue="false"
             android:key="settings_debug"
             android:summary="@string/settings_debug_summary"
             android:title="@string/settings_debug" />

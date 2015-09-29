@@ -1,19 +1,19 @@
 <resources>
-
-    <!-- Base application theme. -->
+    <!-- Default app theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/blueDark</item>
         <item name="colorAccent">@color/blue</item>
     </style>
 
-    <!-- Do something manly with colors achieved :D -->
+    <!-- Pink app theme -->
     <style name="AppThemeManly" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/lessManly</item>
         <item name="colorPrimaryDark">@color/manly</item>
         <item name="colorAccent">@color/lessManly</item>
     </style>
 
+    <!-- Easter egg app theme -->
     <style name="AppThemeYolo" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/lessYolo</item>
         <item name="colorPrimaryDark">@color/yolo</item>

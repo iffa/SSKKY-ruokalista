@@ -26,9 +26,9 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
-import email.crappy.ssao.ruoka.dialog.InfoDialogFragment;
 import email.crappy.ssao.ruoka.MainActivity;
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.dialog.InfoDialogFragment;
 import email.crappy.ssao.ruoka.dialog.RatingDialogFragment;
 import email.crappy.ssao.ruoka.event.RatingSaveEvent;
 import email.crappy.ssao.ruoka.event.ToolbarMenuEvent;
@@ -99,6 +99,7 @@ public class FoodFragment extends MvpLceViewStateFragmentFixed<RelativeLayout, L
 
         foodListView.setLayoutManager(new SnappingLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         foodListView.setAdapter(adapter);
+
     }
 
     @Override

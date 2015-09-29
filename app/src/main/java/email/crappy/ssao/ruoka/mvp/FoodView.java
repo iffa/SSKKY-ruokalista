@@ -12,5 +12,5 @@ import email.crappy.ssao.ruoka.model.Ruoka;
  * @author Santeri Elo
  */
 public interface FoodView extends MvpLceView<List<Ruoka>> {
-    public SharedPreferences getPreferences();
+    SharedPreferences getPreferences();
 }

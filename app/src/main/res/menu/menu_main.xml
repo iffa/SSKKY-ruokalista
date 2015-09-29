@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_action_action_thumbs_up_down"
         android:orderInCategory="150"
         android:title="@string/rating_title"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="300"

@@ -18,14 +18,6 @@ public class Ruoka implements Parcelable {
     @Expose
     private List<Item> items = new ArrayList<Item>();
 
-    public String getUniqueId() {
-        return uniqueId;
-    }
-
-    public void setUniqueId(String uniqueId) {
-        this.uniqueId = uniqueId;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -37,11 +29,6 @@ public class Ruoka implements Parcelable {
     public List<Item> getItems() {
         return items;
     }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
 
     protected Ruoka(Parcel in) {
         uniqueId = in.readString();

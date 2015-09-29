@@ -8,14 +8,11 @@
 
     <include layout="@layout/view_error" />
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_current_food"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="-1dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="4dp" />
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

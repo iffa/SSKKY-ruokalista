@@ -14,16 +14,6 @@
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <ImageView
-        android:id="@+id/bg_easter"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/undefined"
-        android:scaleType="fitXY"
-        android:src="@drawable/bg_ayy_tile"
-        android:layout_below="@id/toolbar"
-        android:visibility="invisible" />
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
