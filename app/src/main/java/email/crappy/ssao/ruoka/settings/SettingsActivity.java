@@ -34,6 +34,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Bil
     public static final String KEY_DEBUG = "settings_debug";
     public static final String KEY_THEME = "settings_theme";
     public static final String KEY_ABOUT = "settings_about";
+    public static final String KEY_DONATE = "settings_donate";
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     int easter = 1;
@@ -77,6 +78,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Bil
                 if (((CheckBoxPreference) preference).isChecked()) {
                     Snackbar.make(findViewById(R.id.contentView), R.string.settings_debug_warning, Snackbar.LENGTH_LONG).show();
                 }
+                return false;
+            }
+        });
+        findPreference(KEY_DONATE).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                bp.purchase(SettingsActivity.this, "donation");
                 return false;
             }
         });
