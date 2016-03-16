@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'io.fabric'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    def versionMajor = 3
+    def versionMinor = 0
+    def versionPatch = 0
+    def versionBuild = 0
+
+    defaultConfig {
+        applicationId "email.crappy.ssao.ruoka"
+        minSdkVersion 15
+        targetSdkVersion 23
+
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+    }
+
+    signingConfigs {
+        release {
+            // TODO: Change to match release keys
+            storeFile file('keystore/release.keystore')
+            keyAlias 'alias'
+            storePassword 'storePass'
+            keyPassword 'keyPass'
+        }
+        debug {
+            storeFile file("keystore/debug.keystore")
+            keyAlias "debug"
+            storePassword "android"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true // TODO: ProGuard rules
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            versionNameSuffix ' (Debug)'
+            applicationIdSuffix '.debug'
+            debuggable true
+            signingConfig signingConfigs.debug
+            ext.enableCrashlytics = false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+        fatal 'UnusedResources'
+        warning 'ResourceType' // Keep lint happy about ButterKnife
+    }
+}
+
+dependencies {
+    final SUPPORT_LIB_VERSION = '23.2.1'
+    final DAGGER_VERSION = '2.0.2'
+    final RETROFIT_VERSION = '2.0.0'
+
+    // Disable inspection due to bug in lint
+    //noinspection GradleDependency
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
+
+    compile "com.google.dagger:dagger:$DAGGER_VERSION"
+    apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    compile 'org.glassfish:javax.annotation:10.0-b28' // Required by Dagger
+
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+
+    compile "io.reactivex:rxjava:1.1.1"
+    compile "io.reactivex:rxandroid:1.1.0"
+
+    compile 'net.xpece.android:support-preference:0.5.9'
+
+    compile('com.crashlytics.sdk.android:answers:1.3.6@aar') {
+        transitive = true;
+    }
+}
