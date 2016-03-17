@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">SSKKY-ruokalista</string>
     <string name="activity_settings">Settings</string>
+
+    <string name="placeholder_tabs_title">Hey, this feature is still unimplemented.</string>
+    <string name="placeholder_tabs">To continue using the app, switch back to the list-layout.</string>
+    <string name="placeholder_week">viikko 7 (15.2–19.2)</string>
+    <string name="icon_desc">Food icon</string>
 </resources>

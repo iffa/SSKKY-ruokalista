@@ -5,6 +5,8 @@
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/accent</item>
 
+        <item name="listBackground">@color/backgroundLight</item>
+
         <!-- Preference styles -->
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>
         <item name="preferenceTint">@color/accent_state_list</item>
@@ -15,6 +17,8 @@
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/accent</item>
 
+        <item name="listBackground">@color/backgroundDark</item>
+
         <!-- Preference styles -->
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>
         <item name="preferenceTint">@color/accent_state_list</item>
@@ -24,6 +28,8 @@
         <item name="colorPrimary">@color/manlyPrimary</item>
         <item name="colorPrimaryDark">@color/manlyPrimaryDark</item>
         <item name="colorAccent">@color/manlyAccent</item>
+
+        <item name="listBackground">@color/backgroundLight</item>
 
         <!-- Preference styles -->
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>

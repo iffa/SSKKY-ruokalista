@@ -11,4 +11,7 @@
     <color name="manlyPrimaryDark">#D416FA</color>
     <color name="manlyAccent">#ECB5F7</color>
     <color name="manlyAccentDisabled">#61ECB5F7</color>
+
+    <color name="backgroundDark">#FF424242</color>
+    <color name="backgroundLight">#FFFFFFFF</color>
 </resources>
