@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'io.fabric'
 
 Properties props = new Properties()
 try {
@@ -55,7 +55,7 @@ android {
             applicationIdSuffix '.debug'
             debuggable true
             signingConfig signingConfigs.debug
-            ext.enableCrashlytics = false
+            //ext.enableCrashlytics = false
         }
     }
 

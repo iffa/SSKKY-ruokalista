@@ -3,3 +3,4 @@
 *.iml
 .idea
 app.properties
+fabric.properties
