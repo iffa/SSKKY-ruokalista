@@ -5,7 +5,7 @@ apply plugin: 'io.fabric'
 
 Properties props = new Properties()
 try {
-    props.load(file('fabric.properties').newDataInputStream())
+    props.load(file('app.properties').newDataInputStream())
 } catch (Exception ex) {
     throw ex;
 }
@@ -61,6 +61,7 @@ android {
 
     applicationVariants.all { variant ->
         variant.resValue "string", "app_version", variant.versionName
+        variant.resValue "string", "ad_unit_id", "\"${props.getProperty("adUnitId")}\""
     }
 
     compileOptions {
