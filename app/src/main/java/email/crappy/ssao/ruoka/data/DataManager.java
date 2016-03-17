@@ -10,6 +10,7 @@ import email.crappy.ssao.ruoka.data.util.DateUtil;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * @author Santeri 'iffa'
@@ -23,6 +24,10 @@ public class DataManager {
     public DataManager(ListService listService, PreferencesHelper preferencesHelper) {
         this.listService = listService;
         this.preferencesHelper = preferencesHelper;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return preferencesHelper;
     }
 
     /**
@@ -43,6 +48,7 @@ public class DataManager {
      * @return Observable
      */
     private Observable<List<Week>> getRemoteWeeks() {
+        Timber.i("Getting data from remote");
         return listService.getList()
                 .map(listResponse -> {
                     preferencesHelper.putExpirationDate(listResponse.expirationDate);
@@ -59,6 +65,7 @@ public class DataManager {
      * @return Observable
      */
     private Observable<List<Week>> getLocalWeeks() {
+        Timber.i("Getting data from local");
         return preferencesHelper.getWeeksObservable()
                 .compose(applySchedulers());
     }

@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Theme.SSKKY" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.SSKKY.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/accent</item>
@@ -10,4 +10,23 @@
         <item name="preferenceTint">@color/accent_state_list</item>
     </style>
 
+    <style name="Theme.SSKKY.Dark" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+
+        <!-- Preference styles -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>
+        <item name="preferenceTint">@color/accent_state_list</item>
+    </style>
+
+    <style name="Theme.SSKKY.Pink" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/manlyPrimary</item>
+        <item name="colorPrimaryDark">@color/manlyPrimaryDark</item>
+        <item name="colorAccent">@color/manlyAccent</item>
+
+        <!-- Preference styles -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>
+        <item name="preferenceTint">@color/accent_state_list_manly</item>
+    </style>
 </resources>

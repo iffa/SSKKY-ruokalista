@@ -9,6 +9,7 @@ import email.crappy.ssao.ruoka.injection.component.ApplicationComponent;
 import email.crappy.ssao.ruoka.injection.component.DaggerApplicationComponent;
 import email.crappy.ssao.ruoka.injection.module.ApplicationModule;
 import io.fabric.sdk.android.Fabric;
+import timber.log.Timber;
 
 /**
  * @author Santeri 'iffa'
@@ -19,6 +20,10 @@ public class SSKKYApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
 
         Fabric.with(this, new Answers());
     }

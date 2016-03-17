@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_general">General</string>
+    <string name="pref_other">About the application</string>
+    <string name="pref_notifications">Show notifications</string>
+    <string name="pref_notifications_off">No notifications will be shown in the morning.</string>
+    <string name="pref_notifications_on">Notifications will be shown in the morning.</string>
+    <string name="pref_ads">Show ads</string>
+    <string name="pref_ads_summary">Ad income supports development: please consider leaving them enabled. You are free to disable them as you wish.</string>
+    <string name="pref_theme">Choose theme</string>
+    <string name="pref_theme_restart">Theme will be applied after restart.</string>
+    <string name="pref_theme_restart_action">Restart</string>
+    <string-array name="pref_themes">
+        <item>Default (light)</item>
+        <item>Default (dark)</item>
+        <item>Pink</item>
+    </string-array>
+    <string-array name="pref_themes_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="pref_credits">Thanks to…</string>
+    <string name="pref_credits_summary">/r/AndroidDev for helpful resources and articles, all friends that helped with development by finding bugs and suggesting new amazing and fun ideas.\n\nSpecial thanks to Juho Haimila.</string>
+    <string name="pref_contact">Contact me</string>
+    <string name="pref_contact_summary">Santeri Elo / me@santeri.xyz</string>
+    <string name="pref_github">Code on GitHub</string>
+    <string name="pref_github_summary">Browse the source code and used third party licenses on GitHub. Feel free to contribute!</string>
+    <string name="pref_debug">Debug mode</string>
+    <string name="pref_debug_summary">Enable debug mode and experimental features.</string>
+</resources>

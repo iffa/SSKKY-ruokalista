@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SSKKY-ruokalista</string>
+    <string name="activity_settings">Settings</string>
 </resources>

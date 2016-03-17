@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Default theme colors -->
     <color name="primary">#3F51B5</color>
     <color name="primaryDark">#303F9F</color>
     <color name="accent">#FF4081</color>
     <color name="accentDisabled">#61FF4081</color> <!-- Disabled alpha #61 -->
+
+    <!-- Pink theme colors -->
+    <color name="manlyPrimary">#D377E6</color>
+    <color name="manlyPrimaryDark">#D416FA</color>
+    <color name="manlyAccent">#ECB5F7</color>
+    <color name="manlyAccentDisabled">#61ECB5F7</color>
 </resources>

@@ -22,7 +22,7 @@ public interface ListService {
     class Builder {
         public static ListService create() {
             Gson gson = new GsonBuilder()
-                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    .setDateFormat("dd.MM.yyyy")
                     .create();
 
             Retrofit retrofit = new Retrofit.Builder()
