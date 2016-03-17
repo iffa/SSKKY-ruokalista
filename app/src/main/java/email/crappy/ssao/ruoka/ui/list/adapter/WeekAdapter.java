@@ -13,6 +13,7 @@ import java.util.List;
 
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.data.model.Week;
+import email.crappy.ssao.ruoka.ui.base.DividerItemDecoration;
 
 /**
  * @author Santeri 'iffa'
@@ -55,6 +56,8 @@ public class WeekAdapter extends SupportAnnotatedAdapter implements WeekAdapterB
             layoutManager.setAutoMeasureEnabled(true);
             vh.list.setLayoutManager(layoutManager);
             vh.list.setNestedScrollingEnabled(false);
+            vh.list.addItemDecoration(new DividerItemDecoration(getInflater().getContext(),
+                    DividerItemDecoration.VERTICAL_LIST));
         }
 
         if (vh.list.getAdapter() == null) {
