@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:title="@string/pref_general">
+    <PreferenceCategory android:title="@string/pref_general">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="PREF_NOTIFICATIONS"
@@ -22,5 +21,13 @@
             android:entryValues="@array/pref_themes_values"
             android:key="PREF_THEME"
             android:title="@string/pref_theme" />
+
+        <ListPreference
+            style="@style/Preference.Material.DialogPreference.ListPreference.SimpleMenu"
+            android:defaultValue="0"
+            android:entries="@array/pref_layouts"
+            android:entryValues="@array/pref_layouts_values"
+            android:key="PREF_LAYOUT"
+            android:title="@string/pref_layout" />
     </PreferenceCategory>
 </PreferenceScreen>

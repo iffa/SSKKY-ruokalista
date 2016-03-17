@@ -6,8 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import email.crappy.ssao.ruoka.BuildConfig;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.data.DataManager;
@@ -24,6 +28,8 @@ import timber.log.Timber;
 public class MainActivity extends BaseActivity {
     @Inject
     DataManager dataManager;
+    @Bind(R.id.adView)
+    AdView adView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,14 +38,11 @@ public class MainActivity extends BaseActivity {
 
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            // TODO: Content fragment
-        }
-
         if (BuildConfig.DEBUG) { // Printing preferences for debug purposes
             Timber.i("Should show notifications: %s", dataManager.getPreferencesHelper().getNotificationsEnabled());
             Timber.i("Should show ads: %s", dataManager.getPreferencesHelper().getShowAds());
             Timber.i("Should debug: %s", dataManager.getPreferencesHelper().getIsDebug());
+            Timber.i("Layout to show: %s", dataManager.getPreferencesHelper().getMenuLayout().name());
         }
 
         if (dataManager.getPreferencesHelper().getIsDebug()) {
@@ -50,6 +53,15 @@ public class MainActivity extends BaseActivity {
                 }
             }, throwable -> Timber.e(throwable, "getWeeks error"), () -> Timber.i("getWeeks completed"));
         }
+
+        if (savedInstanceState == null) {
+            // TODO: Content fragment
+        }
+
+        AdRequest request = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(request);
     }
 
     @Override

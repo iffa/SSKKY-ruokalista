@@ -30,6 +30,7 @@ public class PreferencesHelper {
     public static final String PREF_KEY_NOTIFICATIONS = "PREF_NOTIFICATIONS";
     public static final String PREF_KEY_ADS = "PREF_ADS";
     public static final String PREF_KEY_THEME = "PREF_THEME";
+    public static final String PREF_KEY_LAYOUT = "PREF_LAYOUT";
     public static final String PREF_KEY_DEBUG = "PREF_DEBUG";
     private final SharedPreferences sharedPreferences;
     private final Gson gson;
@@ -118,5 +119,32 @@ public class PreferencesHelper {
         public static Theme valueOf(int value) {
             return map.get(value);
         }
+    }
+
+    public MenuLayout getMenuLayout() {
+        return MenuLayout.valueOf(Integer.parseInt(sharedPreferences.getString(PREF_KEY_LAYOUT, "0")));
+    }
+
+    public enum MenuLayout {
+        LIST(0),
+        TABS(1);
+
+        private final int value;
+        private static Map<Integer, MenuLayout> map = new HashMap<>();
+
+        MenuLayout(int value) {
+            this.value = value;
+        }
+
+        static {
+            for (MenuLayout layout : MenuLayout.values()) {
+                map.put(layout.value, layout);
+            }
+        }
+
+        public static MenuLayout valueOf(int value) {
+            return map.get(value);
+        }
+
     }
 }

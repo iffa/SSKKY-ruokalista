@@ -27,12 +27,10 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
     public void onCreatePreferences2(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.pref_general);
 
-        PreferenceCategory otherHeader = new PreferenceCategory(getPreferenceManager().getContext());
-        otherHeader.setTitle(R.string.pref_other);
-        getPreferenceScreen().addPreference(otherHeader);
         addPreferencesFromResource(R.xml.pref_other);
 
         bindPreferenceSummaryToValue(findPreference("PREF_THEME"));
+        bindPreferenceSummaryToValue(findPreference("PREF_LAYOUT"));
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {
@@ -92,8 +90,8 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
 
     private void showThemeSnackbar() {
         Snackbar snackbar = Snackbar
-                .make(getListView(), R.string.pref_theme_restart, Snackbar.LENGTH_LONG)
-                .setAction(R.string.pref_theme_restart_action, view -> {
+                .make(getListView(), R.string.pref_restart, Snackbar.LENGTH_LONG)
+                .setAction(R.string.pref_restart_action, view -> {
                     Intent restart = new Intent(getContext(), MainActivity.class);
                     restart.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(restart);
@@ -104,8 +102,8 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(PreferencesHelper.PREF_KEY_THEME)) {
-            // Show Snackbar prompting user to restart the app in order to apply the theme
+        if (key.equals(PreferencesHelper.PREF_KEY_THEME) || key.equals(PreferencesHelper.PREF_KEY_LAYOUT)) {
+            // Show Snackbar prompting user to restart the app in order to apply changes
             showThemeSnackbar();
         }
     }
