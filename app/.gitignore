@@ -2,4 +2,4 @@
 *iml
 *.iml
 .idea
-fabric.properties
+app.properties
