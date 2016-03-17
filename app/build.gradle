@@ -73,6 +73,7 @@ dependencies {
     // Disable inspection due to bug in lint
     //noinspection GradleDependency
     compile "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
+    compile "com.android.support:design:$SUPPORT_LIB_VERSION"
 
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
     apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
@@ -84,6 +85,10 @@ dependencies {
 
     compile "io.reactivex:rxjava:1.1.1"
     compile "io.reactivex:rxandroid:1.1.0"
+
+    compile 'com.hannesdorfmann.mosby:mvp:2.0.1'
+
+    compile 'com.jakewharton:butterknife:7.0.1'
 
     compile 'net.xpece.android:support-preference:0.5.9'
 

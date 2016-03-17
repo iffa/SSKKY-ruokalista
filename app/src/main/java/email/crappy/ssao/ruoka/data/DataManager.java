@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import email.crappy.ssao.ruoka.data.model.Week;
+import email.crappy.ssao.ruoka.data.util.DateUtil;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -30,7 +31,7 @@ public class DataManager {
      * @return Observable
      */
     public Observable<List<Week>> getWeeks() {
-        if (preferencesHelper.getWeeks() == null) {
+        if (preferencesHelper.getWeeks() == null || DateUtil.isExpired(preferencesHelper.getExpirationDate())) {
             return getRemoteWeeks();
         }
         return getLocalWeeks();
