@@ -56,7 +56,8 @@ public class DataManager {
 
                     return listResponse.weeks;
                 })
-                .compose(applySchedulers());
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
@@ -67,11 +68,7 @@ public class DataManager {
     private Observable<List<Week>> getLocalWeeks() {
         Timber.i("Getting data from local");
         return preferencesHelper.getWeeksObservable()
-                .compose(applySchedulers());
-    }
-
-    private <T> Observable.Transformer<T, T> applySchedulers() {
-        return observable -> observable.subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 }
