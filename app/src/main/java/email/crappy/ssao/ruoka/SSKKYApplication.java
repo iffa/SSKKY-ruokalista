@@ -2,6 +2,7 @@ package email.crappy.ssao.ruoka;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Debug;
 
 import com.crashlytics.android.answers.Answers;
 
@@ -22,10 +23,11 @@ public class SSKKYApplication extends Application {
         super.onCreate();
 
         if (BuildConfig.DEBUG) {
+            //Debug.startMethodTracing("sskky");
             Timber.plant(new Timber.DebugTree());
         }
 
-        Fabric.with(this, new Answers());
+        //Fabric.with(this, new Answers());
     }
 
     public ApplicationComponent getComponent() {

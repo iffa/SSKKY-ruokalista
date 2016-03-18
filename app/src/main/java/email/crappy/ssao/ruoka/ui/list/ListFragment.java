@@ -1,6 +1,7 @@
 package email.crappy.ssao.ruoka.ui.list;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import email.crappy.ssao.ruoka.BuildConfig;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.SSKKYApplication;
 import email.crappy.ssao.ruoka.data.model.Week;
@@ -82,6 +84,8 @@ public class ListFragment extends MvpFragment<ListView, ListPresenter> implement
 
     @Override
     public void showContent(List<Week> weeks) {
+        //if (BuildConfig.DEBUG) Debug.stopMethodTracing();
+
         loading.setVisibility(View.GONE);
 
         ((WeekAdapter) recyclerView.getAdapter()).setItems(weeks);
