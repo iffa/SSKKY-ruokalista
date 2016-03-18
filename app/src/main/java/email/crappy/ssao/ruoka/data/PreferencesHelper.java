@@ -41,6 +41,10 @@ public class PreferencesHelper {
         gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
     }
 
+    public void clear() {
+        sharedPreferences.edit().clear().apply();
+    }
+
     public void putWeeks(List<Week> weeks) {
         sharedPreferences.edit().putString(PREF_KEY_WEEK_LIST, gson.toJson(weeks)).apply();
     }
