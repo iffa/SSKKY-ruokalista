@@ -102,7 +102,9 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(PreferencesHelper.PREF_KEY_THEME) || key.equals(PreferencesHelper.PREF_KEY_LAYOUT)) {
+        if (key.equals(PreferencesHelper.PREF_KEY_THEME)
+                || key.equals(PreferencesHelper.PREF_KEY_LAYOUT)
+                || key.equals(PreferencesHelper.PREF_KEY_ADS)) {
             // Show Snackbar prompting user to restart the app in order to apply changes
             showThemeSnackbar();
         }
