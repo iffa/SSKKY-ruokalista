@@ -7,6 +7,7 @@
     <string name="placeholder_week">viikko 7 (15.2–19.2)</string>
     <string name="placeholder_day">ma</string>
     <string name="placeholder_date">12.3.</string>
-    <string name="placeholder_food">Kanakeitto, mansikkarahka, salaatti\nkasvissosekeitto</string>
+    <string name="placeholder_food">Kanakeitto, mansikkarahka, salaatti</string>
+    <string name="placeholder_food_veg">kasvissosekeitto</string>
     <string name="placeholder_icon">Dank memes</string>
 </resources>

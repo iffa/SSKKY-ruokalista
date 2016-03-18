@@ -23,6 +23,7 @@ public class DayAdapter extends SupportAnnotatedAdapter implements DayAdapterBin
                     @ViewField(id = R.id.date, name = "date", type = TextView.class),
                     @ViewField(id = R.id.day, name = "day", type = TextView.class),
                     @ViewField(id = R.id.food, name = "food", type = TextView.class),
+                    @ViewField(id = R.id.food_veg, name = "foodVeg", type = TextView.class),
                     @ViewField(id = R.id.icon, name = "icon", type = ImageView.class)
             }
     )
@@ -51,9 +52,11 @@ public class DayAdapter extends SupportAnnotatedAdapter implements DayAdapterBin
     @Override
     public void bindViewHolder(DayAdapterHolders.ItemViewHolder vh, int position) {
         Day day = days.get(position);
+        String[] food = day.food.split("\\n");
 
         vh.date.setText(day.date);
         vh.day.setText(day.day);
-        vh.food.setText(day.food);
+        vh.food.setText(food[0]);
+        vh.foodVeg.setText((food.length > 1 ? food[1] : ""));
     }
 }

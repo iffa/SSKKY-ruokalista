@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
     android:orientation="vertical"
     app:cardElevation="2dp"
     app:cardMaxElevation="8dp"
@@ -22,10 +21,11 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/placeholder_week"
             android:textColor="?android:textColorPrimary"
-            android:textSize="24sp" />
+            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp" />
 
         <View
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="#8F8F8F"
             android:layout_width="match_parent"
             android:layout_height="1px" />
