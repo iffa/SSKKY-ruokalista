@@ -26,12 +26,21 @@ import email.crappy.ssao.ruoka.ui.list.adapter.WeekAdapter;
  * @author Santeri 'iffa'
  */
 public class ListFragment extends MvpFragment<ListView, ListPresenter> implements ListView {
+    private static final String ARGS_SHOW_ADS = "ARGS_SHOW_ADS";
     @Bind(R.id.loading)
     View loadingView;
     @Bind(R.id.recycler)
     RecyclerView recyclerView;
     @Bind(R.id.adView)
     AdView adView;
+
+    public static ListFragment newInstance(boolean showAds) {
+        ListFragment fragment = new ListFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(ARGS_SHOW_ADS, showAds);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -49,11 +58,14 @@ public class ListFragment extends MvpFragment<ListView, ListPresenter> implement
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        AdRequest request = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("3E17D9B5B1509443815503025302253C")
-                .build();
-        adView.loadAd(request);
+        if (getArguments().getBoolean(ARGS_SHOW_ADS)) {
+            adView.setVisibility(View.VISIBLE);
+            AdRequest request = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice("3E17D9B5B1509443815503025302253C")
+                    .build();
+            adView.loadAd(request);
+        }
     }
 
     @NonNull

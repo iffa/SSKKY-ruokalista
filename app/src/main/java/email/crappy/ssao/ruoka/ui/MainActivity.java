@@ -58,13 +58,13 @@ public class MainActivity extends BaseActivity {
             Fragment contentFragment;
             switch (dataManager.getPreferencesHelper().getMenuLayout()) {
                 case LIST:
-                    contentFragment = new ListFragment();
+                    contentFragment = ListFragment.newInstance(dataManager.getPreferencesHelper().getShowAds());
                     break;
                 case TABS:
                     contentFragment = new TabFragment();
                     break;
                 default:
-                    contentFragment = new ListFragment();
+                    contentFragment = ListFragment.newInstance(dataManager.getPreferencesHelper().getShowAds());
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.content, contentFragment).commit();
