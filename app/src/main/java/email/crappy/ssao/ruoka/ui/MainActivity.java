@@ -1,5 +1,6 @@
 package email.crappy.ssao.ruoka.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,15 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import javax.inject.Inject;
 
-import butterknife.Bind;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.data.DataManager;
-import email.crappy.ssao.ruoka.data.model.Week;
 import email.crappy.ssao.ruoka.ui.base.BaseActivity;
 import email.crappy.ssao.ruoka.ui.list.ListFragment;
 import email.crappy.ssao.ruoka.ui.settings.SettingsActivity;
@@ -31,6 +27,14 @@ public class MainActivity extends BaseActivity {
     @Inject
     DataManager dataManager;
 
+    public static Intent getStartIntent(Context context, boolean clearStack) {
+        Intent intent = new Intent(context, MainActivity.class);
+        if (clearStack) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
+        return intent;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +48,6 @@ public class MainActivity extends BaseActivity {
         Timber.i("Should show ads: %s", dataManager.getPreferencesHelper().getShowAds());
         Timber.i("Should debug: %s", dataManager.getPreferencesHelper().getIsDebug());
         Timber.i("Layout to show: %s", dataManager.getPreferencesHelper().getMenuLayout().name());
-
-        if (dataManager.getPreferencesHelper().getIsDebug()) {
-            dataManager.getWeeks().subscribe(weeks -> {
-                Timber.i("getWeeks returned next");
-                for (Week week : weeks) {
-                    Timber.i("week %s with title %s", weeks.indexOf(week), week.title);
-                }
-            }, throwable -> Timber.e(throwable, "getWeeks error"), () -> Timber.i("getWeeks completed"));
-        }
 
         if (savedInstanceState == null) {
             Fragment contentFragment;
@@ -73,7 +68,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
+        getMenuInflater().inflate(dataManager.getPreferencesHelper().getIsDebug() ? R.menu.activity_main_debug : R.menu.activity_main, menu);
         return true;
     }
 
@@ -82,6 +77,10 @@ public class MainActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
+                break;
+            case R.id.action_clear:
+                dataManager.getPreferencesHelper().clear();
+                startActivity(getStartIntent(this, true));
                 break;
         }
         return super.onOptionsItemSelected(item);

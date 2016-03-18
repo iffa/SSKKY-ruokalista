@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SSKKY-ruokalista</string>
     <string name="activity_settings">Settings</string>
+    <string name="action_clear">Clear data</string>
 
     <string name="placeholder_tabs_title">Hey, this feature is still unimplemented.</string>
     <string name="placeholder_tabs">To continue using the app, switch back to the list-layout.</string>

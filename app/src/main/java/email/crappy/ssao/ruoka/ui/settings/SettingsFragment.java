@@ -92,9 +92,7 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
         Snackbar snackbar = Snackbar
                 .make(getListView(), R.string.pref_restart, Snackbar.LENGTH_LONG)
                 .setAction(R.string.pref_restart_action, view -> {
-                    Intent restart = new Intent(getContext(), MainActivity.class);
-                    restart.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(restart);
+                    startActivity(MainActivity.getStartIntent(getContext(), true));
                 });
 
         snackbar.show();
@@ -104,7 +102,8 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(PreferencesHelper.PREF_KEY_THEME)
                 || key.equals(PreferencesHelper.PREF_KEY_LAYOUT)
-                || key.equals(PreferencesHelper.PREF_KEY_ADS)) {
+                || key.equals(PreferencesHelper.PREF_KEY_ADS)
+                || key.equals(PreferencesHelper.PREF_KEY_DEBUG)) {
             // Show Snackbar prompting user to restart the app in order to apply changes
             showThemeSnackbar();
         }
