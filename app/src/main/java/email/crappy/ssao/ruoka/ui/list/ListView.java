@@ -12,7 +12,7 @@ import email.crappy.ssao.ruoka.data.model.Week;
 public interface ListView extends MvpView {
     void showLoading();
 
-    void showError();
+    void showError(Throwable throwable);
 
     void showContent(List<Week> weeks);
 }

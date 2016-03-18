@@ -34,6 +34,14 @@ public class WeekAdapter extends SupportAnnotatedAdapter implements WeekAdapterB
         this.items = items;
     }
 
+    public WeekAdapter(Context context) {
+        super(context);
+    }
+
+    public void setItems(List<Week> items) {
+        this.items = items;
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {

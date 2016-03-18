@@ -3,6 +3,7 @@ package email.crappy.ssao.ruoka.ui.list;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,7 +29,7 @@ import email.crappy.ssao.ruoka.ui.list.adapter.WeekAdapter;
 public class ListFragment extends MvpFragment<ListView, ListPresenter> implements ListView {
     private static final String ARGS_SHOW_ADS = "ARGS_SHOW_ADS";
     @Bind(R.id.loading)
-    View loadingView;
+    View loading;
     @Bind(R.id.recycler)
     RecyclerView recyclerView;
     @Bind(R.id.adView)
@@ -53,19 +54,13 @@ public class ListFragment extends MvpFragment<ListView, ListPresenter> implement
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        presenter.loadContent();
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        if (getArguments().getBoolean(ARGS_SHOW_ADS)) {
-            adView.setVisibility(View.VISIBLE);
-            AdRequest request = new AdRequest.Builder()
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .addTestDevice("3E17D9B5B1509443815503025302253C")
-                    .build();
-            adView.loadAd(request);
-        }
+        WeekAdapter adapter = new WeekAdapter(getContext());
+        recyclerView.setAdapter(adapter);
+
+        presenter.loadContent();
     }
 
     @NonNull
@@ -76,17 +71,28 @@ public class ListFragment extends MvpFragment<ListView, ListPresenter> implement
 
     @Override
     public void showLoading() {
-        loadingView.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showError() {
-        loadingView.setVisibility(View.GONE);
+    public void showError(Throwable throwable) {
+        Snackbar.make(recyclerView, throwable.getMessage(), Snackbar.LENGTH_LONG).show();
+        loading.setVisibility(View.GONE);
     }
 
     @Override
     public void showContent(List<Week> weeks) {
-        loadingView.setVisibility(View.GONE);
-        recyclerView.setAdapter(new WeekAdapter(getContext(), weeks));
+        loading.setVisibility(View.GONE);
+
+        ((WeekAdapter) recyclerView.getAdapter()).setItems(weeks);
+
+        if (getArguments().getBoolean(ARGS_SHOW_ADS)) {
+            adView.setVisibility(View.VISIBLE);
+            AdRequest request = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice("3E17D9B5B1509443815503025302253C")
+                    .build();
+            adView.loadAd(request);
+        }
     }
 }

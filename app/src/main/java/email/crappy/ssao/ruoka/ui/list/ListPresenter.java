@@ -3,6 +3,7 @@ package email.crappy.ssao.ruoka.ui.list;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import email.crappy.ssao.ruoka.data.DataManager;
+import timber.log.Timber;
 
 /**
  * @author Santeri 'iffa'
@@ -18,9 +19,11 @@ public class ListPresenter extends MvpBasePresenter<ListView> {
         if (isViewAttached()) getView().showLoading();
 
         dataManager.getWeeks().subscribe(weeks -> {
+            Timber.i("loadContent() next");
             if (isViewAttached()) getView().showContent(weeks);
         }, throwable -> {
-            if (isViewAttached()) getView().showError();
+            Timber.e(throwable, "loadContent error");
+            if (isViewAttached()) getView().showError(throwable);
         });
     }
 }
