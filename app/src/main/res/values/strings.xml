@@ -2,6 +2,8 @@
     <string name="app_name">SSKKY-ruokalista</string>
     <string name="activity_settings">Settings</string>
     <string name="action_clear">Clear data</string>
+    <string name="notification_title">Today\'s food</string>
+    <string name="notification_title_tomorrow">Tomorrow\'s food</string>
 
     <string name="placeholder_tabs_title">Hey, this feature is still unimplemented.</string>
     <string name="placeholder_tabs">To continue using the app, switch back to the list-layout.</string>
@@ -11,5 +13,5 @@
     <string name="placeholder_food">Kanakeitto, mansikkarahka, salaatti</string>
     <string name="placeholder_food_veg">kasvissosekeitto</string>
     <string name="placeholder_icon">Dank memes</string>
-    <string name="notification_title">Today\'s food</string>
+    <string name="done">Done</string>
 </resources>
