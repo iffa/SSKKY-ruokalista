@@ -10,7 +10,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.SSKKYApplication;
-import email.crappy.ssao.ruoka.data.PreferencesHelper;
 import email.crappy.ssao.ruoka.injection.component.ActivityComponent;
 import email.crappy.ssao.ruoka.injection.component.DaggerActivityComponent;
 import email.crappy.ssao.ruoka.injection.module.ActivityModule;
@@ -28,18 +27,8 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        PreferencesHelper.Theme theme = SSKKYApplication.get(this).getComponent().dataManager().getPreferencesHelper().getTheme();
-        switch (theme) {
-            case LIGHT:
-                setTheme(R.style.Theme_SSKKY_Light);
-                break;
-            case DARK:
-                setTheme(R.style.Theme_SSKKY_Dark);
-                break;
-            case PINK:
-                setTheme(R.style.Theme_SSKKY_Pink);
-                break;
-        }
+        int theme = SSKKYApplication.get(this).getComponent().dataManager().getPreferencesHelper().getThemeRes();
+        setTheme(theme);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class SSKKYApplication extends Application {
             Timber.plant(new Timber.DebugTree());
         }
 
-        AlarmUtil.setRepeatingAlarm(this, 10, 0, 0);
+        getComponent().dataManager().setAlarm(this);
     }
 
     public ApplicationComponent getComponent() {

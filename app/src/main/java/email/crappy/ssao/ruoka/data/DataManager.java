@@ -1,11 +1,14 @@
 package email.crappy.ssao.ruoka.data;
 
+import android.content.Context;
+
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import email.crappy.ssao.ruoka.data.model.Week;
+import email.crappy.ssao.ruoka.data.util.AlarmUtil;
 import email.crappy.ssao.ruoka.data.util.DateUtil;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -70,5 +73,20 @@ public class DataManager {
         return preferencesHelper.getWeeksObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public void setNotificationTime(Context context, int hourOfDay, int minute) {
+        preferencesHelper.putNotificationTime(hourOfDay, minute);
+        Timber.i("Notification time set to %s:%s, resetting alarm", hourOfDay, minute);
+
+        AlarmUtil.setRepeatingAlarm(context, hourOfDay, minute, 0);
+    }
+
+    public void setAlarm(Context context) {
+        PreferencesHelper.NotificationTime time = preferencesHelper.getNotificationTime();
+        Timber.i("Setting alarm %s:%s", time.hourOfDay, time.minute);
+
+        AlarmUtil.setRepeatingAlarm(context, time.hourOfDay, time.minute, 0);
+
     }
 }

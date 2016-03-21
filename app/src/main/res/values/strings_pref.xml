@@ -3,8 +3,10 @@
     <string name="pref_general">General</string>
     <string name="pref_other">About the application</string>
     <string name="pref_notifications">Show notifications</string>
-    <string name="pref_notifications_off">No notifications will be shown in the morning.</string>
-    <string name="pref_notifications_on">Notifications will be shown in the morning.</string>
+    <string name="pref_notifications_off">No notifications will be shown.</string>
+    <string name="pref_notifications_on">Notifications will be shown at the chosen time.</string>
+    <string name="pref_notification_time">Show notifications at…</string>
+    <string name="pref_notification_time_summary">Specify the time at which you want to receive notifications at. Note: after 12 p.m. the notification will show food for the following day.</string>
     <string name="pref_ads">Show ads</string>
     <string name="pref_ads_summary">Ad income supports development: please consider leaving them enabled. You are free to disable them as you wish.</string>
     <string name="pref_theme">Choose theme</string>

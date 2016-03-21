@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidUnknownAttribute -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/pref_general">
         <CheckBoxPreference
@@ -7,6 +7,10 @@
             android:summaryOff="@string/pref_notifications_off"
             android:summaryOn="@string/pref_notifications_on"
             android:title="@string/pref_notifications" />
+
+        <Preference
+            android:key="PREF_NOTIFICATION_PICKER"
+            android:title="@string/pref_notification_time" />
 
         <CheckBoxPreference
             android:defaultValue="true"

@@ -35,4 +35,11 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>
         <item name="preferenceTint">@color/accent_state_list_manly</item>
     </style>
+
+    <style name="RadialTimePicker">
+        <item name="bpMainColor1">@color/primary</item>
+        <item name="bpMainColor2">@color/primaryDark</item>
+        <item name="bpAccentColor">@color/accent</item>
+        <item name="bpMainTextColor">@android:color/primary_text_dark</item>
+    </style>
 </resources>

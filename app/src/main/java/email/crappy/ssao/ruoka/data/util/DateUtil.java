@@ -21,17 +21,19 @@ public class DateUtil {
     }
 
     /**
-     * Checks if a given date (dd.MM) is today
+     * Checks if a given date (dd.MM) is today (or tomorrow)
      *
-     * @param date Date (dd.MM)
+     * @param date     Date (dd.MM)
+     * @param tomorrow Set to true if checking for tomorrow
      * @return True if today
      */
-    public static boolean isToday(String date) {
+    public static boolean isToday(String date, boolean tomorrow) {
         int day = Integer.parseInt(date.split("\\.")[0]);
         int month = Integer.parseInt(date.split("\\.")[1]);
 
         Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.DAY_OF_MONTH) == day && calendar.get(Calendar.MONTH) == (month - 1);
+        if (tomorrow) calendar.add(Calendar.DATE, 1);
 
+        return calendar.get(Calendar.DAY_OF_MONTH) == day && calendar.get(Calendar.MONTH) == (month - 1);
     }
 }

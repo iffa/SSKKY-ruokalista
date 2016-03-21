@@ -16,11 +16,13 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.data.model.Day;
 import email.crappy.ssao.ruoka.data.model.Week;
 import email.crappy.ssao.ruoka.data.util.DateUtil;
 import email.crappy.ssao.ruoka.injection.ApplicationContext;
 import rx.Observable;
+import timber.log.Timber;
 
 /**
  * @author Santeri 'iffa'
@@ -29,7 +31,9 @@ import rx.Observable;
 public class PreferencesHelper {
     private static final String PREF_KEY_WEEK_LIST = "PREF_WEEK_LIST";
     private static final String PREF_KEY_EXPIRATION_DATE = "PREF_EXPIRATION_DATE";
+    private static final String PREF_KEY_NOTIFICATION_TIME = "PREF_NOTIFICATION_TIME";
     public static final String PREF_KEY_NOTIFICATIONS = "PREF_NOTIFICATIONS";
+    public static final String PREF_KEY_NOTIFICATION_PICKER = "PREF_NOTIFICATION_PICKER";
     public static final String PREF_KEY_ADS = "PREF_ADS";
     public static final String PREF_KEY_THEME = "PREF_THEME";
     public static final String PREF_KEY_LAYOUT = "PREF_LAYOUT";
@@ -72,13 +76,13 @@ public class PreferencesHelper {
         });
     }
 
-    public Day getCurrentDay() {
+    public Day getCurrentDay(boolean forTomorrow) {
         Day current = null;
         weekLoop:
         {
             for (Week week : getWeeks()) {
                 for (Day day : week.days) {
-                    if (DateUtil.isToday(day.date)) {
+                    if (DateUtil.isToday(day.date, forTomorrow)) {
                         current = day;
                         break weekLoop;
                     }
@@ -88,9 +92,9 @@ public class PreferencesHelper {
         return current;
     }
 
-    public Observable<Day> getCurrentDayObservable() {
+    public Observable<Day> getCurrentDayObservable(boolean forTomorrow) {
         return Observable.create((Observable.OnSubscribe<Day>) subscriber -> {
-            Day current = getCurrentDay();
+            Day current = getCurrentDay(forTomorrow);
             if (current == null) {
                 subscriber.onError(new NullPointerException("No current day found"));
             } else {
@@ -120,6 +124,18 @@ public class PreferencesHelper {
         return sharedPreferences.getBoolean(PREF_KEY_NOTIFICATIONS, true);
     }
 
+    public NotificationTime getNotificationTime() {
+        String notificationJSon = sharedPreferences.getString(PREF_KEY_NOTIFICATION_TIME, null);
+        if (notificationJSon != null) {
+            return gson.fromJson(notificationJSon, NotificationTime.class);
+        }
+        return new NotificationTime(10, 0);
+    }
+
+    public void putNotificationTime(int hourOfDay, int minute) {
+        sharedPreferences.edit().putString(PREF_KEY_NOTIFICATION_TIME, gson.toJson(new NotificationTime(hourOfDay, minute))).apply();
+    }
+
     public boolean getShowAds() {
         return sharedPreferences.getBoolean(PREF_KEY_ADS, true);
     }
@@ -128,30 +144,16 @@ public class PreferencesHelper {
         return sharedPreferences.getBoolean(PREF_KEY_DEBUG, false);
     }
 
-    public Theme getTheme() {
-        return Theme.valueOf(Integer.parseInt(sharedPreferences.getString(PREF_KEY_THEME, "0")));
-    }
-
-    public enum Theme {
-        LIGHT(0),
-        DARK(1),
-        PINK(2);
-
-        private final int value;
-        private static Map<Integer, Theme> map = new HashMap<>();
-
-        Theme(int value) {
-            this.value = value;
-        }
-
-        static {
-            for (Theme theme : Theme.values()) {
-                map.put(theme.value, theme);
-            }
-        }
-
-        public static Theme valueOf(int value) {
-            return map.get(value);
+    public int getThemeRes() {
+        switch (Integer.parseInt(sharedPreferences.getString(PREF_KEY_THEME, "0"))) {
+            case 0:
+                return R.style.Theme_SSKKY_Light;
+            case 1:
+                return R.style.Theme_SSKKY_Dark;
+            case 2:
+                return R.style.Theme_SSKKY_Pink;
+            default:
+                return R.style.Theme_SSKKY_Light;
         }
     }
 
@@ -180,5 +182,15 @@ public class PreferencesHelper {
             return map.get(value);
         }
 
+    }
+
+    public class NotificationTime {
+        public int hourOfDay;
+        public int minute;
+
+        public NotificationTime(int hourOfDay, int minute) {
+            this.hourOfDay = hourOfDay;
+            this.minute = minute;
+        }
     }
 }

@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
+import java.util.Calendar;
+
 import javax.inject.Inject;
 
 import email.crappy.ssao.ruoka.R;
@@ -39,32 +41,38 @@ public class AlarmReceiver extends BroadcastReceiver {
             return;
         }
 
+        final boolean forTomorrow;
+        forTomorrow = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
+                || dataManager.getPreferencesHelper().getNotificationTime().hourOfDay > 12;
+
         dataManager.getPreferencesHelper()
-                .getCurrentDayObservable()
+                .getCurrentDayObservable(forTomorrow)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(day -> {
-                    Timber.i("Found data for current day, showing notification");
-                    showNotification(context, day);
+                    Timber.i("Found data, showing notification");
+                    showNotification(context, day, forTomorrow);
                 }, throwable -> {
-                    Timber.w(throwable, "No data for current day found");
+                    Timber.w(throwable, "No data found");
                 });
     }
 
-    private void showNotification(Context context, Day day) {
+    private void showNotification(Context context, Day day, boolean forTomorrow) {
         String[] foodSplit = day.food.split("\\n");
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context.getApplicationContext())
                 .setSmallIcon(R.drawable.ic_stat_notification)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
                         R.mipmap.ic_launcher))
-                .setContentTitle(context.getResources().getString(R.string.notification_title))
+                .setContentTitle(forTomorrow
+                        ? context.getResources().getString(R.string.notification_title_tomorrow)
+                        : context.getResources().getString(R.string.notification_title))
                 .setContentText(foodSplit[0])
                 .setAutoCancel(false);
         if (foodSplit.length > 1) {
             mBuilder.setSubText(foodSplit[1]);
         }
 
-        Intent resultIntent = new Intent(context, MainActivity.class);
+        Intent resultIntent = new Intent(context.getApplicationContext(), MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainActivity.class);
         stackBuilder.addNextIntent(resultIntent);

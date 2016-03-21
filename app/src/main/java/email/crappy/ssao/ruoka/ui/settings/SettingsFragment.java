@@ -1,6 +1,5 @@
 package email.crappy.ssao.ruoka.ui.settings;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,18 +9,20 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.XpPreferenceFragment;
 import android.view.View;
 
+import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
+
 import net.xpece.android.support.preference.ListPreference;
-import net.xpece.android.support.preference.PreferenceCategory;
 import net.xpece.android.support.preference.PreferenceDividerDecoration;
 
 import email.crappy.ssao.ruoka.R;
+import email.crappy.ssao.ruoka.SSKKYApplication;
 import email.crappy.ssao.ruoka.data.PreferencesHelper;
 import email.crappy.ssao.ruoka.ui.MainActivity;
 
 /**
  * @author Santeri 'iffa'
  */
-public class SettingsFragment extends XpPreferenceFragment implements Preference.OnPreferenceChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment extends XpPreferenceFragment implements Preference.OnPreferenceChangeListener, SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener, RadialTimePickerDialogFragment.OnTimeSetListener {
 
     @Override
     public void onCreatePreferences2(Bundle savedInstanceState, String rootKey) {
@@ -29,8 +30,10 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
 
         addPreferencesFromResource(R.xml.pref_other);
 
-        bindPreferenceSummaryToValue(findPreference("PREF_THEME"));
-        bindPreferenceSummaryToValue(findPreference("PREF_LAYOUT"));
+        bindPreferenceSummaryToValue(findPreference(PreferencesHelper.PREF_KEY_THEME));
+        bindPreferenceSummaryToValue(findPreference(PreferencesHelper.PREF_KEY_LAYOUT));
+
+        findPreference(PreferencesHelper.PREF_KEY_NOTIFICATION_PICKER).setOnPreferenceClickListener(this);
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {
@@ -107,5 +110,33 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
             // Show Snackbar prompting user to restart the app in order to apply changes
             showThemeSnackbar();
         }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        switch (preference.getKey()) {
+            case PreferencesHelper.PREF_KEY_NOTIFICATION_PICKER:
+                PreferencesHelper.NotificationTime startTime = SSKKYApplication.get(getContext())
+                        .getComponent()
+                        .preferencesHelper()
+                        .getNotificationTime();
+                RadialTimePickerDialogFragment rtpd = new RadialTimePickerDialogFragment()
+                        .setOnTimeSetListener(this)
+                        .setThemeCustom(R.style.RadialTimePicker)
+                        .setDoneText(getResources().getString(R.string.done))
+                        .setStartTime(startTime.hourOfDay, startTime.minute);
+                rtpd.show(getFragmentManager(), rtpd.getClass().getName());
+
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onTimeSet(RadialTimePickerDialogFragment dialog, int hourOfDay, int minute) {
+        SSKKYApplication.get(getContext())
+                .getComponent()
+                .dataManager()
+                .setNotificationTime(getContext(), hourOfDay, minute);
     }
 }
