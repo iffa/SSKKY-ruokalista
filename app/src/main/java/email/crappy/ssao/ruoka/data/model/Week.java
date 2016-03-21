@@ -11,10 +11,8 @@ import com.google.gson.annotations.SerializedName;
 public class Week {
 
     @SerializedName("title")
-    @Expose
     public String title;
     @SerializedName("days")
-    @Expose
     public List<Day> days = new ArrayList<Day>();
 
 }

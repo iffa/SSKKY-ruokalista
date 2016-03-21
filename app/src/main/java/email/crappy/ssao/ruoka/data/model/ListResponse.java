@@ -12,10 +12,8 @@ import com.google.gson.annotations.SerializedName;
 public class ListResponse {
 
     @SerializedName("expirationDate")
-    @Expose
     public Date expirationDate;
     @SerializedName("weeks")
-    @Expose
     public List<Week> weeks = new ArrayList<Week>();
 
 }
