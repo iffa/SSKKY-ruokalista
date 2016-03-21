@@ -26,8 +26,6 @@ public class SSKKYApplication extends Application {
             //Debug.startMethodTracing("sskky");
             Timber.plant(new Timber.DebugTree());
         }
-
-        //Fabric.with(this, new Answers());
     }
 
     public ApplicationComponent getComponent() {
