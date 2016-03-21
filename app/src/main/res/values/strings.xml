@@ -11,4 +11,5 @@
     <string name="placeholder_food">Kanakeitto, mansikkarahka, salaatti</string>
     <string name="placeholder_food_veg">kasvissosekeitto</string>
     <string name="placeholder_icon">Dank memes</string>
+    <string name="notification_title">Today\'s food</string>
 </resources>

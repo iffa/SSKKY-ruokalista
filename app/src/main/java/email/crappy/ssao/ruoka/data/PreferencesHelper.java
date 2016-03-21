@@ -16,7 +16,9 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import email.crappy.ssao.ruoka.data.model.Day;
 import email.crappy.ssao.ruoka.data.model.Week;
+import email.crappy.ssao.ruoka.data.util.DateUtil;
 import email.crappy.ssao.ruoka.injection.ApplicationContext;
 import rx.Observable;
 
@@ -65,6 +67,34 @@ public class PreferencesHelper {
                 subscriber.onError(new NullPointerException("Local data is null"));
             } else {
                 subscriber.onNext(getWeeks());
+                subscriber.onCompleted();
+            }
+        });
+    }
+
+    public Day getCurrentDay() {
+        Day current = null;
+        weekLoop:
+        {
+            for (Week week : getWeeks()) {
+                for (Day day : week.days) {
+                    if (DateUtil.isToday(day.date)) {
+                        current = day;
+                        break weekLoop;
+                    }
+                }
+            }
+        }
+        return current;
+    }
+
+    public Observable<Day> getCurrentDayObservable() {
+        return Observable.create((Observable.OnSubscribe<Day>) subscriber -> {
+            Day current = getCurrentDay();
+            if (current == null) {
+                subscriber.onError(new NullPointerException("No current day found"));
+            } else {
+                subscriber.onNext(current);
                 subscriber.onCompleted();
             }
         });
