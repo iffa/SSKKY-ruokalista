@@ -4,3 +4,4 @@
 .idea
 app.properties
 fabric.properties
+*.apk
