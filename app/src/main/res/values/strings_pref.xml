@@ -13,8 +13,8 @@
     <string name="pref_restart">Restart to apply changes.</string>
     <string name="pref_restart_action">Restart</string>
     <string-array name="pref_themes">
-        <item>Default (light)</item>
-        <item>Default (dark)</item>
+        <item>Light (default)</item>
+        <item>Dark</item>
         <item>Pink</item>
     </string-array>
     <string-array name="pref_themes_values">
