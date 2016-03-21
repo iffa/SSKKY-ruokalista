@@ -9,6 +9,7 @@ import dagger.Component;
 import email.crappy.ssao.ruoka.data.DataManager;
 import email.crappy.ssao.ruoka.data.ListService;
 import email.crappy.ssao.ruoka.data.PreferencesHelper;
+import email.crappy.ssao.ruoka.data.receiver.AlarmReceiver;
 import email.crappy.ssao.ruoka.injection.ApplicationContext;
 import email.crappy.ssao.ruoka.injection.module.ApplicationModule;
 
@@ -18,6 +19,8 @@ import email.crappy.ssao.ruoka.injection.module.ApplicationModule;
 @Singleton
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
+    void inject(AlarmReceiver alarmReceiver);
+
     @ApplicationContext
     Context context();
 

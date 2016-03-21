@@ -3,6 +3,7 @@
     package="email.crappy.ssao.ruoka">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".SSKKYApplication"
@@ -25,6 +26,14 @@
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/activity_settings" />
+
+        <receiver android:name=".data.receiver.AlarmReceiver" />
+
+        <receiver android:name=".data.receiver.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

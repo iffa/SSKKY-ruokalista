@@ -2,14 +2,11 @@ package email.crappy.ssao.ruoka;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Debug;
 
-import com.crashlytics.android.answers.Answers;
-
+import email.crappy.ssao.ruoka.data.util.AlarmUtil;
 import email.crappy.ssao.ruoka.injection.component.ApplicationComponent;
 import email.crappy.ssao.ruoka.injection.component.DaggerApplicationComponent;
 import email.crappy.ssao.ruoka.injection.module.ApplicationModule;
-import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 /**
@@ -26,6 +23,8 @@ public class SSKKYApplication extends Application {
             //Debug.startMethodTracing("sskky");
             Timber.plant(new Timber.DebugTree());
         }
+
+        AlarmUtil.setRepeatingAlarm(this, 10, 0, 0);
     }
 
     public ApplicationComponent getComponent() {
