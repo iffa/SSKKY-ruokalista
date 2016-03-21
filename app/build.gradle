@@ -45,7 +45,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true // TODO: ProGuard rules
+            minifyEnabled false // TODO: ProGuard rules
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
