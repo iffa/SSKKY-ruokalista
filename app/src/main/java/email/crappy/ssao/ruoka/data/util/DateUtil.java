@@ -39,6 +39,15 @@ public class DateUtil {
         return calendar.get(Calendar.DAY_OF_MONTH) == day && calendar.get(Calendar.MONTH) == (month - 1);
     }
 
+    public static boolean isRemainingWeek(String weekNumber) {
+        int currentWeek = Calendar.getInstance(Locale.GERMAN).get(Calendar.WEEK_OF_YEAR);
+        if (Integer.parseInt(weekNumber) < currentWeek) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static boolean isCurrentWeek(String weekNumber) {
         int currentWeek = Calendar.getInstance(Locale.GERMAN).get(Calendar.WEEK_OF_YEAR);
         Timber.i("Comparing week %s with %s", weekNumber, currentWeek);

@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity {
         Timber.i("Should show ads: %s", dataManager.getPreferencesHelper().getShowAds());
         Timber.i("Should debug: %s", dataManager.getPreferencesHelper().getIsDebug());
         Timber.i("Layout to show: %s", dataManager.getPreferencesHelper().getMenuLayout().name());
+        Timber.i("Should hide old weeks: %s", dataManager.getPreferencesHelper().getHideOldWeeks());
 
         if (savedInstanceState == null) {
             Fragment contentFragment;

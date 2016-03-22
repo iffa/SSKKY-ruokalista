@@ -32,6 +32,7 @@ public class PreferencesHelper {
     private static final String PREF_KEY_WEEK_LIST = "PREF_WEEK_LIST";
     private static final String PREF_KEY_EXPIRATION_DATE = "PREF_EXPIRATION_DATE";
     private static final String PREF_KEY_NOTIFICATION_TIME = "PREF_NOTIFICATION_TIME";
+    public static final String PREF_KEY_HIDE_OLD_WEEKS = "PREF_HIDE_OLD_WEEKS";
     public static final String PREF_KEY_NOTIFICATIONS = "PREF_NOTIFICATIONS";
     public static final String PREF_KEY_NOTIFICATION_PICKER = "PREF_NOTIFICATION_PICKER";
     public static final String PREF_KEY_ADS = "PREF_ADS";
@@ -142,6 +143,10 @@ public class PreferencesHelper {
 
     public boolean getIsDebug() {
         return sharedPreferences.getBoolean(PREF_KEY_DEBUG, false);
+    }
+
+    public boolean getHideOldWeeks() {
+        return sharedPreferences.getBoolean(PREF_KEY_HIDE_OLD_WEEKS, true);
     }
 
     public int getThemeRes() {

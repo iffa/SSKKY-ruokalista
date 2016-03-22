@@ -106,7 +106,8 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
         if (key.equals(PreferencesHelper.PREF_KEY_THEME)
                 || key.equals(PreferencesHelper.PREF_KEY_LAYOUT)
                 || key.equals(PreferencesHelper.PREF_KEY_ADS)
-                || key.equals(PreferencesHelper.PREF_KEY_DEBUG)) {
+                || key.equals(PreferencesHelper.PREF_KEY_DEBUG)
+                || key.equals(PreferencesHelper.PREF_KEY_HIDE_OLD_WEEKS)) {
             // Show Snackbar prompting user to restart the app in order to apply changes
             showThemeSnackbar();
         }
