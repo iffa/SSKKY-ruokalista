@@ -9,6 +9,12 @@ try {
     throw ex;
 }
 
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('HH.mm:ss dd.MM.yyyy')
+    return formattedDate
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -54,12 +60,11 @@ android {
             applicationIdSuffix '.debug'
             debuggable true
             signingConfig signingConfigs.debug
-            //ext.enableCrashlytics = false
         }
     }
 
     applicationVariants.all { variant ->
-        variant.resValue "string", "app_version", variant.versionName
+        variant.resValue "string", "app_version", variant.versionName + " - " + getDate()
         variant.resValue "string", "ad_unit_id", "\"${props.getProperty("adUnitId")}\""
     }
 
@@ -113,10 +118,11 @@ dependencies {
     compile "com.hannesdorfmann.annotatedadapter:support-recyclerview:$ANNOTATED_ADAPTER_VERSION"
     apt "com.hannesdorfmann.annotatedadapter:processor:$ANNOTATED_ADAPTER_VERSION"
 
-    compile 'net.xpece.android:support-preference:0.5.9'
+    compile 'net.xpece.android:support-preference:0.5.11'
 
-    compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
+    //compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
     compile 'com.code-troopers.betterpickers:library:2.5.2'
+    compile 'com.github.ybq:AndroidSpinKit:v1.0.0'
 
     compile 'in.workarounds.typography:typography:0.0.8'
 }
