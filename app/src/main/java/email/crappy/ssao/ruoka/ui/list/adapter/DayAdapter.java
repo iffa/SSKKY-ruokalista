@@ -1,6 +1,7 @@
 package email.crappy.ssao.ruoka.ui.list.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.data.model.Day;
+import email.crappy.ssao.ruoka.data.util.DateUtil;
 
 /**
  * @author Santeri 'iffa'
@@ -58,5 +60,11 @@ public class DayAdapter extends SupportAnnotatedAdapter implements DayAdapterBin
         vh.day.setText(day.day);
         vh.food.setText(food[0]);
         vh.foodVeg.setText((food.length > 1 ? food[1] : ""));
+
+        if (DateUtil.isToday(day.date, false)) {
+            vh.food.setTypeface(null, Typeface.BOLD);
+        } else {
+            vh.food.setTypeface(null, Typeface.NORMAL);
+        }
     }
 }
