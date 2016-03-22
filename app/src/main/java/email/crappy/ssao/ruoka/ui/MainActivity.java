@@ -65,6 +65,8 @@ public class MainActivity extends BaseActivity {
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.content, contentFragment).commit();
         }
+
+        dataManager.setAlarm(this);
     }
 
     @Override

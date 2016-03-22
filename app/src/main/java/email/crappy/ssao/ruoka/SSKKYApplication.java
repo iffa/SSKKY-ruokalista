@@ -23,8 +23,6 @@ public class SSKKYApplication extends Application {
             //Debug.startMethodTracing("sskky");
             Timber.plant(new Timber.DebugTree());
         }
-
-        getComponent().dataManager().setAlarm(this);
     }
 
     public ApplicationComponent getComponent() {
