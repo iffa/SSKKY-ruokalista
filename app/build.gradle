@@ -120,7 +120,6 @@ dependencies {
 
     compile 'net.xpece.android:support-preference:0.5.11'
 
-    //compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
     compile 'com.code-troopers.betterpickers:library:2.5.2'
     compile 'com.github.ybq:AndroidSpinKit:v1.0.0'
 
