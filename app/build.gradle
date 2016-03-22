@@ -16,7 +16,7 @@ android {
     def versionMajor = 3
     def versionMinor = 0
     def versionPatch = 0
-    def versionBuild = 0
+    def versionBuild = 1 // If you're happy and you know it, bump this
 
     defaultConfig {
         applicationId "email.crappy.ssao.ruoka"
