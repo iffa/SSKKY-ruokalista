@@ -12,6 +12,8 @@ import email.crappy.ssao.ruoka.data.model.Week;
 import email.crappy.ssao.ruoka.data.util.AlarmUtil;
 import email.crappy.ssao.ruoka.data.util.DateUtil;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -39,9 +41,13 @@ public class DataManager {
      */
     public Observable<List<Week>> getWeeks(boolean onlyRemaining) {
         if (preferencesHelper.getWeeks() == null || DateUtil.isExpired(preferencesHelper.getExpirationDate())) {
-            return getRemoteWeeks(onlyRemaining);
+            return getRemoteWeeks(onlyRemaining)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
         }
-        return getLocalWeeks(onlyRemaining);
+        return getLocalWeeks(onlyRemaining)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
