@@ -14,5 +14,5 @@ public interface ListView extends MvpView {
 
     void showError(Throwable throwable);
 
-    void showContent(List<Week> weeks);
+    void showContent(List<Week> weeks, int currentPosition);
 }

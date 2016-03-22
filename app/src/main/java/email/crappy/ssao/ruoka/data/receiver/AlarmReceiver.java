@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -42,7 +43,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
 
         final boolean forTomorrow;
-        forTomorrow = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
+        forTomorrow = Calendar.getInstance(Locale.GERMAN).get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
                 || dataManager.getPreferencesHelper().getNotificationTime().hourOfDay > 12;
 
         dataManager.getPreferencesHelper()

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import email.crappy.ssao.ruoka.data.receiver.AlarmReceiver;
 import timber.log.Timber;
@@ -21,8 +22,8 @@ public class AlarmUtil {
         Intent alarmIntent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Calendar calendar = Calendar.getInstance();
-        Calendar now = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(Locale.GERMAN);
+        Calendar now = Calendar.getInstance(Locale.GERMAN);
         calendar.set(Calendar.HOUR_OF_DAY, hh);
         calendar.set(Calendar.MINUTE, mm);
         calendar.set(Calendar.SECOND, ss);
