@@ -3,8 +3,8 @@
     <!-- Default theme colors -->
     <color name="primary">#3F51B5</color>
     <color name="primaryDark">#303F9F</color>
-    <color name="accent">#FF4081</color>
-    <color name="accentDisabled">#61FF4081</color> <!-- Disabled alpha #61 -->
+    <color name="accent">#FFC107</color>
+    <color name="accentDisabled">#61FFC107</color> <!-- Disabled alpha #61 -->
 
     <!-- Pink theme colors -->
     <color name="manlyPrimary">#D377E6</color>
