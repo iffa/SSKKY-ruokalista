@@ -7,11 +7,11 @@
 
     <string name="placeholder_tabs_title">Hey, this feature is still unimplemented.</string>
     <string name="placeholder_tabs">To continue using the app, switch back to the list-layout.</string>
-    <string name="placeholder_week">viikko 7 (15.2–19.2)</string>
-    <string name="placeholder_day">ma</string>
-    <string name="placeholder_date">12.10.</string>
-    <string name="placeholder_food">Kanakeitto, mansikkarahka, salaatti</string>
-    <string name="placeholder_food_veg">kasvissosekeitto</string>
-    <string name="placeholder_icon">Dank memes</string>
+    <string name="placeholder_week" translatable="false">viikko 7 (15.2–19.2)</string>
+    <string name="placeholder_day" translatable="false">ma</string>
+    <string name="placeholder_date" translatable="false">12.10.</string>
+    <string name="placeholder_food" translatable="false">Kanakeitto, mansikkarahka, salaatti</string>
+    <string name="placeholder_food_veg" translatable="false">kasvissosekeitto</string>
+    <string name="placeholder_icon" translatable="false">Dank memes</string>
     <string name="done">Done</string>
 </resources>

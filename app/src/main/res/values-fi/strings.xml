@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SSKKY-ruokalista</string>
+    <string name="action_clear">Poista tiedot</string>
+    <string name="activity_settings">Asetukset</string>
+    <string name="done">Valmis</string>
+    <string name="notification_title">Päivän ruoka</string>
+    <string name="notification_title_tomorrow">Huomisen ruoka</string>
+    <string name="placeholder_tabs">Jatkaaksesi sovelluksen käyttöä, vaihda takaisin listanäkymään (sori!).</string>
+    <string name="placeholder_tabs_title">Tätä ominaisuutta ei ole vielä kehitetty.</string>
+    <string name="pref_ads">Näytä mainokset</string>
+    <string name="pref_ads_summary">Mainostulot tukevat kehitystä: harkitsethan tämän päälle jättämistä. Saat ottaa mainokset kuitenkin pois käytöstä vapaasti.</string>
+    <string name="pref_contact">Ota yhteyttä</string>
+    <string name="pref_credits">Kiitokset…</string>
+    <string name="pref_credits_summary">\u2022 /r/AndroidDeville hyödyllisistä resursseista ja artikkeleista\n\u2022 Kavereille, ketkä auttoivat kehityksessä löytämällä bugeja ja ehdottamalla uusia hauskoja ideoita.\n\n\u2022 Erikoiskiitokset Juho Haimilalle ❤</string>
+    <string name="pref_debug">Kehittäjätila</string>
+    <string name="pref_debug_summary">Ota käyttöön kehittäjätila ja kokeelliset ominaisuudet.</string>
+    <string name="pref_general">Yleiset</string>
+    <string name="pref_github">Lähdekoodi GitHubissa</string>
+    <string name="pref_github_summary">Selaa lähdekoodia ja käytettyjen kolmannen osapuolen kirjastojen lisenssejä.</string>
+    <string name="pref_hide_weeks">Näytä vain jäljellä olevat viikot</string>
+    <string name="pref_hide_weeks_off">Kaikki viikot näytetään.</string>
+    <string name="pref_hide_weeks_on">Vain jäljellä olevat viikot näytetään.</string>
+    <string name="pref_layout">Vaihda näkymää</string>
+    <string name="pref_notification_time">Ilmoitusten kellonaika…</string>
+    <string name="pref_notification_time_summary">Määritä kellonaika milloin haluat saada ilmoituksia. Huom: klo 12.00 jälkeiset ilmoitukset kertovat seuraavan päivän ruoan.</string>
+    <string name="pref_notifications">Ilmoitukset</string>
+    <string name="pref_notifications_off">Ilmoituksia ei näytetä.</string>
+    <string name="pref_notifications_on">Ilmoitukset näytetään valittuna kellonaikana.</string>
+    <string name="pref_other">Tietoja sovelluksesta</string>
+    <string name="pref_restart">Uudelleenkäynnistä nähdäksesi muutokset.</string>
+    <string name="pref_restart_action">OK</string>
+    <string name="pref_theme">Valitse teema</string>
+    <string-array name="pref_themes">
+        <item>Vaalea (oletus)</item>
+        <item>Tumma</item>
+        <item>Pinkki</item>
+    </string-array>
+    <string-array name="pref_layouts">
+        <item>Näytä viikot listana</item>
+        <item>Näytä viikot välilehdissä</item>
+    </string-array>
+</resources>

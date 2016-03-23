@@ -38,7 +38,7 @@
     <string name="pref_credits">Thanks to…</string>
     <string name="pref_credits_summary">\u2022 /r/AndroidDev for helpful resources and articles\n\u2022 All friends that helped with development by finding bugs and suggesting amazing and fun ideas.\n\n\u2022 Special thanks to Juho Haimila ❤</string>
     <string name="pref_contact">Contact me</string>
-    <string name="pref_contact_summary">Santeri Elo / me@santeri.xyz</string>
+    <string name="pref_contact_summary" translatable="false">Santeri Elo / me@santeri.xyz</string>
     <string name="pref_github">Code on GitHub</string>
     <string name="pref_github_summary">Browse the source code and used third party licenses on GitHub. Feel free to contribute!</string>
     <string name="pref_debug">Debug mode</string>
