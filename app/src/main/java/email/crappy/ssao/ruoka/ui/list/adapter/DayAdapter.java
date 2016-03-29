@@ -14,6 +14,7 @@ import java.util.List;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.data.model.Day;
 import email.crappy.ssao.ruoka.data.util.DateUtil;
+import email.crappy.ssao.ruoka.ui.base.ColorUtil;
 
 /**
  * @author Santeri 'iffa'
@@ -31,11 +32,6 @@ public class DayAdapter extends SupportAnnotatedAdapter implements DayAdapterBin
     )
     public final int item = 0;
     private List<Day> days;
-
-    public DayAdapter(Context context, List<Day> days) {
-        super(context);
-        this.days = days;
-    }
 
     public DayAdapter(Context context) {
         super(context);
@@ -63,8 +59,20 @@ public class DayAdapter extends SupportAnnotatedAdapter implements DayAdapterBin
 
         if (DateUtil.isToday(day.date, false)) {
             vh.food.setTypeface(null, Typeface.BOLD);
+
+            int textColor = ColorUtil.
+                    getColor(getInflater().getContext(), android.R.attr.textColorPrimary);
+
+            vh.day.setTextColor(textColor);
+            vh.date.setTextColor(textColor);
         } else {
             vh.food.setTypeface(null, Typeface.NORMAL);
+
+            int textColor = ColorUtil.
+                    getColor(getInflater().getContext(), android.R.attr.textColorSecondary);
+
+            vh.day.setTextColor(textColor);
+            vh.date.setTextColor(textColor);
         }
     }
 }

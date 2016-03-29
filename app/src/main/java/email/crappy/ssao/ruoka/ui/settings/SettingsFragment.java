@@ -88,7 +88,6 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
         }
 
         return true;
-
     }
 
     private void showThemeSnackbar() {
