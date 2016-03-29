@@ -3,7 +3,6 @@ package email.crappy.ssao.ruoka;
 import android.app.Application;
 import android.content.Context;
 
-import email.crappy.ssao.ruoka.data.util.AlarmUtil;
 import email.crappy.ssao.ruoka.injection.component.ApplicationComponent;
 import email.crappy.ssao.ruoka.injection.component.DaggerApplicationComponent;
 import email.crappy.ssao.ruoka.injection.module.ApplicationModule;
@@ -20,7 +19,6 @@ public class SSKKYApplication extends Application {
         super.onCreate();
 
         if (BuildConfig.DEBUG) {
-            //Debug.startMethodTracing("sskky");
             Timber.plant(new Timber.DebugTree());
         }
     }

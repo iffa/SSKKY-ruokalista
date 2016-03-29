@@ -86,8 +86,6 @@ public class ListFragment extends MvpFragment<ListView, ListPresenter> implement
 
     @Override
     public void showContent(List<Week> weeks, int currentPosition) {
-        //if (BuildConfig.DEBUG) Debug.stopMethodTracing();
-
         ((WeekAdapter) recyclerView.getAdapter()).setItems(weeks);
         ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(currentPosition, 0);
 
