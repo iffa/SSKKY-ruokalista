@@ -29,6 +29,7 @@
         <ListPreference
             style="@style/Preference.Material.DialogPreference.ListPreference.SimpleMenu"
             android:defaultValue="0"
+            android:enabled="false"
             android:entries="@array/pref_layouts"
             android:entryValues="@array/pref_layouts_values"
             android:key="PREF_LAYOUT"
@@ -37,8 +38,8 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="PREF_HIDE_OLD_WEEKS"
-            android:summaryOn="@string/pref_hide_weeks_on"
             android:summaryOff="@string/pref_hide_weeks_off"
+            android:summaryOn="@string/pref_hide_weeks_on"
             android:title="@string/pref_hide_weeks" />
     </PreferenceCategory>
 </PreferenceScreen>
