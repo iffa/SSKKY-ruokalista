@@ -31,6 +31,7 @@
     <string name="pref_restart">Uudelleenkäynnistä nähdäksesi muutokset.</string>
     <string name="pref_restart_action">OK</string>
     <string name="pref_theme">Valitse teema</string>
+    <string name="cancel">Peruuta</string>
     <string-array name="pref_themes">
         <item>Vaalea (oletus)</item>
         <item>Tumma</item>

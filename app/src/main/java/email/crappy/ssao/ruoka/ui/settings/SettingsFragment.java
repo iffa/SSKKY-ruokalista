@@ -124,6 +124,7 @@ public class SettingsFragment extends XpPreferenceFragment implements Preference
                         .setOnTimeSetListener(this)
                         .setThemeCustom(R.style.RadialTimePicker)
                         .setDoneText(getResources().getString(R.string.done))
+                        .setCancelText(getResources().getString(R.string.cancel))
                         .setStartTime(startTime.hourOfDay, startTime.minute);
                 rtpd.show(getFragmentManager(), rtpd.getClass().getName());
 
