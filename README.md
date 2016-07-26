@@ -1,13 +1,27 @@
-# SSKKY-ruokalista v4
+# SSKKY-ruokalista
 Development branch for version 4.
 
 ### About the app (technical)
 * Built with Java (Kotlin in the future is a possibility)
-* RxJava is all the hype!
+* Reactive is all the hype!
 * ...and boy is it beautiful
 
-License
---------
+### Libraries used
+SSKKY-ruokalista is made with these amazing libraries:
+
+* Android support libraries
+* Dagger 2
+* RxJava (with RxAndroid and RxPreferences)
+* Retrofit with Moshi
+* ButterKnife
+* Timber (with TimberTreeUtils)
+* Mosby
+* Materialize (for MD resources)
+* Material Preference
+* Crashlytics & Answers
+* LeakCanary
+
+### License
 
     Copyright 2016 Santeri Elo
 
