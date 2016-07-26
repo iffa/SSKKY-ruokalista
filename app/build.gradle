@@ -74,7 +74,6 @@ android {
 dependencies {
     def supportVersion = '24.1.1'
     def daggerVersion = '2.5'
-    // 2.3 causes build fail https://code.google.com/p/android/issues/detail?id=206407
     def retrofitVersion = '2.1.0'
     def butterknifeVersion = '8.2.1'
     def leakcanaryVersion = '1.4-beta2'
