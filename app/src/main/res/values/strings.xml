@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SSKKY-ruokalista</string>
+    <string name="activity_settings">Settings</string>
+    <string name="action_clear">Clear data</string>
+    <string name="notification_title">Today\'s food</string>
+    <string name="notification_title_tomorrow">Tomorrow\'s food</string>
+
+    <string name="placeholder_week" translatable="false">viikko 7 (15.2–19.2)</string>
+    <string name="placeholder_day" translatable="false">ma</string>
+    <string name="placeholder_date" translatable="false">12.10.</string>
+    <string name="placeholder_food" translatable="false">Kanakeitto, mansikkarahka, salaatti</string>
+    <string name="placeholder_food_veg" translatable="false">kasvissosekeitto</string>
+    <string name="placeholder_icon" translatable="false">Dank memes</string>
+
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+</resources>

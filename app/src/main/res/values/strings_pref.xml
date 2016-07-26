@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_general">General</string>
+    <string name="pref_other">About the application</string>
+    <string name="pref_notifications">Show notifications</string>
+    <string name="pref_notifications_off">No notifications will be shown.</string>
+    <string name="pref_notifications_on">Notifications will be shown.</string>
+    <string name="pref_theme">Choose theme</string>
+    <string name="pref_restart">Restart to apply changes.</string>
+    <string name="pref_restart_action">Restart</string>
+
+    <string-array name="pref_themes">
+        <item>Light (day)</item>
+        <item>Dark (night)</item>
+        <item>Automatic</item>
+    </string-array>
+    <string-array name="pref_themes_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="pref_credits">Thanks to…</string>
+    <string name="pref_credits_summary">\u2022 /r/AndroidDev for helpful resources and articles\n\u2022 All friends that helped with development by finding bugs and suggesting amazing and fun ideas.\n\n\u2022 Special thanks to Juho Haimila ❤</string>
+    <string name="pref_contact">Contact me</string>
+    <string name="pref_contact_summary" translatable="false">Santeri Elo / me@santeri.xyz</string>
+    <string name="pref_github">Code on GitHub</string>
+    <string name="pref_github_summary">Browse the source code on GitHub. Feel free to contribute!</string>
+    <string name="pref_debug">Debug mode</string>
+    <string name="pref_debug_summary">Enable debug mode and experimental features.</string>
+</resources>
