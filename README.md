@@ -1,6 +1,11 @@
 # SSKKY-ruokalista v4
 Development branch for version 4.
 
+### About the app (technical)
+* Built with Java (Kotlin in the future is a possibility)
+* RxJava is all the hype!
+* ...and boy is it beautiful
+
 License
 --------
 
@@ -17,5 +22,3 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-
