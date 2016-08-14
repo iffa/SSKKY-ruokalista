@@ -73,10 +73,10 @@ android {
 
 dependencies {
     def supportVersion = '24.1.1'
-    def daggerVersion = '2.5'
+    def daggerVersion = '2.6'
     def retrofitVersion = '2.1.0'
     def butterknifeVersion = '8.2.1'
-    def leakcanaryVersion = '1.4-beta2'
+    def leakcanaryVersion = '1.4-SNAPSHOT'
 
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile "com.android.support:cardview-v7:$supportVersion"
@@ -94,22 +94,24 @@ dependencies {
     compile "com.jakewharton:butterknife:$butterknifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
-    compile "io.reactivex:rxjava:1.1.8"
+    compile "io.reactivex:rxjava:1.1.9"
     compile "io.reactivex:rxandroid:1.2.1"
     compile 'com.f2prateek.rx.preferences:rx-preferences:1.0.2'
 
-    compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.jakewharton.timber:timber:4.2.0'
     compile 'net.ypresto.timbertreeutils:timbertreeutils:1.0.0'
 
     compile 'com.hannesdorfmann.mosby:mvp:2.0.1'
 
     compile "com.mikepenz:materialize:0.9.0@aar"
 
-    compile 'net.xpece.android:support-preference:1.0.0'
+    compile 'net.xpece.android:support-preference:1.0.2'
 
     //
     // Debugging, crash reporting, analytics etc.
     //
+
+    compile 'com.google.firebase:firebase-messaging:9.4.0'
 
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true;
@@ -120,7 +122,6 @@ dependencies {
 
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanaryVersion"
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanaryVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
