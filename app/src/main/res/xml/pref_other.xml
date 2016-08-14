@@ -6,12 +6,9 @@
             android:title="@string/pref_credits" />
 
         <Preference
+            android:key="pref_version"
             android:summary="@string/app_version"
-            android:title="@string/app_name">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://play.google.com/store/apps/details?id=email.crappy.ssao.ruoka" />
-        </Preference>
+            android:title="@string/app_name" />
 
         <Preference
             android:summary="@string/pref_contact_summary"

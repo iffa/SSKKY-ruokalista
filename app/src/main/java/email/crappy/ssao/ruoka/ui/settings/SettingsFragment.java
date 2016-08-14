@@ -9,6 +9,8 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.XpPreferenceFragment;
 import android.view.View;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import net.xpece.android.support.preference.ListPreference;
 
 import javax.inject.Inject;
@@ -24,6 +26,7 @@ import email.crappy.ssao.ruoka.ui.MainActivity;
  */
 public class SettingsFragment extends XpPreferenceFragment
         implements Preference.OnPreferenceChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
+    private static final String PREF_KEY_VERSION = "pref_version";
     @Inject DataManager dataManager;
 
     public static SettingsFragment newInstance() {
@@ -37,6 +40,17 @@ public class SettingsFragment extends XpPreferenceFragment
         addPreferencesFromResource(R.xml.pref_other);
 
         bindPreferenceSummaryToValue(findPreference(PreferencesHelper.PREF_KEY_THEME));
+
+        findPreference(PREF_KEY_VERSION).setOnPreferenceClickListener(preference -> {
+            // Too lazy to make this not leak on orientation change - it's an easter egg anyway...
+            new MaterialDialog.Builder(getContext())
+                    .title(R.string.pref_easter_title)
+                    .content(R.string.pref_easter_description)
+                    .items(R.array.pref_easter_items)
+                    .show();
+
+            return true;
+        });
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {
