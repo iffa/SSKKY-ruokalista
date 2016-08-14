@@ -18,6 +18,7 @@ import javax.inject.Singleton;
 import email.crappy.ssao.ruoka.data.model.FoodItem;
 import email.crappy.ssao.ruoka.injection.ApplicationContext;
 import rx.Observable;
+import timber.log.Timber;
 
 /**
  * @author Santeri 'iffa'
@@ -63,6 +64,11 @@ public class PreferencesHelper {
     }
 
     private Observable<List<FoodItem>> fromJson(String json) {
+        if (json == null) {
+            Timber.w("JSON is null - don't even think about it");
+            return Observable.empty();
+        }
+
         return Observable.create(subscriber -> {
             try {
                 List<FoodItem> items = jsonAdapter.fromJson(json);
@@ -70,6 +76,7 @@ public class PreferencesHelper {
             } catch (IOException exception) {
                 subscriber.onError(exception);
             }
+            subscriber.onCompleted();
         });
     }
 
