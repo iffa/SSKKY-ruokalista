@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.core.CrashlyticsCore;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -35,7 +36,7 @@ public class SSKKYApplication extends Application {
         component().inject(this);
 
         Crashlytics crashlytics = new Crashlytics.Builder()
-                /*.core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())*/
+                .core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
                 .build();
 
         Fabric.with(this, crashlytics, new Answers());
