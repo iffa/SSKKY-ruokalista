@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SSKKY-ruokalista</string>
+    <string name="action_clear">Poista tiedot</string>
+    <string name="activity_settings">Asetukset</string>
+    <string name="friday">Pe</string>
+    <string name="home_title">Ruokalistalla tänään</string>
+    <string name="list_title">Listoilla myöhemmin</string>
+    <string name="monday">Ma</string>
+    <string name="thursday">To</string>
+    <string name="tuesday">Ti</string>
+    <string name="wednesday">Ke</string>
+    <string name="week">vko %d</string>
+    <string name="next_empty">Ei ruokaa tälle päivälle.</string>
+    <string name="notification_title">Tänään ruokana</string>
+    <string name="notification_title_tomorrow">Huomenna ruokana</string>
+    <string name="pref_contact">Ota yhteyttä</string>
+    <string name="pref_credits">Kiitokset…</string>
+    <string name="pref_credits_summary">\u2022 /r/AndroidDeville hyödyllisistä resursseista ja artikkeleista\n\u2022 Kavereille, ketkä auttoivat kehityksessä löytämällä bugeja ja ehdottamalla uusia hauskoja ideoita.\n\n\u2022 Erikoiskiitokset Juho Haimilalle ❤</string>
+    <string name="pref_debug">Kehittäjätila</string>
+    <string name="pref_debug_summary">Ota käyttöön kehittäjätila ja kokeelliset ominaisuudet.</string>
+    <string name="pref_general">Yleiset</string>
+    <string name="pref_github">Lähdekoodi GitHubissa</string>
+    <string name="pref_github_summary">Selaa lähdekoodia ja käytettyjen kolmannen osapuolen kirjastojen lisenssejä.</string>
+    <string name="pref_notifications">Ilmoitukset</string>
+    <string name="pref_notifications_off">Et saa ilmoituksia päivän ruoasta.</string>
+    <string name="pref_notifications_on">Saat ilmoituksia päivän ruoasta.</string>
+    <string name="pref_other">Tietoja sovelluksesta</string>
+    <string name="pref_restart">Uudelleenkäynnistä nähdäksesi muutokset.</string>
+    <string name="pref_restart_action">OK</string>
+    <string name="pref_theme">Valitse teema</string>
+    <string-array name="pref_themes">
+        <item>Vaalea (päivä)</item>
+        <item>Tumma (yö)</item>
+        <item>Automaattinen</item>
+    </string-array>
+</resources>
