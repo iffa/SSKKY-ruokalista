@@ -25,5 +25,5 @@ allprojects {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.0'
+    gradleVersion = '2.14.1' // Use 2.14.1 until 3.0 works with Android Studio
 }
