@@ -11,4 +11,7 @@ import email.crappy.ssao.ruoka.data.model.FoodItem;
  * @author Santeri Elo
  */
 public interface HomeMvpView extends MvpLceView<Map<Integer, List<FoodItem>>> {
+    void setNext(FoodItem next);
+
+    void showNextEmpty();
 }

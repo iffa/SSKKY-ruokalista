@@ -1,6 +1,7 @@
 package email.crappy.ssao.ruoka.ui.list;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.TextView;
 
 import com.hannesdorfmann.annotatedadapter.annotation.ViewField;
@@ -48,6 +49,12 @@ public class DayAdapter extends SupportAnnotatedAdapter implements DayAdapterBin
 
         vh.day.setText(vh.day.getResources().getString(DateUtil.getDayResource(day.date)));
         vh.food.setText(day.food);
-        vh.foodVeg.setText(day.secondaryFood);
+
+        if (day.secondaryFood.isEmpty()) {
+            vh.foodVeg.setVisibility(View.GONE);
+        } else {
+            vh.foodVeg.setVisibility(View.VISIBLE);
+            vh.foodVeg.setText(day.secondaryFood);
+        }
     }
 }

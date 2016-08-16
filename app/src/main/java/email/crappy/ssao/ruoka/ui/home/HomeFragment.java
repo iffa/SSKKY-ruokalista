@@ -10,10 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceFragment;
+import com.transitionseverywhere.TransitionManager;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,6 @@ import butterknife.Unbinder;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.SSKKYApplication;
 import email.crappy.ssao.ruoka.data.model.FoodItem;
-import email.crappy.ssao.ruoka.data.util.DateUtil;
 import email.crappy.ssao.ruoka.ui.list.WeekAdapter;
 import email.crappy.ssao.ruoka.ui.view.DateBoxView;
 
@@ -39,6 +39,17 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
 
     @BindView(R.id.recycler_weeks)
     RecyclerView recyclerView;
+
+    @BindView(R.id.next_container)
+    LinearLayout nextContainer;
+
+    @BindView(R.id.next_empty) TextView nextEmpty;
+
+    @BindView(R.id.next_date) DateBoxView dateBox;
+
+    @BindView(R.id.next_food) TextView nextFood;
+
+    @BindView(R.id.next_food_secondary) TextView nextFoodVeg;
 
     @Nullable
     @Override
@@ -65,12 +76,6 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DateBoxView dateBoxView = (DateBoxView) view.findViewById(R.id.date_today);
-
-        Date current = DateUtil.getCurrentCalendar().getTime();
-        dateBoxView.setDay(current);
-        dateBoxView.setDate(current);
-
         // Setup list
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false) {
             @Override
@@ -94,6 +99,27 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
     @Override
     public void setData(Map<Integer, List<FoodItem>> data) {
         ((WeekAdapter) recyclerView.getAdapter()).setItems(data);
+    }
+
+
+    @Override
+    public void setNext(FoodItem next) {
+        dateBox.setDay(next.date);
+        dateBox.setDate(next.date);
+
+        nextFood.setText(next.food);
+        nextFoodVeg.setText(next.secondaryFood);
+
+        TransitionManager.beginDelayedTransition(nextContainer);
+        nextEmpty.setVisibility(View.GONE);
+        dateBox.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showNextEmpty() {
+        TransitionManager.beginDelayedTransition(nextContainer);
+        nextEmpty.setVisibility(View.VISIBLE);
+        dateBox.setVisibility(View.GONE);
     }
 
     @Override

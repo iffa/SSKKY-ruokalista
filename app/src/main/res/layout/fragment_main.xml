@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <ProgressBar
         android:id="@+id/loadingView"
@@ -10,13 +10,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminate="true" />
+        android:indeterminate="true"/>
 
     <TextView
         android:id="@+id/errorView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"/>
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/contentView"
@@ -31,7 +31,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@color/md_grey_200"
+                android:background="@color/header_background"
                 android:elevation="2dp">
 
                 <TextView
@@ -40,7 +40,7 @@
                     android:layout_gravity="center"
                     android:text="@string/home_title"
                     android:textAllCaps="true"
-                    android:textAppearance="?android:textAppearanceMedium" />
+                    android:textAppearance="?android:textAppearanceMedium"/>
 
             </FrameLayout>
 
@@ -50,15 +50,27 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/cardview_default_radius"
                 app:cardElevation="0dp"
-                app:contentPadding="@dimen/md_content_padding_top">
+                app:contentPadding="8dp">
 
                 <LinearLayout
+                    android:id="@+id/next_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/next_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:text="@string/next_empty"
+                        android:textAppearance="?android:textAppearanceListItem"
+                        android:textSize="18sp"
+                        android:visibility="gone"/>
+
                     <email.crappy.ssao.ruoka.ui.view.DateBoxView
-                        android:id="@+id/date_today"
+                        android:id="@+id/next_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp">
@@ -70,19 +82,21 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/next_food"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Broilerkastike, perunat, salaatti"
                                 android:textAppearance="?android:textAppearanceListItem"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"/>
 
                             <TextView
+                                android:id="@+id/next_food_secondary"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="kasviskastike"
                                 android:textAppearance="?android:textAppearanceListItemSmall"
                                 android:textColor="?android:textColorSecondary"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </email.crappy.ssao.ruoka.ui.view.DateBoxView>
 
@@ -93,7 +107,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@color/md_grey_200"
+                android:background="@color/header_background"
                 android:elevation="2dp">
 
                 <TextView
@@ -102,7 +116,7 @@
                     android:layout_gravity="center"
                     android:text="@string/list_title"
                     android:textAllCaps="true"
-                    android:textAppearance="?android:textAppearanceMedium" />
+                    android:textAppearance="?android:textAppearanceMedium"/>
 
             </FrameLayout>
 
@@ -110,7 +124,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_weeks"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </FrameLayout>

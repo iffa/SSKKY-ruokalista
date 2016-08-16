@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp"
+    app:cardBackgroundColor="@color/card_background"
     app:cardCornerRadius="@dimen/cardview_default_radius"
     app:cardElevation="@dimen/cardview_default_elevation"
-    app:contentPadding="@dimen/md_content_padding_top">
+    app:contentPadding="8dp">
 
     <LinearLayout
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
+            android:textColor="?android:textColorPrimary"
+            android:layout_marginTop="16dp"
             android:id="@+id/week"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceMedium"
-            tools:text="wk 33" />
+            tools:text="wk 33"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_days"
+            android:layerType="software"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

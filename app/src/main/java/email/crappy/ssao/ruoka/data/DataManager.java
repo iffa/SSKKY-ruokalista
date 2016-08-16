@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +16,7 @@ import email.crappy.ssao.ruoka.data.util.AlarmUtil;
 import email.crappy.ssao.ruoka.data.util.DateUtil;
 import rx.Completable;
 import rx.Observable;
+import rx.Single;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -52,8 +52,8 @@ public class DataManager {
             for (FoodItem item : items) {
                 int week = DateUtil.getWeekNumber(item.date);
 
-                if (week < DateUtil.getCurrentCalendar().get(Calendar.WEEK_OF_YEAR)) {
-                    return;
+                if (!DateUtil.isRemainingWeek(week) || item.date.before(DateUtil.getCurrentCalendar().getTime())) {
+                    continue;
                 }
 
                 if (map.get(week) != null) {
@@ -68,6 +68,22 @@ public class DataManager {
             }
 
             subscriber.onNext(map);
+            subscriber.onCompleted();
+        });
+    }
+
+    public Observable<FoodItem> next(List<FoodItem> items) {
+        return Observable.create(subscriber -> {
+            FoodItem next = null;
+
+            for (FoodItem item : items) {
+                if (DateUtil.isToday(item.date)) {
+                    next = item;
+                    break;
+                }
+            }
+
+            subscriber.onNext(next);
             subscriber.onCompleted();
         });
     }

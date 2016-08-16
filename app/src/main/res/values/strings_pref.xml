@@ -28,18 +28,4 @@
     <string name="pref_github_summary">Browse the source code on GitHub. Feel free to contribute!</string>
     <string name="pref_debug">Debug mode</string>
     <string name="pref_debug_summary">Enable debug mode and experimental features.</string>
-
-    <string name="pref_easter_title">Thanks for the reviews!</string>
-    <string name="pref_easter_description">The review-feature in version 2 was quite a success - here are the best reviews. Warning: not safe for work.</string>
-    <string-array name="pref_easter_items">
-        <item>pihvit yhtä hyviä ku lidlin halpispaska hampparit ja kastike on mautonta</item>
-        <item>Kalapihvit maistuivat kissan ruoalta jotka ovat kaavittu nyrkillä kissan perseestä</item>
-        <item>KUKA VITTU KEKSI VAIHTAA HERNARIN TILALLE VITU KAALIKEITTOA !!!!!! SADALLA VITTU SANALLA</item>
-        <item>mun lusikka oli ruskee</item>
-        <item>3/5 ei maistu salami ja missä simpukat ?????</item>
-        <item>Mamman pierukeitto hyvää oli juuvittu</item>
-        <item>mamman liharipulit aivan paskaa 0/5</item>
-        <item>moi iffa</item>
-        <item>iffa mull vähän paulavanukast tänne synttäri lahjaks ;)</item>
-    </string-array>
 </resources>

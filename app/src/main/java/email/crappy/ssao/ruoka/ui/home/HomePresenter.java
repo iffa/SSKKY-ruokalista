@@ -23,24 +23,28 @@ public class HomePresenter extends MvpBasePresenter<HomeMvpView> {
     public void load() {
         if (isViewAttached()) getView().showLoading(false);
 
-        dataManager.updateData().subscribe(
-                () -> {
-                    Timber.i("Updated data, showing content");
-                    if (isViewAttached()) {
-                        getView().showContent();
-                    }
-                },
-                throwable -> Timber.e(throwable, "Failed to update data"));
+        dataManager.updateData().subscribe(() -> {
+        }, throwable -> getView().showError(throwable, true));
 
         dataManager.dataStream()
                 .filter(items -> items != null && items.size() > 0)
+                .doOnNext(items -> dataManager.next(items).compose(dataManager.schedulers()).subscribe(item -> {
+                    if (item == null && isViewAttached()) {
+                        getView().showNextEmpty();
+                    } else {
+                        getView().setNext(item);
+                    }
+                }))
                 .flatMap(foodItems -> dataManager.sectioned(foodItems))
+                .compose(dataManager.schedulers())
                 .subscribe(map -> {
+                    Timber.i("Finished loading data for UI");
                     if (isViewAttached()) {
                         getView().setData(map);
                         getView().showContent();
                     }
                 }, throwable -> {
+                    Timber.e("Failed to load data for UI");
                     if (isViewAttached()) {
                         getView().showError(throwable, false);
                     }

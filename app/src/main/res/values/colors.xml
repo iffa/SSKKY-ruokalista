@@ -3,4 +3,8 @@
     <color name="primary">#3F51B5</color>
     <color name="primaryDark">#303F9F</color>
     <color name="accent">#FFC107</color>
+
+    <!-- Day/night functionality colors -->
+    <color name="card_background">@color/cardview_light_background</color>
+    <color name="header_background">@color/md_grey_200</color>
 </resources>

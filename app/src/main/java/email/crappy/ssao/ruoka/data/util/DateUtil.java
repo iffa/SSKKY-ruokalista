@@ -32,24 +32,24 @@ public class DateUtil {
     /**
      * Checks if a given date (dd.MM) is today (or tomorrow)
      *
-     * @param date     Date (dd.MM)
+     * @param date     Date
      * @param tomorrow Set to true if checking for tomorrow
      * @return True if today
      */
-    public static boolean isToday(String date, boolean tomorrow) {
-        int day = Integer.parseInt(date.split("\\.")[0]);
-        int month = Integer.parseInt(date.split("\\.")[1]);
+    public static boolean isToday(Date date) {
+        Calendar current = getCurrentCalendar();
 
-        Calendar calendar = getCurrentCalendar();
-        if (tomorrow) calendar.add(Calendar.DATE, 1);
+        Calendar item = getCurrentCalendar();
+        item.setTime(date);
+        //if (tomorrow) calendar.add(Calendar.DATE, 1);
 
-        return calendar.get(Calendar.DAY_OF_MONTH) == day && calendar.get(Calendar.MONTH) == (month - 1);
+        return current.get(Calendar.DAY_OF_MONTH) == item.get(Calendar.DAY_OF_MONTH) && current.get(Calendar.MONTH) == item.get(Calendar.MONTH);
     }
 
-    public static boolean isRemainingWeek(String weekNumber) {
+    public static boolean isRemainingWeek(int weekNumber) {
         int currentWeek = getCurrentCalendar().get(Calendar.WEEK_OF_YEAR);
 
-        if (Integer.parseInt(weekNumber) < currentWeek) {
+        if (weekNumber < currentWeek) {
             return false;
         } else {
             return true;
