@@ -4,6 +4,7 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="pref_notifications"
+            android:enabled="false"
             android:summaryOff="@string/pref_notifications_off"
             android:summaryOn="@string/pref_notifications_on"
             android:title="@string/pref_notifications" />
