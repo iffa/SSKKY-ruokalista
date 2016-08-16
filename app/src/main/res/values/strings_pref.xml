@@ -14,7 +14,7 @@
         <item>Dark (night)</item>
         <item>Automatic</item>
     </string-array>
-    <string-array name="pref_themes_values">
+    <string-array name="pref_themes_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
