@@ -23,19 +23,18 @@ public class HomePresenter extends MvpBasePresenter<HomeMvpView> {
     public void load() {
         if (isViewAttached()) getView().showLoading(false);
 
-        dataManager.updateData().subscribe(() -> {
-        }, throwable -> getView().showError(throwable, true));
-
-        dataManager.dataStream()
-                .filter(items -> items != null && items.size() > 0)
-                .doOnNext(items -> dataManager.next(items).compose(dataManager.schedulers()).subscribe(item -> {
-                    if (item == null && isViewAttached()) {
-                        getView().showNextEmpty();
-                    } else {
-                        getView().setNext(item);
+        dataManager.isValid()
+                .flatMap(valid -> valid ? dataManager.dataStream() : dataManager.updateData())
+                .doOnNext(items -> dataManager.next(items).compose(dataManager.schedulers()).subscribe(foodItem -> {
+                    if (isViewAttached()) {
+                        if (foodItem == null) {
+                            getView().showNextEmpty();
+                        } else {
+                            getView().setNext(foodItem);
+                        }
                     }
                 }))
-                .flatMap(foodItems -> dataManager.sectioned(foodItems))
+                .flatMap(items -> dataManager.sectioned(items))
                 .compose(dataManager.schedulers())
                 .subscribe(map -> {
                     Timber.i("Finished loading data for UI");
@@ -44,7 +43,7 @@ public class HomePresenter extends MvpBasePresenter<HomeMvpView> {
                         getView().showContent();
                     }
                 }, throwable -> {
-                    Timber.e("Failed to load data for UI");
+                    Timber.e(throwable, "Failed to load data for UI");
                     if (isViewAttached()) {
                         getView().showError(throwable, false);
                     }

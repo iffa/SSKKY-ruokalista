@@ -51,6 +51,10 @@ public class PreferencesHelper {
         return itemsJson.asObservable().flatMap(this::fromJson);
     }
 
+    public Observable<List<FoodItem>> data() {
+        return Observable.just(preferences.getString(PREF_KEY_FOOD, null)).flatMap(this::fromJson);
+    }
+
     public Observable<List<FoodItem>> save(List<FoodItem> items) {
         return Observable.create(subscriber -> {
             try {
@@ -66,7 +70,7 @@ public class PreferencesHelper {
     private Observable<List<FoodItem>> fromJson(String json) {
         if (json == null) {
             Timber.w("JSON is null - don't even think about it");
-            return Observable.empty();
+            return Observable.just(null);
         }
 
         return Observable.create(subscriber -> {

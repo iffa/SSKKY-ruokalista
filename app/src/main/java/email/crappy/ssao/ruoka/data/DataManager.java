@@ -16,7 +16,6 @@ import email.crappy.ssao.ruoka.data.util.AlarmUtil;
 import email.crappy.ssao.ruoka.data.util.DateUtil;
 import rx.Completable;
 import rx.Observable;
-import rx.Single;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -40,9 +39,34 @@ public class DataManager {
     }
 
     public Observable<List<FoodItem>> dataStream() {
+        Timber.d("Getting data stream of local items");
         return preferencesHelper.observe()
-                .doOnNext(items -> Timber.d("%s local items", items.size()))
                 .compose(schedulers());
+    }
+
+    public Observable<Boolean> isValid() {
+        Timber.d("Checking validity of local items");
+        return preferencesHelper.data()
+                .flatMap(this::checkValidity)
+                .compose(schedulers());
+    }
+
+    private Observable<Boolean> checkValidity(List<FoodItem> items) {
+        return Observable.create(subscriber -> {
+            if (items == null) {
+                subscriber.onNext(false);
+            } else {
+                boolean valid = false;
+                for (FoodItem item : items) {
+                    if (item.date.after(DateUtil.getCurrentCalendar().getTime())) {
+                        valid = true;
+                        break;
+                    }
+                }
+                subscriber.onNext(valid);
+            }
+            subscriber.onCompleted();
+        });
     }
 
     public Observable<Map<Integer, List<FoodItem>>> sectioned(List<FoodItem> items) {
@@ -88,14 +112,14 @@ public class DataManager {
         });
     }
 
-    public Completable updateData() {
+    public Observable<List<FoodItem>> updateData() {
+        Timber.i("Getting fresh data online");
         return listService.getList()
                 .doOnError(throwable -> Timber.e(throwable, "Data update failed"))
                 .doOnNext(items -> Timber.d("Got %s items from server", items.size()))
                 .flatMap(preferencesHelper::save)
-                .toCompletable()
                 .doOnCompleted(() -> Timber.d("Completed data update call"))
-                .compose(schedulersCompletable());
+                .compose(schedulers());
     }
 
     public void updateTheme() {
