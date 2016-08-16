@@ -25,7 +25,7 @@ android {
         targetSdkVersion 24
 
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-        versionName "v${versionMajor}.${versionMinor}.${versionPatch}" + " - " + getDate()
+        versionName "v${versionMajor}.${versionMinor}.${versionPatch} beta - " + getDate()
     }
 
     signingConfigs {
@@ -44,7 +44,6 @@ android {
         }
 
         debug {
-            versionNameSuffix ' (Debug)'
             applicationIdSuffix '.debug'
 
             debuggable true
