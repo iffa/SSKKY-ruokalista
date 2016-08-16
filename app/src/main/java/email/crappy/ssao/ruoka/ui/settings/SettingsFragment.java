@@ -15,6 +15,7 @@ import net.xpece.android.support.preference.ListPreference;
 
 import javax.inject.Inject;
 
+import email.crappy.ssao.ruoka.BuildConfig;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.SSKKYApplication;
 import email.crappy.ssao.ruoka.data.DataManager;
@@ -27,7 +28,8 @@ import email.crappy.ssao.ruoka.ui.MainActivity;
 public class SettingsFragment extends XpPreferenceFragment
         implements Preference.OnPreferenceChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String PREF_KEY_VERSION = "pref_version";
-    @Inject DataManager dataManager;
+    @Inject
+    DataManager dataManager;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -59,6 +61,8 @@ public class SettingsFragment extends XpPreferenceFragment
         String value = PreferenceManager
                 .getDefaultSharedPreferences(preference.getContext())
                 .getString(preference.getKey(), "");
+
+        findPreference(PREF_KEY_VERSION).setSummary(BuildConfig.VERSION_NAME);
 
         onPreferenceChange(preference, value);
     }

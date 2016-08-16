@@ -9,6 +9,7 @@ import dagger.Module;
 import dagger.Provides;
 import email.crappy.ssao.ruoka.data.FoodService;
 import email.crappy.ssao.ruoka.injection.ApplicationContext;
+import email.crappy.ssao.ruoka.ui.home.HomePresenter;
 
 /**
  * @author Santeri 'iffa'

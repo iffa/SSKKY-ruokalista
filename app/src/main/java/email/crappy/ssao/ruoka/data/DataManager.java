@@ -3,13 +3,18 @@ package email.crappy.ssao.ruoka.data;
 import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import email.crappy.ssao.ruoka.data.model.FoodItem;
 import email.crappy.ssao.ruoka.data.util.AlarmUtil;
+import email.crappy.ssao.ruoka.data.util.DateUtil;
 import rx.Completable;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -35,7 +40,36 @@ public class DataManager {
     }
 
     public Observable<List<FoodItem>> dataStream() {
-        return preferencesHelper.observe().doOnNext(items -> Timber.d("%s local items", items.size())).compose(schedulers());
+        return preferencesHelper.observe()
+                .doOnNext(items -> Timber.d("%s local items", items.size()))
+                .compose(schedulers());
+    }
+
+    public Observable<Map<Integer, List<FoodItem>>> sectioned(List<FoodItem> items) {
+        return Observable.create(subscriber -> {
+            Map<Integer, List<FoodItem>> map = new LinkedHashMap<>();
+
+            for (FoodItem item : items) {
+                int week = DateUtil.getWeekNumber(item.date);
+
+                if (week < DateUtil.getCurrentCalendar().get(Calendar.WEEK_OF_YEAR)) {
+                    return;
+                }
+
+                if (map.get(week) != null) {
+                    List<FoodItem> current = map.get(week);
+                    current.add(item);
+                } else {
+                    List<FoodItem> newList = new ArrayList<>();
+                    newList.add(item);
+
+                    map.put(week, newList);
+                }
+            }
+
+            subscriber.onNext(map);
+            subscriber.onCompleted();
+        });
     }
 
     public Completable updateData() {
@@ -57,7 +91,7 @@ public class DataManager {
         AlarmUtil.setRepeatingAlarm(context, 10, 0);
     }
 
-    <T> Observable.Transformer<T, T> schedulers() {
+    public <T> Observable.Transformer<T, T> schedulers() {
         return observable -> observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

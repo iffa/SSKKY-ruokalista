@@ -1,31 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView
-        app:cardCornerRadius="@dimen/cardview_default_radius"
-        app:cardElevation="@dimen/cardview_default_elevation"
-        app:contentPadding="@dimen/md_content_padding_top"
+    <ProgressBar
+        android:id="@+id/loadingView"
+        style="?android:progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true" />
+
+    <TextView
+        android:id="@+id/errorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/contentView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:textAppearance="?attr/textAppearanceSearchResultTitle"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/md_grey_200"
+                android:elevation="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/home_title"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </FrameLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/home_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="On the menu..."/>
+                app:cardCornerRadius="@dimen/cardview_default_radius"
+                app:cardElevation="0dp"
+                app:contentPadding="@dimen/md_content_padding_top">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <email.crappy.ssao.ruoka.ui.view.DateBoxView
+                        android:id="@+id/date_today"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Broilerkastike, perunat, salaatti"
+                                android:textAppearance="?android:textAppearanceListItem"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="kasviskastike"
+                                android:textAppearance="?android:textAppearanceListItemSmall"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </email.crappy.ssao.ruoka.ui.view.DateBoxView>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/md_grey_200"
+                android:elevation="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/list_title"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </FrameLayout>
 
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_weeks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-</LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</FrameLayout>

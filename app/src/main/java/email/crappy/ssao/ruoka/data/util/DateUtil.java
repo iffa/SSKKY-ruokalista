@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import email.crappy.ssao.ruoka.R;
 import timber.log.Timber;
 
 /**
@@ -13,7 +14,7 @@ import timber.log.Timber;
  * @author Santeri 'iffa'
  */
 public class DateUtil {
-    private static Calendar getCurrentCalendar() {
+    public static Calendar getCurrentCalendar() {
         return GregorianCalendar.getInstance(Locale.GERMAN);
     }
 
@@ -59,5 +60,49 @@ public class DateUtil {
         int currentWeek = getCurrentCalendar().get(Calendar.WEEK_OF_YEAR);
         Timber.i("Comparing week %s with %s", weekNumber, currentWeek);
         return currentWeek == Integer.parseInt(weekNumber);
+    }
+
+    public static int getWeekNumber(Date date) {
+        Calendar calendar = getCurrentCalendar();
+        calendar.setTime(date);
+
+        return calendar.get(Calendar.WEEK_OF_YEAR);
+    }
+
+    public static int getDayResource(Date date) {
+        Calendar calendar = getCurrentCalendar();
+        calendar.setTime(date);
+
+        switch (calendar.get(Calendar.DAY_OF_WEEK)) {
+            case Calendar.MONDAY:
+                return R.string.monday;
+            case Calendar.TUESDAY:
+                return R.string.tuesday;
+            case Calendar.WEDNESDAY:
+                return R.string.wednesday;
+            case Calendar.THURSDAY:
+                return R.string.thursday;
+            case Calendar.FRIDAY:
+                return R.string.friday;
+            default:
+                return R.string.app_name;
+        }
+    }
+
+    public static int getDayResource(Calendar calendar) {
+        switch (calendar.get(Calendar.DAY_OF_WEEK)) {
+            case Calendar.MONDAY:
+                return R.string.monday;
+            case Calendar.TUESDAY:
+                return R.string.tuesday;
+            case Calendar.WEDNESDAY:
+                return R.string.wednesday;
+            case Calendar.THURSDAY:
+                return R.string.thursday;
+            case Calendar.FRIDAY:
+                return R.string.friday;
+            default:
+                return R.string.app_name;
+        }
     }
 }
