@@ -17,7 +17,7 @@ android {
     def versionMajor = 4
     def versionMinor = 0
     def versionPatch = 0
-    def versionBuild = 0 // If you're happy and you know it, bump this
+    def versionBuild = 1 // If you're happy and you know it, bump this
 
     defaultConfig {
         applicationId "email.crappy.ssao.ruoka"
@@ -25,7 +25,7 @@ android {
         targetSdkVersion 24
 
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-        versionName "v${versionMajor}.${versionMinor}.${versionPatch} beta - " + getDate()
+        versionName "v${versionMajor}.${versionMinor}.${versionPatch} - " + getDate()
     }
 
     signingConfigs {
@@ -58,10 +58,10 @@ android {
 }
 
 dependencies {
-    def supportVersion = '24.1.1'
-    def daggerVersion = '2.6'
+    def supportVersion = '24.2.0'
+    def daggerVersion = '2.6.1'
     def retrofitVersion = '2.1.0'
-    def butterknifeVersion = '8.2.1'
+    def butterknifeVersion = '8.4.0'
     def leakcanaryVersion = '1.4-SNAPSHOT'
     def annotatedAdapterVersion = '1.1.1'
 
@@ -90,12 +90,12 @@ dependencies {
     compile "io.reactivex:rxandroid:1.2.1"
     compile 'com.f2prateek.rx.preferences:rx-preferences:1.0.2'
 
-    compile 'com.jakewharton.timber:timber:4.2.0'
+    compile 'com.jakewharton.timber:timber:4.3.0'
     compile 'net.ypresto.timbertreeutils:timbertreeutils:1.0.0'
 
     compile 'com.hannesdorfmann.mosby:mvp:2.0.1'
 
-    compile "com.mikepenz:materialize:0.9.0@aar"
+    compile "com.mikepenz:materialize:1.0.0@aar"
 
     compile 'net.xpece.android:support-preference:1.0.2'
 
