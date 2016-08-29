@@ -23,43 +23,35 @@ import timber.log.Timber;
 public class AlarmReceiver extends BroadcastReceiver {
     private static final int NOTIFICATION_ID = 69;
 
-    @Inject DataManager dataManager;
+    @Inject
+    DataManager dataManager;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Timber.i("Notification alarm fired");
         SSKKYApplication.get(context).component().inject(this);
 
-        if (!dataManager.getPreferencesHelper().getNotificationsEnabled()
-                /*|| dataManager.getPreferencesHelper().getWeeks() == null*/) {
-            Timber.i("Not showing notification as user has them disabled or no data is loaded");
+        if (!dataManager.getPreferencesHelper().getNotificationsEnabled()) {
+            Timber.i("Not showing notification as user has them disabled");
             return;
         }
 
-        /*
-        final boolean forTomorrow;
-        forTomorrow = Calendar.getInstance(Locale.GERMAN).get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
-                || dataManager.getPreferencesHelper().getNotificationTime().hourOfDay > 12;
-
-        dataManager.getPreferencesHelper()
-                .getCurrentDayObservable(forTomorrow)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(day -> {
-                    Timber.i("Found data, showing notification");
-                    showNotification(context, day, forTomorrow);
-                }, throwable -> {
-                    Timber.w(throwable, "No data found");
-                });
-                */
+        dataManager.isValid().filter(valid -> valid)
+                .flatMap(valid -> dataManager.dataStream())
+                .flatMap(items -> dataManager.next(items))
+                .compose(dataManager.schedulers())
+                .subscribe(today -> {
+                    Timber.i("Got data for notification");
+                    showNotification(context, today);
+                }, throwable -> Timber.e(throwable, "Failed to get data for notification"));
     }
 
-    private void showNotification(Context context, FoodItem item, boolean forTomorrow) {
+    private void showNotification(Context context, FoodItem item) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setAutoCancel(false)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setSmallIcon(R.drawable.ic_stat_notification)
-                .setContentTitle(forTomorrow ? context.getString(R.string.notification_title_tomorrow) : context.getString(R.string.notification_title))
+                .setContentTitle(context.getString(R.string.notification_title))
                 .setContentText(item.food);
 
         if (item.secondaryFood != null) builder.setSubText(item.secondaryFood);

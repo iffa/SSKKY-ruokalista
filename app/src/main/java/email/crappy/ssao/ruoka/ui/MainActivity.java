@@ -43,6 +43,8 @@ public class MainActivity extends BaseActivity {
                     .replace(R.id.content, HomeFragment.newInstance())
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .commit();
+
+            dataManager.setAlarm(this);
         }
     }
 
