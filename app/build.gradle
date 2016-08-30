@@ -40,6 +40,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false // TODO: ProGuard rules that don't break the APK
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
