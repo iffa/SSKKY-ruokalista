@@ -14,4 +14,5 @@
     <string name="friday">Fri</string>
     <string name="week">wk %d</string>
     <string name="next_empty">No food for today.</string>
+    <string name="app_update">Enjoy the new features!</string>
 </resources>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceFragment;
 import com.transitionseverywhere.TransitionManager;
@@ -26,6 +27,8 @@ import email.crappy.ssao.ruoka.SSKKYApplication;
 import email.crappy.ssao.ruoka.data.model.FoodItem;
 import email.crappy.ssao.ruoka.ui.list.WeekAdapter;
 import email.crappy.ssao.ruoka.ui.view.DateBoxView;
+import io.github.prashantsolanki3.shoot.Shoot;
+import io.github.prashantsolanki3.shoot.listener.OnShootListener;
 
 /**
  * @author Santeri Elo
@@ -43,13 +46,17 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
     @BindView(R.id.next_container)
     LinearLayout nextContainer;
 
-    @BindView(R.id.next_empty) TextView nextEmpty;
+    @BindView(R.id.next_empty)
+    TextView nextEmpty;
 
-    @BindView(R.id.next_date) DateBoxView dateBox;
+    @BindView(R.id.next_date)
+    DateBoxView dateBox;
 
-    @BindView(R.id.next_food) TextView nextFood;
+    @BindView(R.id.next_food)
+    TextView nextFood;
 
-    @BindView(R.id.next_food_secondary) TextView nextFoodVeg;
+    @BindView(R.id.next_food_secondary)
+    TextView nextFoodVeg;
 
     @Nullable
     @Override
@@ -89,6 +96,13 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
 
         // Load content
         loadData(false);
+
+        Shoot.once(Shoot.APP_VERSION, "WHAT_IS_THIS", new OnShootListener() {
+            @Override
+            public void onExecute(int i, String s, int i1) {
+                Toast.makeText(getContext(), R.string.app_update, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

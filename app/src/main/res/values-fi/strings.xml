@@ -34,4 +34,5 @@
         <item>Tumma (yö)</item>
         <item>Automaattinen</item>
     </string-array>
+    <string name="app_update">Nauti uusista ominaisuuksista!</string>
 </resources>

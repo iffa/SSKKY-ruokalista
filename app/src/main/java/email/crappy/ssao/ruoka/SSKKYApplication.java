@@ -18,6 +18,7 @@ import email.crappy.ssao.ruoka.injection.component.ApplicationComponent;
 import email.crappy.ssao.ruoka.injection.component.DaggerApplicationComponent;
 import email.crappy.ssao.ruoka.injection.module.ApplicationModule;
 import io.fabric.sdk.android.Fabric;
+import io.github.prashantsolanki3.shoot.Shoot;
 import timber.log.Timber;
 
 /**
@@ -27,7 +28,8 @@ public class SSKKYApplication extends Application {
     private ApplicationComponent applicationComponent;
     private RefWatcher refWatcher;
 
-    @Inject DataManager dataManager;
+    @Inject
+    DataManager dataManager;
 
     @Override
     public void onCreate() {
@@ -48,6 +50,9 @@ public class SSKKYApplication extends Application {
         }
 
         Timber.plant(new CrashlyticsLogExceptionTree());
+
+        // Initializing Shoot
+        Shoot.with(this);
 
         // Updating theme according to user preferences
         dataManager.updateTheme();
