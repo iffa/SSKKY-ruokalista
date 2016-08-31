@@ -4,6 +4,10 @@
     <color name="primaryDark">#303F9F</color>
     <color name="accent">#FFC107</color>
 
+    <color name="primaryPink">#E91E63</color>
+    <color name="primaryDarkPink">#C2185B</color>
+    <color name="accentPink">#EC407A</color>
+
     <!-- Day/night functionality colors -->
     <color name="card_background">@color/cardview_light_background</color>
     <color name="header_background">@color/md_grey_200</color>

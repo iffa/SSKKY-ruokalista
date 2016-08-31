@@ -35,4 +35,5 @@
         <item>Automaattinen</item>
     </string-array>
     <string name="app_update">Nauti uusista ominaisuuksista!</string>
+    <string name="pref_madde">Madde-tila muutettu</string>
 </resources>

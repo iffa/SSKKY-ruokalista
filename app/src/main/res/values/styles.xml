@@ -13,6 +13,12 @@
         <item name="asp_preferenceDialogIconTint">?asp_preferenceIconTint</item>
     </style>
 
+    <style name="Theme.SSKKY.Madde" parent="Theme.SSKKY">
+        <item name="colorPrimary">@color/primaryPink</item>
+        <item name="colorPrimaryDark">@color/primaryDarkPink</item>
+        <item name="colorAccent">@color/accentPink</item>
+    </style>
+
     <style name="Theme.SSKKY.AlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert" />
 
 </resources>

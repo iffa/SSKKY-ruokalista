@@ -28,6 +28,7 @@ public class PreferencesHelper {
     public static final String PREF_KEY_NOTIFICATIONS = "pref_notifications";
     public static final String PREF_KEY_THEME = "pref_theme";
     public static final String PREF_KEY_DEBUG = "pref_debug";
+    public static final String PREF_KEY_MADDE = "pref_madde";
     private static final String PREF_KEY_FOOD = "pref_food";
     private final SharedPreferences preferences;
     private final RxSharedPreferences rxPreferences;
@@ -98,6 +99,14 @@ public class PreferencesHelper {
 
     public boolean getIsDebug() {
         return preferences.getBoolean(PREF_KEY_DEBUG, false);
+    }
+
+    public boolean getIsMadde() {
+        return preferences.getBoolean(PREF_KEY_MADDE, false);
+    }
+
+    public void setIsMadde(boolean madde) {
+        preferences.edit().putBoolean(PREF_KEY_MADDE, madde).apply();
     }
 
     @AppCompatDelegate.NightMode

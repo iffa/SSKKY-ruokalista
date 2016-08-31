@@ -26,6 +26,7 @@
     <string name="pref_contact_summary" translatable="false">Santeri Elo / me@santeri.xyz</string>
     <string name="pref_github">Code on GitHub</string>
     <string name="pref_github_summary">Browse the source code on GitHub. Feel free to contribute!</string>
+    <string name="pref_madde">Madde mode toggled</string>
     <string name="pref_debug">Debug mode</string>
     <string name="pref_debug_summary">Enable debug mode and experimental features.</string>
 </resources>

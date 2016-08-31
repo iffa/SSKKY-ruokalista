@@ -36,6 +36,10 @@ public class MainActivity extends BaseActivity {
 
         getActivityComponent().inject(this);
 
+        if (dataManager.getPreferencesHelper().getIsMadde()) {
+            setTheme(R.style.Theme_SSKKY_Madde);
+        }
+
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {

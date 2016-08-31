@@ -8,6 +8,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.XpPreferenceFragment;
 import android.view.View;
+import android.widget.Toast;
 
 import net.xpece.android.support.preference.ListPreference;
 
@@ -26,9 +27,15 @@ import email.crappy.ssao.ruoka.ui.MainActivity;
 public class SettingsFragment extends XpPreferenceFragment
         implements Preference.OnPreferenceChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String PREF_KEY_VERSION = "pref_version";
+    private static final String PREF_KEY_THANKS = "pref_thanks";
 
     @Inject
     DataManager dataManager;
+
+    @Inject
+    PreferencesHelper preferencesHelper;
+
+    private int maddeClicks = 0;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -41,6 +48,21 @@ public class SettingsFragment extends XpPreferenceFragment
         addPreferencesFromResource(R.xml.pref_other);
 
         bindPreferenceSummaryToValue(findPreference(PreferencesHelper.PREF_KEY_THEME));
+
+        findPreference(PREF_KEY_THANKS).setOnPreferenceClickListener(preference -> {
+            if (maddeClicks < 5) {
+                maddeClicks++;
+            } else {
+                maddeClicks = 0;
+                preferencesHelper.setIsMadde(!preferencesHelper.getIsMadde());
+
+                Toast.makeText(getContext(), R.string.pref_madde, Toast.LENGTH_LONG).show();
+
+                startActivity(MainActivity.createIntent(getContext(), true));
+            }
+
+            return true;
+        });
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {
