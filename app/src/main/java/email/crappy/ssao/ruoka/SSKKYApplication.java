@@ -26,7 +26,6 @@ import timber.log.Timber;
  */
 public class SSKKYApplication extends Application {
     private ApplicationComponent applicationComponent;
-    private RefWatcher refWatcher;
 
     @Inject
     DataManager dataManager;
@@ -43,7 +42,7 @@ public class SSKKYApplication extends Application {
 
         Fabric.with(this, crashlytics, new Answers());
 
-        refWatcher = LeakCanary.install(this);
+        LeakCanary.install(this);
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
@@ -56,10 +55,6 @@ public class SSKKYApplication extends Application {
 
         // Updating theme according to user preferences
         dataManager.updateTheme();
-    }
-
-    public RefWatcher refWatcher() {
-        return refWatcher;
     }
 
     public ApplicationComponent component() {

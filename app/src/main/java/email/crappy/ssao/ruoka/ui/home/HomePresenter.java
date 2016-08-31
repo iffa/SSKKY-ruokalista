@@ -16,11 +16,11 @@ public class HomePresenter extends MvpBasePresenter<HomeMvpView> {
     private DataManager dataManager;
 
     @Inject
-    public HomePresenter(DataManager dataManager) {
+    HomePresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
-    public void load() {
+    void load() {
         if (isViewAttached()) getView().showLoading(false);
 
         dataManager.isValid()

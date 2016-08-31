@@ -43,6 +43,8 @@ public class WeekAdapter extends SupportAnnotatedAdapter implements WeekAdapterB
 
     @Override
     public void bindViewHolder(WeekAdapterHolders.ItemViewHolder vh, int position) {
+        // Suspicious :-)
+        @SuppressWarnings("SuspiciousMethodCalls")
         List<FoodItem> foodItems = weekMap.get(weekMap.keySet().toArray()[position]);
 
         vh.title.setText(vh.title.getResources().getString(R.string.week, DateUtil.getWeekNumber(foodItems.get(0).date)));

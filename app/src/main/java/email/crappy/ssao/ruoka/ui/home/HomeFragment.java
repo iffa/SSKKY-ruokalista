@@ -97,6 +97,7 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
         // Load content
         loadData(false);
 
+        // Show sexy Toast about update
         Shoot.once(Shoot.APP_VERSION, "WHAT_IS_THIS", new OnShootListener() {
             @Override
             public void onExecute(int i, String s, int i1) {

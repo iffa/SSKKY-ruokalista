@@ -17,7 +17,7 @@ import email.crappy.ssao.ruoka.data.util.DateUtil;
 /**
  * @author Santeri Elo
  */
-public class DayAdapter extends SupportAnnotatedAdapter implements DayAdapterBinder {
+class DayAdapter extends SupportAnnotatedAdapter implements DayAdapterBinder {
     @ViewType(
             layout = R.layout.item_day,
             views = {
@@ -29,11 +29,11 @@ public class DayAdapter extends SupportAnnotatedAdapter implements DayAdapterBin
     public final int item = 0;
     private List<FoodItem> days;
 
-    public DayAdapter(Context context) {
+    DayAdapter(Context context) {
         super(context);
     }
 
-    public void setItems(List<FoodItem> days) {
+    void setItems(List<FoodItem> days) {
         this.days = days;
         notifyDataSetChanged();
     }

@@ -121,9 +121,7 @@ public class SettingsFragment extends XpPreferenceFragment
     private void showRestartSnackbar() {
         Snackbar snackbar = Snackbar
                 .make(getListView(), R.string.pref_restart, Snackbar.LENGTH_LONG)
-                .setAction(R.string.pref_restart_action, view -> {
-                    startActivity(MainActivity.createIntent(getContext(), true));
-                });
+                .setAction(R.string.pref_restart_action, view -> startActivity(MainActivity.createIntent(getContext(), true)));
 
         snackbar.show();
     }
@@ -135,11 +133,5 @@ public class SettingsFragment extends XpPreferenceFragment
             dataManager.updateTheme();
             showRestartSnackbar();
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        SSKKYApplication.get(getContext()).refWatcher().watch(this);
     }
 }

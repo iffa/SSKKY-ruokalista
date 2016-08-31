@@ -1,7 +1,6 @@
 package email.crappy.ssao.ruoka.ui.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -20,21 +19,13 @@ public class DateBoxView extends LinearLayout {
     public DateBoxView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setupView(attrs);
+        setupView();
     }
 
-    private void setupView(AttributeSet attrs) {
+    private void setupView() {
         setOrientation(LinearLayout.HORIZONTAL);
 
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.DateBoxView, 0, 0);
-        boolean small = a.getBoolean(R.styleable.DateBoxView_small, false);
-        a.recycle();
-
-        if (small) {
-            LayoutInflater.from(getContext()).inflate(R.layout.view_date_small, this, true);
-        } else {
-            LayoutInflater.from(getContext()).inflate(R.layout.view_date, this, true);
-        }
+        LayoutInflater.from(getContext()).inflate(R.layout.view_date, this, true);
     }
 
     public void setDate(Date date) {
