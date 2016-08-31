@@ -20,5 +20,4 @@
     </style>
 
     <style name="Theme.SSKKY.AlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert" />
-
 </resources>
