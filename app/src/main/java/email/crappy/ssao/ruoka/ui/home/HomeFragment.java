@@ -1,6 +1,5 @@
 package email.crappy.ssao.ruoka.ui.home;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +21,6 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnLongClick;
 import butterknife.Unbinder;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.SSKKYApplication;
@@ -59,13 +57,6 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
 
     @BindView(R.id.next_food_secondary)
     TextView nextFoodVeg;
-
-    @OnLongClick(R.id.next_date)
-    public void huutista() {
-        MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.huutista);
-        mp.start();
-        mp.setOnCompletionListener(MediaPlayer::release);
-    }
 
     @Nullable
     @Override
