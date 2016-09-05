@@ -3,8 +3,8 @@
     <string name="pref_general">General</string>
     <string name="pref_other">About the application</string>
     <string name="pref_notifications">Show notifications</string>
-    <string name="pref_notifications_off">No notifications will be shown.</string>
-    <string name="pref_notifications_on">Notifications will be shown.</string>
+    <string name="pref_notifications_off">You won\'t notified of today\'s menu.</string>
+    <string name="pref_notifications_on">You will be notified of today\'s menu.</string>
     <string name="pref_theme">Choose theme</string>
     <string name="pref_restart">Restart to apply changes.</string>
     <string name="pref_restart_action">Restart</string>
