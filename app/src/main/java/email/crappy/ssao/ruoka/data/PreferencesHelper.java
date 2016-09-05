@@ -25,10 +25,10 @@ import timber.log.Timber;
  */
 @Singleton
 public class PreferencesHelper {
-    public static final String PREF_KEY_NOTIFICATIONS = "pref_notifications";
     public static final String PREF_KEY_THEME = "pref_theme";
     public static final String PREF_KEY_DEBUG = "pref_debug";
-    public static final String PREF_KEY_MADDE = "pref_madde";
+    private static final String PREF_KEY_NOTIFICATIONS = "pref_notifications";
+    private static final String PREF_KEY_MADDE = "pref_madde";
     private static final String PREF_KEY_FOOD = "pref_food";
     private final SharedPreferences preferences;
     private final RxSharedPreferences rxPreferences;
@@ -42,21 +42,23 @@ public class PreferencesHelper {
         this.jsonAdapter = jsonAdapter;
     }
 
+    /**
+     * Clears preferences - duh.
+     */
     public void clear() {
         preferences.edit().clear().apply();
     }
 
-    public Observable<List<FoodItem>> observe() {
-        Preference<String> itemsJson = rxPreferences.getString(PREF_KEY_FOOD);
-
-        return itemsJson.asObservable().flatMap(this::fromJson);
-    }
-
+    /**
+     * Gets the current data (not a stream of data) as an Observable.
+     *
+     * @return Emits the current data
+     */
     public Observable<List<FoodItem>> data() {
         return Observable.just(preferences.getString(PREF_KEY_FOOD, null)).flatMap(this::fromJson);
     }
 
-    public Observable<List<FoodItem>> save(List<FoodItem> items) {
+    Observable<List<FoodItem>> save(List<FoodItem> items) {
         return Observable.create(subscriber -> {
             try {
                 putItems(items);
@@ -66,6 +68,12 @@ public class PreferencesHelper {
             }
             subscriber.onCompleted();
         });
+    }
+
+    Observable<List<FoodItem>> observe() {
+        Preference<String> itemsJson = rxPreferences.getString(PREF_KEY_FOOD);
+
+        return itemsJson.asObservable().flatMap(this::fromJson);
     }
 
     private Observable<List<FoodItem>> fromJson(String json) {
@@ -93,24 +101,36 @@ public class PreferencesHelper {
     // Settings-related preferences
     //
 
+    /**
+     * @return True if notifications are enabled
+     */
     public boolean getNotificationsEnabled() {
         return preferences.getBoolean(PREF_KEY_NOTIFICATIONS, true);
     }
 
+    /**
+     * @return True if debug mode is enabled (in settings)
+     */
     public boolean getIsDebug() {
         return preferences.getBoolean(PREF_KEY_DEBUG, false);
     }
 
+    /**
+     * @return True if easter egg is active
+     */
     public boolean getIsMadde() {
         return preferences.getBoolean(PREF_KEY_MADDE, false);
     }
 
+    /**
+     * @param madde True if easter egg should be active, otherwise false
+     */
     public void setIsMadde(boolean madde) {
         preferences.edit().putBoolean(PREF_KEY_MADDE, madde).apply();
     }
 
     @AppCompatDelegate.NightMode
-    public int getDayNightMode() {
+    int getDayNightMode() {
         switch (Integer.parseInt(preferences.getString(PREF_KEY_THEME, "0"))) {
             case 0:
                 return AppCompatDelegate.MODE_NIGHT_NO;

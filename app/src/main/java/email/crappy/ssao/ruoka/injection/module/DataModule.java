@@ -23,13 +23,13 @@ import email.crappy.ssao.ruoka.data.model.FoodItem;
 public class DataModule {
     @Provides
     @Singleton
-    public Moshi provideMoshi() {
+    Moshi provideMoshi() {
         return new Moshi.Builder().add(Date.class, new Rfc3339DateJsonAdapter()).build();
     }
 
     @Provides
     @Singleton
-    public JsonAdapter<List<FoodItem>> provideJsonAdapter(Moshi moshi) {
+    JsonAdapter<List<FoodItem>> provideJsonAdapter(Moshi moshi) {
         Type adapterType = Types.newParameterizedType(List.class, FoodItem.class);
 
         return moshi.adapter(adapterType);
@@ -37,7 +37,7 @@ public class DataModule {
 
     @Provides
     @Singleton
-    public FoodService provideFoodService(Moshi moshi) {
+    FoodService provideFoodService(Moshi moshi) {
         return FoodService.Builder.create(moshi);
     }
 }

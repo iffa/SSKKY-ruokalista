@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity {
         getActivityComponent().inject(this);
 
         if (dataManager.getPreferencesHelper().getIsMadde()) {
+            // TODO: Make this easter egg more fun
             setTheme(R.style.Theme_SSKKY_Madde);
         }
 

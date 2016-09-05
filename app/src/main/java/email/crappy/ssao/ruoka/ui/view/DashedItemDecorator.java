@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
+ * Dashed item decorator for RecyclerViews
+ *
  * @author Santeri Elo
  */
 public class DashedItemDecorator extends RecyclerView.ItemDecoration {

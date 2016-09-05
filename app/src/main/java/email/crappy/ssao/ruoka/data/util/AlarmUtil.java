@@ -15,7 +15,7 @@ import timber.log.Timber;
  * @author Santeri 'iffa'
  */
 public class AlarmUtil {
-    public static final int ID = 1337;
+    private static final int ID = 1337;
 
     public static void setRepeatingAlarm(Context context, int hh, int mm) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

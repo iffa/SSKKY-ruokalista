@@ -20,6 +20,7 @@ public class HomePresenter extends MvpBasePresenter<HomeMvpView> {
         this.dataManager = dataManager;
     }
 
+    @SuppressWarnings("ConstantConditions")
     void load() {
         if (isViewAttached()) getView().showLoading(false);
 
