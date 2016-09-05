@@ -40,7 +40,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false // TODO: https://github.com/google/dagger/issues/298
-            shrinkResources true
+            shrinkResources false // TODO: Wait for fix in Gradle plugin
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
