@@ -1,8 +1,10 @@
 # SSKKY-ruokalista
 Development branch for version 4.
 
+http://tiny.cc/sskkyruoka 🔎
+
 ### About the app (technical)
-* Built with Java (Kotlin in the future is a possibility)
+* Built with Java (Kotlin in the future is a possibility - v5?)
 * Reactive is all the hype!
 * ...and boy is it beautiful
 
@@ -10,6 +12,7 @@ Development branch for version 4.
 SSKKY-ruokalista is made with these amazing libraries:
 
 * Android support libraries
+* Firebase (push notifications)
 * Dagger 2
 * RxJava (with RxAndroid and RxPreferences)
 * Retrofit with Moshi
@@ -17,7 +20,9 @@ SSKKY-ruokalista is made with these amazing libraries:
 * Timber (with TimberTreeUtils)
 * Mosby
 * Materialize (for MD resources)
+* Annotated Adapter
 * Material Preference
+* Shoot
 * Crashlytics & Answers
 * LeakCanary
 
