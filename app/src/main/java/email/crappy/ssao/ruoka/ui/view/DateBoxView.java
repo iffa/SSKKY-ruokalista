@@ -34,7 +34,7 @@ public class DateBoxView extends LinearLayout {
         Calendar calendar = DateUtil.getCurrentCalendar();
         calendar.setTime(date);
 
-        dateView.setText(Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)));
+        dateView.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
     }
 
     public void setDay(Date date) {
