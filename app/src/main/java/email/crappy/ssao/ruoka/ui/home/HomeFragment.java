@@ -3,6 +3,7 @@ package email.crappy.ssao.ruoka.ui.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.transition.TransitionManager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceFragment;
-import com.transitionseverywhere.TransitionManager;
 
 import java.util.List;
 import java.util.Map;

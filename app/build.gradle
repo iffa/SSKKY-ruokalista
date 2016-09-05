@@ -69,6 +69,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile "com.android.support:cardview-v7:$supportVersion"
     compile "com.android.support:design:$supportVersion"
+    compile "com.android.support:transition:$supportVersion"
 
     compile "com.google.dagger:dagger:$daggerVersion"
     apt "com.google.dagger:dagger-compiler:$daggerVersion"
@@ -99,8 +100,6 @@ dependencies {
     compile "com.mikepenz:materialize:1.0.0@aar"
 
     compile 'net.xpece.android:support-preference:1.0.2'
-
-    compile "com.andkulikov:transitionseverywhere:1.6.5"
 
     compile 'com.github.prashantsolanki3:Shoot:0.8.3'
 
