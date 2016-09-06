@@ -61,7 +61,6 @@ android {
 
     applicationVariants.all { variant ->
         variant.resValue "string", "ad_bottom", "\"${props.getProperty("ad_id_bottom")}\""
-        variant.resValue "string", "ad_top", "\"${props.getProperty("ad_id_top")}\""
     }
 
     compileOptions {

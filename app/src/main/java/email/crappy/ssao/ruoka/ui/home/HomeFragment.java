@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.NativeExpressAdView;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceFragment;
 
 import java.util.List;
@@ -63,9 +62,6 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
 
     @BindView(R.id.ad_bottom)
     AdView bottomAd;
-
-    @BindView(R.id.ad_top)
-    NativeExpressAdView topAd;
 
     @Nullable
     @Override
@@ -152,13 +148,8 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("84275ACA55FEE01D25BACD7DC1A42F7A")
                 .build();
-        AdRequest topAdRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("84275ACA55FEE01D25BACD7DC1A42F7A")
-                .build();
 
-        //bottomAd.loadAd(adRequest);
-        topAd.loadAd(topAdRequest);
+        bottomAd.loadAd(adRequest);
     }
 
     @Override
