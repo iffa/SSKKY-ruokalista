@@ -125,7 +125,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_weeks"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="42dp"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
