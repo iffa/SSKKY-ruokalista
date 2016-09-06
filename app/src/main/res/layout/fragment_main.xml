@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -50,9 +50,9 @@
                 android:id="@+id/home_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/cardview_default_radius"
-                app:cardElevation="0dp"
-                app:contentPadding="8dp">
+                ads:cardCornerRadius="@dimen/cardview_default_radius"
+                ads:contentPadding="8dp"
+                ads:cardElevation="0dp">
 
                 <LinearLayout
                     android:id="@+id/next_container"
@@ -98,6 +98,7 @@
                                 android:textColor="?android:textColorSecondary"
                                 android:textSize="16sp" />
                         </LinearLayout>
+
                     </email.crappy.ssao.ruoka.ui.view.DateBoxView>
 
                 </LinearLayout>
@@ -121,6 +122,13 @@
 
             </FrameLayout>
 
+            <com.google.android.gms.ads.NativeExpressAdView
+                android:id="@+id/ad_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ads:adSize="FULL_WIDTHx250"
+                ads:adUnitId="@string/ad_top" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_weeks"
                 android:layout_width="match_parent"
@@ -128,4 +136,12 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/ad_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/ad_bottom" />
 </FrameLayout>

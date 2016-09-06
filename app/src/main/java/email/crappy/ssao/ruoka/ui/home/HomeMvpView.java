@@ -14,4 +14,6 @@ interface HomeMvpView extends MvpLceView<Map<Integer, List<FoodItem>>> {
     void setNext(FoodItem next);
 
     void showNextEmpty();
+
+    void loadAds();
 }

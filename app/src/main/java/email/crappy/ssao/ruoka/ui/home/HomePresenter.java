@@ -42,6 +42,7 @@ public class HomePresenter extends MvpBasePresenter<HomeMvpView> {
                     if (isViewAttached()) {
                         getView().setData(map);
                         getView().showContent();
+                        getView().loadAds();
                     }
                 }, throwable -> {
                     Timber.e(throwable, "Failed to load data for UI");
