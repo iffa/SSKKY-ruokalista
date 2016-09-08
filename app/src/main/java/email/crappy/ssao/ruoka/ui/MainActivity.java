@@ -6,6 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.github.lukaspili.reactivebilling.ReactiveBilling;
+import com.github.lukaspili.reactivebilling.model.PurchaseType;
+import com.github.lukaspili.reactivebilling.response.GetPurchasesResponse;
+import com.github.lukaspili.reactivebilling.response.PurchaseResponse;
+import com.github.lukaspili.reactivebilling.response.Response;
 
 import javax.inject.Inject;
 
@@ -14,6 +21,9 @@ import email.crappy.ssao.ruoka.data.DataManager;
 import email.crappy.ssao.ruoka.ui.base.BaseActivity;
 import email.crappy.ssao.ruoka.ui.home.HomeFragment;
 import email.crappy.ssao.ruoka.ui.settings.SettingsActivity;
+import rx.Subscription;
+import rx.functions.Action1;
+import timber.log.Timber;
 
 /**
  * @author Santeri 'iffa'
@@ -21,6 +31,9 @@ import email.crappy.ssao.ruoka.ui.settings.SettingsActivity;
 public class MainActivity extends BaseActivity {
     @Inject
     DataManager dataManager;
+
+    private Subscription billingSubscription;
+    private static final String BILLING_ID = "feelgood";
 
     public static Intent createIntent(Context context, boolean newTask) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -51,6 +64,26 @@ public class MainActivity extends BaseActivity {
 
             dataManager.setAlarm(this);
         }
+
+        billingSubscription = ReactiveBilling.getInstance(this).purchaseFlow()
+                .subscribe(response -> {
+                    if (response.isSuccess()) {
+                        Timber.i("Product purchased succesfully - $$$");
+                        response.getPurchase();
+                    } else {
+                        Timber.e("Product purchase failed");
+                    }
+                });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (billingSubscription != null) {
+            billingSubscription.unsubscribe();
+            billingSubscription = null;
+        }
     }
 
     @Override
@@ -64,6 +97,20 @@ public class MainActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 startActivity(SettingsActivity.createIntent(this));
+                break;
+            case R.id.action_donate:
+                ReactiveBilling.getInstance(this)
+                        .startPurchase(BILLING_ID, PurchaseType.PRODUCT, null, null)
+                        .compose(dataManager.schedulers())
+                        .subscribe(response -> {
+                            if (response.isSuccess()) {
+                                Timber.d("Purchase flow started");
+                            } else {
+                                Timber.e("Couldn't start purchase flow");
+                            }
+                        }, throwable -> {
+                            Timber.e(throwable, "Couldn't start purchase flow");
+                        });
                 break;
             case R.id.action_clear:
                 dataManager.getPreferencesHelper().clear();

@@ -101,8 +101,10 @@ dependencies {
 
     compile "io.reactivex:rxjava:1.1.10"
     compile 'com.artemzin.rxjava:proguard-rules:1.1.9.0'
+    compile 'com.jakewharton.rxrelay:rxrelay:1.1.0'
     compile "io.reactivex:rxandroid:1.2.1"
     compile 'com.f2prateek.rx.preferences:rx-preferences:1.0.2'
+    compile 'com.github.lukaspili.reactive-billing:reactive-billing:0.2@aar'
 
     compile 'com.jakewharton.timber:timber:4.3.0'
     compile 'net.ypresto.timbertreeutils:timbertreeutils:1.0.0'
