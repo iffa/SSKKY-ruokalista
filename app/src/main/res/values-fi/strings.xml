@@ -36,4 +36,6 @@
     </string-array>
     <string name="app_update">Nauti uusista ominaisuuksista!</string>
     <string name="pref_madde">Madde-tila muutettu</string>
+    <string name="action_donate">Lahjoita</string>
+    <string name="action_donate_fail">Ostos epäonnistui</string>
 </resources>

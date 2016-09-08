@@ -24,7 +24,7 @@ android {
     def versionMajor = 4
     def versionMinor = 0
     def versionPatch = 4
-    def versionBuild = 0 // If you're happy and you know it, bump this
+    def versionBuild = 1 // If you're happy and you know it, bump this
 
     defaultConfig {
         applicationId "email.crappy.ssao.ruoka"
