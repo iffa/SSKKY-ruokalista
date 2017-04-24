@@ -1,5 +1,6 @@
 package email.crappy.ssao.ruoka.ui.base;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import email.crappy.ssao.ruoka.injection.module.ActivityModule;
 /**
  * @author Santeri 'iffa'
  */
+@SuppressLint("Registered")
 @SuppressWarnings("CreateIntent")
 public class BaseActivity extends AppCompatActivity {
     private ActivityComponent activityComponent;

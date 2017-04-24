@@ -58,7 +58,7 @@ public class SettingsFragment extends XpPreferenceFragment
 
                 Toast.makeText(getContext(), R.string.pref_madde, Toast.LENGTH_LONG).show();
 
-                startActivity(MainActivity.createIntent(getContext(), true));
+                startActivity(MainActivity.createIntent(getContext()));
             }
 
             return true;
@@ -121,7 +121,7 @@ public class SettingsFragment extends XpPreferenceFragment
     private void showRestartSnackbar() {
         Snackbar snackbar = Snackbar
                 .make(getListView(), R.string.pref_restart, Snackbar.LENGTH_LONG)
-                .setAction(R.string.pref_restart_action, view -> startActivity(MainActivity.createIntent(getContext(), true)));
+                .setAction(R.string.pref_restart_action, view -> startActivity(MainActivity.createIntent(getContext())));
 
         snackbar.show();
     }

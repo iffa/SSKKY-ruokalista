@@ -59,14 +59,13 @@ public class PreferencesHelper {
     }
 
     Observable<List<FoodItem>> save(List<FoodItem> items) {
-        return Observable.create(subscriber -> {
+        return Observable.defer(() -> {
             try {
                 putItems(items);
-                subscriber.onNext(items);
+                return Observable.just(items);
             } catch (IOException exception) {
-                subscriber.onError(exception);
+                return Observable.error(exception);
             }
-            subscriber.onCompleted();
         });
     }
 
@@ -82,14 +81,13 @@ public class PreferencesHelper {
             return Observable.just(null);
         }
 
-        return Observable.create(subscriber -> {
+        return Observable.defer(() -> {
             try {
                 List<FoodItem> items = jsonAdapter.fromJson(json);
-                subscriber.onNext(items);
+                return Observable.just(items);
             } catch (IOException exception) {
-                subscriber.onError(exception);
+                return Observable.error(exception);
             }
-            subscriber.onCompleted();
         });
     }
 

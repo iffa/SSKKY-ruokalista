@@ -13,7 +13,6 @@ import email.crappy.ssao.ruoka.injection.ApplicationContext;
 import email.crappy.ssao.ruoka.injection.module.ActivityModule;
 import email.crappy.ssao.ruoka.injection.module.ApplicationModule;
 import email.crappy.ssao.ruoka.injection.module.DataModule;
-import email.crappy.ssao.ruoka.ui.home.HomeFragment;
 import email.crappy.ssao.ruoka.ui.home.HomePresenter;
 import email.crappy.ssao.ruoka.ui.settings.SettingsFragment;
 

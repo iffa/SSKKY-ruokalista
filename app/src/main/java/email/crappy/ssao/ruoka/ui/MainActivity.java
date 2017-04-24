@@ -6,13 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.github.lukaspili.reactivebilling.ReactiveBilling;
 import com.github.lukaspili.reactivebilling.model.PurchaseType;
-import com.github.lukaspili.reactivebilling.response.GetPurchasesResponse;
-import com.github.lukaspili.reactivebilling.response.PurchaseResponse;
-import com.github.lukaspili.reactivebilling.response.Response;
 
 import javax.inject.Inject;
 
@@ -22,7 +18,6 @@ import email.crappy.ssao.ruoka.ui.base.BaseActivity;
 import email.crappy.ssao.ruoka.ui.home.HomeFragment;
 import email.crappy.ssao.ruoka.ui.settings.SettingsActivity;
 import rx.Subscription;
-import rx.functions.Action1;
 import timber.log.Timber;
 
 /**
@@ -35,11 +30,9 @@ public class MainActivity extends BaseActivity {
     private Subscription billingSubscription;
     private static final String BILLING_ID = "feelgood";
 
-    public static Intent createIntent(Context context, boolean newTask) {
+    public static Intent createIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
-        if (newTask) {
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        }
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         return intent;
     }
 
@@ -108,13 +101,11 @@ public class MainActivity extends BaseActivity {
                             } else {
                                 Timber.e("Couldn't start purchase flow");
                             }
-                        }, throwable -> {
-                            Timber.e(throwable, "Couldn't start purchase flow");
-                        });
+                        }, throwable -> Timber.e(throwable, "Couldn't start purchase flow"));
                 break;
             case R.id.action_clear:
                 dataManager.getPreferencesHelper().clear();
-                startActivity(createIntent(this, true));
+                startActivity(createIntent(this));
                 break;
         }
         return super.onOptionsItemSelected(item);

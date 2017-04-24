@@ -3,20 +3,16 @@ package email.crappy.ssao.ruoka.injection.module;
 import android.app.Application;
 import android.content.Context;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
-import email.crappy.ssao.ruoka.data.FoodService;
 import email.crappy.ssao.ruoka.injection.ApplicationContext;
-import email.crappy.ssao.ruoka.ui.home.HomePresenter;
 
 /**
  * @author Santeri 'iffa'
  */
 @Module
 public class ApplicationModule {
-    protected final Application application;
+    private final Application application;
 
     public ApplicationModule(Application application) {
         this.application = application;

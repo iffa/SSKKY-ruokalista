@@ -131,6 +131,7 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
+    <!--suppress AndroidDomInspection -->
     <com.google.android.gms.ads.AdView
         android:id="@+id/ad_bottom"
         android:layout_width="match_parent"

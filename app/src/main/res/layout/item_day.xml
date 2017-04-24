@@ -31,6 +31,7 @@
             tools:text="kasvispastavuoka"/>
 
         <ImageView
+            android:contentDescription="@string/cd_icon"
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

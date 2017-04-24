@@ -13,7 +13,6 @@
     <string name="week">vko %d</string>
     <string name="next_empty">Ei ruokaa tälle päivälle.</string>
     <string name="notification_title">Tänään ruokana</string>
-    <string name="notification_title_tomorrow">Huomenna ruokana</string>
     <string name="pref_contact">Ota yhteyttä</string>
     <string name="pref_credits">Kiitokset…</string>
     <string name="pref_credits_summary">\u2022 /r/AndroidDeville hyödyllisistä resursseista ja artikkeleista\n\u2022 Kavereille, ketkä auttoivat kehityksessä löytämällä bugeja ja ehdottamalla uusia hauskoja ideoita.\n\n\u2022 Erikoiskiitokset Juho Haimilalle ❤</string>
@@ -37,5 +36,4 @@
     <string name="app_update">Nauti uusista ominaisuuksista!</string>
     <string name="pref_madde">Madde-tila muutettu</string>
     <string name="action_donate">Lahjoita</string>
-    <string name="action_donate_fail">Ostos epäonnistui</string>
 </resources>

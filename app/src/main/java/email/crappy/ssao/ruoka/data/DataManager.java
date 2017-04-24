@@ -60,9 +60,9 @@ public class DataManager {
     }
 
     private Observable<Boolean> checkValidity(List<FoodItem> items) {
-        return Observable.create(subscriber -> {
+        return Observable.defer(() -> {
             if (items == null) {
-                subscriber.onNext(false);
+                return Observable.just(false);
             } else {
                 boolean valid = false;
                 for (FoodItem item : items) {
@@ -71,9 +71,8 @@ public class DataManager {
                         break;
                     }
                 }
-                subscriber.onNext(valid);
+                return Observable.just(valid);
             }
-            subscriber.onCompleted();
         });
     }
 
@@ -84,7 +83,7 @@ public class DataManager {
      * @return Emits sectioned map
      */
     public Observable<Map<Integer, List<FoodItem>>> sectioned(List<FoodItem> items) {
-        return Observable.create(subscriber -> {
+        return Observable.defer(() -> {
             Map<Integer, List<FoodItem>> map = new LinkedHashMap<>();
 
             for (FoodItem item : items) {
@@ -105,8 +104,7 @@ public class DataManager {
                 }
             }
 
-            subscriber.onNext(map);
-            subscriber.onCompleted();
+            return Observable.just(map);
         });
     }
 
@@ -117,7 +115,7 @@ public class DataManager {
      * @return Emits today's item if it exists
      */
     public Observable<FoodItem> next(List<FoodItem> items) {
-        return Observable.create(subscriber -> {
+        return Observable.defer(() -> {
             FoodItem next = null;
 
             for (FoodItem item : items) {
@@ -127,8 +125,7 @@ public class DataManager {
                 }
             }
 
-            subscriber.onNext(next);
-            subscriber.onCompleted();
+            return Observable.just(next);
         });
     }
 
