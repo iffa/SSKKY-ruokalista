@@ -16,4 +16,6 @@
     <string name="app_update">Enjoy the new features!</string>
     <string name="action_donate">Donate</string>
     <string name="cd_icon">Icon</string>
+    <string name="tab_main">Cafeteria</string>
+    <string name="tab_poukama">Poukama</string>
 </resources>

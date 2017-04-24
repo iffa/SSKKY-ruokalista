@@ -8,7 +8,6 @@ import email.crappy.ssao.ruoka.data.receiver.AlarmReceiver;
 import email.crappy.ssao.ruoka.data.receiver.BootReceiver;
 import email.crappy.ssao.ruoka.injection.module.ApplicationModule;
 import email.crappy.ssao.ruoka.injection.module.DataModule;
-import email.crappy.ssao.ruoka.ui.home.HomePresenter;
 import email.crappy.ssao.ruoka.ui.settings.SettingsFragment;
 
 /**
@@ -24,8 +23,6 @@ public interface ApplicationComponent {
     void inject(SSKKYApplication sskkyApplication);
 
     void inject(SettingsFragment settingsFragment);
-
-    HomePresenter presenter();
 
     ConfigPersistentComponent configPersistentComponent();
 }

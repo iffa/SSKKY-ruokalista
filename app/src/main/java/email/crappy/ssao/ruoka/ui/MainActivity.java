@@ -4,6 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +40,12 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
+
+    @BindView(R.id.pager)
+    ViewPager viewPager;
+
     public static Intent createIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -57,13 +68,18 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
+            /*
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content, HomeFragment.newInstance())
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .commit();
+            */
 
             dataManager.setAlarm(this);
         }
+
+        viewPager.setAdapter(new TabAdapter(getSupportFragmentManager(), this));
+        tabLayout.setupWithViewPager(viewPager);
 
         billingSubscription = ReactiveBilling.getInstance(this).purchaseFlow()
                 .subscribe(response -> {
@@ -116,5 +132,45 @@ public class MainActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class TabAdapter extends FragmentStatePagerAdapter {
+        private static final int TABS = 2;
+        private final Context context;
+
+        TabAdapter(FragmentManager fm, Context context) {
+            super(fm);
+
+            this.context = context;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return HomeFragment.newInstance(HomeFragment.MAIN);
+                case 1:
+                    return HomeFragment.newInstance(HomeFragment.POUKAMA);
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return TABS;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return context.getString(R.string.tab_main);
+                case 1:
+                    return context.getString(R.string.tab_poukama);
+                default:
+                    return context.getString(R.string.tab_main);
+            }
+        }
     }
 }

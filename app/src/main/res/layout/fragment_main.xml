@@ -2,22 +2,25 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
+    <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/loadingView"
-        style="?android:progressBarStyle"
+        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="32dp"
         android:indeterminate="true" />
 
     <TextView
         android:id="@+id/errorView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/contentView"
@@ -51,8 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 ads:cardCornerRadius="@dimen/cardview_default_radius"
-                ads:contentPadding="8dp"
-                ads:cardElevation="0dp">
+                ads:cardElevation="0dp"
+                ads:contentPadding="8dp">
 
                 <LinearLayout
                     android:id="@+id/next_container"
@@ -126,7 +129,7 @@
                 android:id="@+id/recycler_weeks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="42dp"/>
+                android:layout_marginBottom="42dp" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

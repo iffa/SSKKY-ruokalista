@@ -9,7 +9,8 @@ import com.pascalwelsch.compositeandroid.fragment.CompositeFragment;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import email.crappy.ssao.ruoka.SSKKYApplication;
-import email.crappy.ssao.ruoka.injection.component.ActivityComponent;
+import email.crappy.ssao.ruoka.injection.component.FragmentComponent;
+import email.crappy.ssao.ruoka.injection.module.FragmentModule;
 
 /**
  * Base fragment implementation that all fragments should extend from. This used to be an abstract
@@ -43,20 +44,17 @@ public class BaseFragment extends CompositeFragment {
         SSKKYApplication.getInstance(getContext()).getRefWatcher().watch(this);
     }
 
-    public boolean onBackPressed() {
-        return true;
-    }
-
     /**
      * Get the activity component from the parent activity.
      *
      * @return Activity component
      */
-    public ActivityComponent getComponent() {
+    public FragmentComponent getComponent() {
         // Ensure that the parent activity extends from BaseActivity
         if (!(getActivity() instanceof BaseActivity)) {
             throw new UnsupportedOperationException("Parent activity for fragment should extend from BaseActivity");
         }
-        return ((BaseActivity) getActivity()).getComponent();
+        return ((BaseActivity) getActivity()).getComponent()
+                .fragmentComponent(new FragmentModule(this));
     }
 }

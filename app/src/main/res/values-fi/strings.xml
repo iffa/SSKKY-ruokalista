@@ -36,4 +36,6 @@
     <string name="app_update">Nauti uusista ominaisuuksista!</string>
     <string name="pref_madde">Madde-tila muutettu</string>
     <string name="action_donate">Lahjoita</string>
+    <string name="tab_main">Ruokala</string>
+    <string name="tab_poukama">Poukama</string>
 </resources>
