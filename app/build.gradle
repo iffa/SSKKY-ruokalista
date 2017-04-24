@@ -58,7 +58,7 @@ android {
     }
 
     applicationVariants.all { variant ->
-        variant.resValue "string", "ad_bottom", "\"${properties.getProperty("ad_id_bottom")}\""
+        variant.resValue "string", "ad_id_bottom", "\"${properties.getProperty("ad_id_bottom")}\""
     }
 
     compileOptions {
@@ -79,6 +79,7 @@ android {
 dependencies {
     def supportVersion = '25.3.1'
     def daggerVersion = '2.10'
+    def thirtyinchVersion = '0.8.0-rc3'
     def retrofitVersion = '2.2.0'
     def butterknifeVersion = '8.5.1'
     def leakcanaryVersion = '1.5'
@@ -106,6 +107,14 @@ dependencies {
     compile "com.hannesdorfmann.annotatedadapter:annotation:$annotatedAdapterVersion"
     compile "com.hannesdorfmann.annotatedadapter:support-recyclerview:$annotatedAdapterVersion"
     apt "com.hannesdorfmann.annotatedadapter:processor:$annotatedAdapterVersion"
+
+    compile "net.grandcentrix.thirtyinch:thirtyinch:$thirtyinchVersion"
+    compile "net.grandcentrix.thirtyinch:thirtyinch-rx:$thirtyinchVersion"
+    compile "net.grandcentrix.thirtyinch:thirtyinch-plugin:$thirtyinchVersion"
+
+    // These are always behind on the version number
+    compile "com.pascalwelsch.compositeandroid:activity:25.3.0"
+    compile "com.pascalwelsch.compositeandroid:fragment:25.3.0"
 
     compile "io.reactivex:rxjava:1.2.9"
     compile 'com.artemzin.rxjava:proguard-rules:1.2.5.0'

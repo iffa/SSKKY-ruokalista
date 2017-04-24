@@ -1,59 +1,84 @@
 package email.crappy.ssao.ruoka.ui.base;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.util.LongSparseArray;
 
-import butterknife.BindView;
+import com.pascalwelsch.compositeandroid.activity.CompositeActivity;
+
+import java.util.concurrent.atomic.AtomicLong;
+
 import butterknife.ButterKnife;
-import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.SSKKYApplication;
 import email.crappy.ssao.ruoka.injection.component.ActivityComponent;
+import email.crappy.ssao.ruoka.injection.component.ConfigPersistentComponent;
 import email.crappy.ssao.ruoka.injection.module.ActivityModule;
+import timber.log.Timber;
 
 /**
+ * Base activity implementation that all activities should extend from. We use CompositeAndroid
+ * so that activities can use plugins for e.g. MVP libraries and the like.
+ * <p>
+ * ConfigPersistentComponent idea & implementation borrowed from Ribot's boilerplate app with
+ * slight modifications to allow getting the component before onCreate is called.
+ *
  * @author Santeri 'iffa'
  */
-@SuppressLint("Registered")
-@SuppressWarnings("CreateIntent")
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends CompositeActivity {
+    private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
+    private static final AtomicLong NEXT_ID = new AtomicLong(0);
+    private static final LongSparseArray<ConfigPersistentComponent> componentMap = new LongSparseArray<>();
     private ActivityComponent activityComponent;
-
-    @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private long activityId;
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
+
         ButterKnife.bind(this);
-
-        setupToolbar();
     }
 
-    private void setupToolbar() {
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        createComponent(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(KEY_ACTIVITY_ID, activityId);
+    }
+
+    @Override
+    public void onDestroy() {
+        if (!isChangingConfigurations()) {
+            Timber.v("Clearing ConfigPersistentComponent '%d'", activityId);
+            componentMap.remove(activityId);
         }
+        super.onDestroy();
     }
 
-    protected Toolbar getToolbar() {
-        return toolbar;
-    }
-
-    public ActivityComponent getActivityComponent() {
-        if (activityComponent == null) {
-            activityComponent = SSKKYApplication.getInstance(this)
-                    .getComponent()
-                    .plus(new ActivityModule(this));
-        }
+    public ActivityComponent getComponent() {
+        if (activityComponent == null) createComponent(null);
         return activityComponent;
+    }
+
+    private void createComponent(@Nullable Bundle savedInstanceState) {
+        activityId = savedInstanceState != null ?
+                savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
+        ConfigPersistentComponent configPersistentComponent;
+        if (componentMap.get(activityId) == null) {
+            Timber.d("Creating new ConfigPersistentComponent '%d'", activityId);
+            configPersistentComponent = SSKKYApplication.getInstance(this).getComponent()
+                    .configPersistentComponent();
+            componentMap.put(activityId, configPersistentComponent);
+        } else {
+            Timber.d("Reusing ConfigPersistentComponent '%d'", activityId);
+            configPersistentComponent = componentMap.get(activityId);
+        }
+        activityComponent = configPersistentComponent.activityComponent(new ActivityModule(this));
     }
 }

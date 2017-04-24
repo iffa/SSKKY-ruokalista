@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,6 +13,7 @@ import com.github.lukaspili.reactivebilling.model.PurchaseType;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import email.crappy.ssao.ruoka.R;
 import email.crappy.ssao.ruoka.data.DataManager;
 import email.crappy.ssao.ruoka.ui.base.BaseActivity;
@@ -24,11 +26,14 @@ import timber.log.Timber;
  * @author Santeri 'iffa'
  */
 public class MainActivity extends BaseActivity {
+    private Subscription billingSubscription;
+    private static final String BILLING_ID = "feelgood";
+
     @Inject
     DataManager dataManager;
 
-    private Subscription billingSubscription;
-    private static final String BILLING_ID = "feelgood";
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     public static Intent createIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -37,10 +42,10 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getActivityComponent().inject(this);
+        getComponent().inject(this);
 
         if (dataManager.getPreferencesHelper().getIsMadde()) {
             // TODO: Make this easter egg more fun
@@ -48,6 +53,8 @@ public class MainActivity extends BaseActivity {
         }
 
         setContentView(R.layout.activity_main);
+
+        setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -70,7 +77,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
 
         if (billingSubscription != null) {
