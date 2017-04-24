@@ -1,38 +1,36 @@
+apply plugin: 'io.github.rockerhieu.versionberg'
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
-//apply plugin: 'io.fabric'
 apply plugin: 'com.getkeepsafe.dexcount'
 
-def getDate() {
-    def date = new Date()
-    def formattedDate = date.format('dd.MM.yyyy HH.mm')
-    return formattedDate
+versionberg {
+    major 4
+    minor 2
+    patch 0
+    nameTemplate '${major}.${minor}.${patch}.${commitCount}.${commitSha}'
+    codeTemplate '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
 }
 
-Properties props = new Properties()
+Properties properties = new Properties()
 try {
-    props.load(file('../local.properties').newDataInputStream())
-} catch (Exception ex) {
-    throw ex;
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+} catch (Exception e) {
+    throw e;
 }
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
-    def versionMajor = 4
-    def versionMinor = 0
-    def versionPatch = 5
-    def versionBuild = 0 // If you're happy and you know it, bump this
-
     defaultConfig {
         applicationId "email.crappy.ssao.ruoka"
+
         minSdkVersion 19
         targetSdkVersion 25
 
-        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-        versionName "v${versionMajor}.${versionMinor}.${versionPatch} - " + getDate()
+        versionCode versionberg.code
+        versionName versionberg.name
     }
 
     signingConfigs {
@@ -60,24 +58,34 @@ android {
     }
 
     applicationVariants.all { variant ->
-        variant.resValue "string", "ad_bottom", "\"${props.getProperty("ad_id_bottom")}\""
+        variant.resValue "string", "ad_bottom", "\"${properties.getProperty("ad_id_bottom")}\""
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        abortOnError false
+        textReport true
+        textOutput "stdout"
+        checkAllWarnings true
+        showAll true
+        explainIssues true
+    }
 }
 
 dependencies {
-    def supportVersion = '25.1.0'
-    def daggerVersion = '2.8'
-    def retrofitVersion = '2.1.0'
-    def butterknifeVersion = '8.4.0'
+    def supportVersion = '25.3.1'
+    def daggerVersion = '2.10'
+    def retrofitVersion = '2.2.0'
+    def butterknifeVersion = '8.5.1'
     def leakcanaryVersion = '1.5'
     def annotatedAdapterVersion = '1.1.1'
-    def firebaseVersion = '10.0.1'
+    def firebaseVersion = '10.2.1'
 
+    //noinspection GradleCompatible
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile "com.android.support:cardview-v7:$supportVersion"
     compile "com.android.support:design:$supportVersion"
@@ -90,7 +98,7 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
-    compile 'com.squareup.moshi:moshi-adapters:1.2.0' // To support Date objects
+    compile 'com.squareup.moshi:moshi-adapters:1.4.0' // To support Date objects
 
     compile "com.jakewharton:butterknife:$butterknifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
@@ -99,21 +107,20 @@ dependencies {
     compile "com.hannesdorfmann.annotatedadapter:support-recyclerview:$annotatedAdapterVersion"
     apt "com.hannesdorfmann.annotatedadapter:processor:$annotatedAdapterVersion"
 
-    compile "io.reactivex:rxjava:1.2.5"
+    compile "io.reactivex:rxjava:1.2.9"
     compile 'com.artemzin.rxjava:proguard-rules:1.2.5.0'
     compile 'com.jakewharton.rxrelay:rxrelay:1.2.0'
     compile "io.reactivex:rxandroid:1.2.1"
     compile 'com.f2prateek.rx.preferences:rx-preferences:1.0.2'
     compile 'com.github.lukaspili.reactive-billing:reactive-billing:0.2@aar'
 
-    compile 'com.jakewharton.timber:timber:4.4.0'
-    compile 'net.ypresto.timbertreeutils:timbertreeutils:1.0.0'
+    compile 'com.jakewharton.timber:timber:4.5.1'
 
     compile 'com.hannesdorfmann.mosby:mvp:2.0.1'
 
     compile "com.mikepenz:materialize:1.0.0@aar"
 
-    compile 'net.xpece.android:support-preference:1.2.1'
+    compile 'net.xpece.android:support-preference:1.2.7'
 
     compile 'com.github.prashantsolanki3:Shoot:0.8.3'
 
@@ -123,13 +130,7 @@ dependencies {
 
     compile "com.google.firebase:firebase-messaging:$firebaseVersion"
     compile "com.google.firebase:firebase-ads:$firebaseVersion"
-
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.2@aar') {
-        transitive = true;
-    }
-    compile('com.crashlytics.sdk.android:answers:1.3.9@aar') {
-        transitive = true;
-    }
+    compile "com.google.firebase:firebase-crash:$firebaseVersion"
 
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanaryVersion"

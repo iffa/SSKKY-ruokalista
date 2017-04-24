@@ -48,8 +48,8 @@ public class BaseActivity extends AppCompatActivity {
 
     public ActivityComponent getActivityComponent() {
         if (activityComponent == null) {
-            activityComponent = SSKKYApplication.get(this)
-                    .component()
+            activityComponent = SSKKYApplication.getInstance(this)
+                    .getComponent()
                     .plus(new ActivityModule(this));
         }
         return activityComponent;

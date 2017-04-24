@@ -17,7 +17,7 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        SSKKYApplication.get(context).component().inject(this);
+        SSKKYApplication.getInstance(context).getComponent().inject(this);
 
         dataManager.setAlarm(context);
     }

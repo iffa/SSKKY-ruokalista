@@ -35,7 +35,7 @@ public class PreferencesHelper {
     private final JsonAdapter<List<FoodItem>> jsonAdapter;
 
     @Inject
-    public PreferencesHelper(@ApplicationContext Context context, JsonAdapter<List<FoodItem>> jsonAdapter) {
+    PreferencesHelper(@ApplicationContext Context context, JsonAdapter<List<FoodItem>> jsonAdapter) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         rxPreferences = RxSharedPreferences.create(preferences);
 

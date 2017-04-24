@@ -29,7 +29,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Timber.i("Notification alarm fired");
-        SSKKYApplication.get(context).component().inject(this);
+        SSKKYApplication.getInstance(context).getComponent().inject(this);
 
         if (!dataManager.getPreferencesHelper().getNotificationsEnabled()) {
             Timber.i("Not showing notification as user has them disabled");
@@ -43,7 +43,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .subscribe(today -> {
                     Timber.i("Got data for notification");
                     showNotification(context, today);
-                }, throwable -> Timber.e(throwable, "Failed to get data for notification"));
+                }, throwable -> Timber.e(throwable, "Failed to getInstance data for notification"));
     }
 
     private void showNotification(Context context, FoodItem item) {

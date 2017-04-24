@@ -81,7 +81,7 @@ public class HomeFragment extends MvpLceFragment<NestedScrollView, Map<Integer, 
     @NonNull
     @Override
     public HomePresenter createPresenter() {
-        return SSKKYApplication.get(getContext()).component().presenter();
+        return SSKKYApplication.getInstance(getContext()).getComponent().presenter();
     }
 
     @Override

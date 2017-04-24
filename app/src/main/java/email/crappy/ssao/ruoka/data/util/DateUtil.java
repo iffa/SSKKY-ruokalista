@@ -1,5 +1,7 @@
 package email.crappy.ssao.ruoka.data.util;
 
+import android.annotation.SuppressLint;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -32,8 +34,7 @@ public class DateUtil {
     /**
      * Checks if a given date (dd.MM) is today (or tomorrow)
      *
-     * @param date     Date
-     * @param tomorrow Set to true if checking for tomorrow
+     * @param date Date
      * @return True if today
      */
     public static boolean isToday(Date date) {
@@ -41,19 +42,15 @@ public class DateUtil {
 
         Calendar item = getCurrentCalendar();
         item.setTime(date);
-        //if (tomorrow) calendar.add(Calendar.DATE, 1);
 
-        return current.get(Calendar.DAY_OF_MONTH) == item.get(Calendar.DAY_OF_MONTH) && current.get(Calendar.MONTH) == item.get(Calendar.MONTH);
+        return current.get(Calendar.DAY_OF_MONTH) == item.get(Calendar.DAY_OF_MONTH)
+                && current.get(Calendar.MONTH) == item.get(Calendar.MONTH);
     }
 
     public static boolean isRemainingWeek(int weekNumber) {
         int currentWeek = getCurrentCalendar().get(Calendar.WEEK_OF_YEAR);
 
-        if (weekNumber < currentWeek) {
-            return false;
-        } else {
-            return true;
-        }
+        return weekNumber >= currentWeek;
     }
 
     public static boolean isCurrentWeek(String weekNumber) {
@@ -69,6 +66,7 @@ public class DateUtil {
         return calendar.get(Calendar.WEEK_OF_YEAR);
     }
 
+    @SuppressLint("SwitchIntDef")
     public static int getDayResource(Date date) {
         Calendar calendar = getCurrentCalendar();
         calendar.setTime(date);
@@ -89,6 +87,7 @@ public class DateUtil {
         }
     }
 
+    @SuppressLint("SwitchIntDef")
     public static int getDayResource(Calendar calendar) {
         switch (calendar.get(Calendar.DAY_OF_WEEK)) {
             case Calendar.MONDAY:

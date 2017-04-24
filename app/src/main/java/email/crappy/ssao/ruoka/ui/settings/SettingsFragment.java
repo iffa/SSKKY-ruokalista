@@ -93,7 +93,7 @@ public class SettingsFragment extends XpPreferenceFragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SSKKYApplication.get(getContext()).component().inject(this);
+        SSKKYApplication.getInstance(getContext()).getComponent().inject(this);
 
         getListView().setFocusable(false);
     }
