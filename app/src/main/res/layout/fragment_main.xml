@@ -6,13 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.ContentLoadingProgressBar
+    <ProgressBar
         android:id="@+id/loadingView"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="32dp"
+        android:layout_gravity="center"
         android:indeterminate="true" />
 
     <TextView
@@ -45,7 +44,7 @@
                     android:layout_gravity="center"
                     android:text="@string/home_title"
                     android:textAllCaps="true"
-                    android:textAppearance="?android:textAppearanceMedium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             </FrameLayout>
 
@@ -78,7 +77,8 @@
                         android:id="@+id/next_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp">
+                        android:layout_margin="8dp"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -91,7 +91,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:textAppearanceListItem"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                tools:text="Lasagnette, salaatti" />
 
                             <TextView
                                 android:id="@+id/next_food_secondary"
@@ -99,7 +100,8 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:textAppearanceListItemSmall"
                                 android:textColor="?android:textColorSecondary"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                tools:text="kasvislasagnette" />
                         </LinearLayout>
 
                     </email.crappy.ssao.ruoka.ui.view.DateBoxView>
@@ -121,7 +123,7 @@
                     android:layout_gravity="center"
                     android:text="@string/list_title"
                     android:textAllCaps="true"
-                    android:textAppearance="?android:textAppearanceMedium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             </FrameLayout>
 

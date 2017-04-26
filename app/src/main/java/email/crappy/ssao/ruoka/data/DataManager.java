@@ -43,8 +43,7 @@ public class DataManager {
      * @return Emits local items
      */
     public Observable<List<FoodItem>> dataStream() {
-        return preferencesHelper.observe()
-                .compose(schedulers());
+        return preferencesHelper.observe();
     }
 
     /**
@@ -55,8 +54,7 @@ public class DataManager {
     public Observable<Boolean> isValid() {
         Timber.d("Checking validity of local items");
         return preferencesHelper.data()
-                .flatMap(this::checkValidity)
-                .compose(schedulers());
+                .flatMap(this::checkValidity);
     }
 
     private Observable<Boolean> checkValidity(List<FoodItem> items) {
@@ -140,8 +138,7 @@ public class DataManager {
                 .doOnError(throwable -> Timber.e(throwable, "Data update failed"))
                 .doOnNext(items -> Timber.d("Got %s items from server", items.size()))
                 .flatMap(preferencesHelper::save)
-                .doOnCompleted(() -> Timber.d("Completed data update call"))
-                .compose(schedulers());
+                .doOnCompleted(() -> Timber.d("Completed data update call"));
     }
 
     /**

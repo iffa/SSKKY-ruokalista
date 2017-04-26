@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.transition.TransitionManager;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +71,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     FrameLayout rootLayout;
 
     @BindView(R.id.loadingView)
-    ContentLoadingProgressBar progressBar;
+    ProgressBar progressBar;
 
     @BindView(R.id.errorView)
     TextView errorView;
@@ -159,14 +159,12 @@ public class HomeFragment extends BaseFragment implements HomeView {
         nextFood.setText(next.food);
         nextFoodVeg.setText(next.secondaryFood);
 
-        TransitionManager.beginDelayedTransition(nextContainer);
         nextEmpty.setVisibility(View.GONE);
         dateBox.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showNextEmpty() {
-        TransitionManager.beginDelayedTransition(nextContainer);
         nextEmpty.setVisibility(View.VISIBLE);
         dateBox.setVisibility(View.GONE);
     }
@@ -186,14 +184,14 @@ public class HomeFragment extends BaseFragment implements HomeView {
         TransitionManager.beginDelayedTransition(rootLayout);
         contentView.setVisibility(View.GONE);
         errorView.setVisibility(View.GONE);
-        progressBar.show();
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showError(Throwable throwable) {
         TransitionManager.beginDelayedTransition(rootLayout);
         contentView.setVisibility(View.GONE);
-        progressBar.hide();
+        progressBar.setVisibility(View.GONE);
         errorView.setVisibility(View.VISIBLE);
 
         errorView.setText(throwable.getLocalizedMessage());
@@ -203,7 +201,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void showContent(Map<Integer, List<FoodItem>> items) {
         TransitionManager.beginDelayedTransition(rootLayout);
         contentView.setVisibility(View.VISIBLE);
-        progressBar.hide();
+        progressBar.setVisibility(View.GONE);
         errorView.setVisibility(View.GONE);
 
         ((WeekAdapter) recyclerView.getAdapter()).setItems(items);

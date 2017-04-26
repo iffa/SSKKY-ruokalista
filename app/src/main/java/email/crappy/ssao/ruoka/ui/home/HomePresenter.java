@@ -37,28 +37,28 @@ public class HomePresenter extends TiPresenter<HomeView> {
 
         rxHelper.manageViewSubscription(dataManager.isValid()
                 .flatMap(valid -> valid ? dataManager.dataStream() : dataManager.updateData())
-                .doOnNext(items -> dataManager.next(items).compose(dataManager.schedulers()).subscribe(foodItem -> {
-                    if (getView() != null) {
-                        if (foodItem == null) {
-                            getView().showNextEmpty();
-                        } else {
-                            getView().showNext(foodItem);
-                        }
+                .doOnNext(items -> dataManager.next(items).compose(dataManager.schedulers()).subscribe(foodItem -> sendToView(v -> {
+                    if (foodItem == null) {
+                        Timber.v("No data, showing empty (next)");
+                        v.showNextEmpty();
+                    } else {
+                        Timber.v("Have data, showing (next)");
+                        v.showNext(foodItem);
                     }
-                }))
+                })))
                 .flatMap(items -> dataManager.sectioned(items))
                 .compose(dataManager.schedulers())
                 .subscribe(map -> {
                     Timber.i("Finished loading data for UI");
-                    if (getView() != null) {
+
+                    sendToView(v -> {
                         getView().showContent(map);
                         getView().loadAds();
-                    }
+                    });
                 }, throwable -> {
                     Timber.e(throwable, "Failed to load data for UI");
-                    if (getView() != null) {
-                        getView().showError(throwable);
-                    }
+
+                    sendToView(v -> getView().showError(throwable));
                 })
         );
     }
