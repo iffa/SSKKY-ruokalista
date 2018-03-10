@@ -1,5 +1,7 @@
 # SSKKY-ruokalista
-Development branch for version 4.
+If you are a developer, and want to help make the app even more awesome than it is, feel free to fork the project and go wild! I will gladly accept any pull requests (that make sense).
+
+Oletko sovelluskehittäjä (tai ohjelmointia harjoitteleva opiskelija) ja halukas auttamaan sovelluksen parantamisessa? Pistä forkit tulille, hakkaa näppäimistöä niin pirusti ja pistä pull requesteja tulemaan! Kiitos. :)
 
 http://tiny.cc/sskkyruoka 🔎
 
@@ -9,7 +11,7 @@ http://tiny.cc/sskkyruoka 🔎
 * ...and boy is it beautiful
 
 ### Libraries used
-SSKKY-ruokalista is made with these amazing libraries:
+SSKKY-ruokalista is made using these amazing libraries:
 
 * Android support libraries
 * Firebase (push notifications)
@@ -28,7 +30,7 @@ SSKKY-ruokalista is made with these amazing libraries:
 
 ### License
 
-    Copyright 2016 Santeri Elo
+    Copyright 2018 Santeri Elo
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
